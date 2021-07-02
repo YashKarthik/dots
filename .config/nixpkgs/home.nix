@@ -33,6 +33,7 @@
 	pkgs.tree
 	pkgs.qutebrowser
 	pkgs.dart
+	pkgs.nodejs
   ];
 
 
