@@ -32,6 +32,7 @@
 	pkgs.starship
 	pkgs.tree
 	pkgs.qutebrowser
+	pkgs.dart
   ];
 
 
