@@ -35,15 +35,6 @@ Plug 'luochen1990/rainbow'
 
 " All of your Plugins must be added before the following line
 call plug#end()
-
-" ======================================================================
-"                        Running the Code
-" ======================================================================
-autocmd FileType python map <buffer> <leader>r :exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType dart map <buffer> <leader>r :exec '!dart' shellescape(@%, 1)<CR>
-autocmd FileType dart :silent! lcd %:p:h
-
-
 " ======================================================================
 "                        other settings 
 " ======================================================================
@@ -140,6 +131,8 @@ endif
 
 " no numbers in terminal
 autocmd TermOpen * setlocal nonumber norelativenumber
+" enter terminal in insert mode
+autocmd TermOpen * startinsert
 
 " ======================================================================
 "                                MAPPINGS 
@@ -180,6 +173,15 @@ nnoremap <silent> <leader>= <C-w>=
 nnoremap <silent> <Leader><Leader>+ :exe "vertical resize " . (winwidth(0) * 32/20)<CR>
 nnoremap <silent> <Leader><Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 nnoremap <silent> <leader><leader>= <C-w>=
+
+" ======================================================================
+"                        Running the Code
+" ======================================================================
+autocmd FileType python map <buffer> <leader>r :vs \| terminal python %<CR>
+autocmd FileType dart map <buffer> <leader>r :vs \| terminal dart %<CR>
+autocmd FileType dart :silent! lcd %:p:h
+
+
 
 " ======================================================================
 "                                LSP 
@@ -228,13 +230,8 @@ end
 -- for _, lsp in ipairs(servers) do
 --   nvim_lsp[lsp].setup { on_attach = on_attach }
 -- end
-local custom_lsp_attach = function(client)
-  vim.api.nvim_set_current_dir(client.config.root_dir)
-end
-
-
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.vimls.setup{}
+require'lspconfig'.pyright.setup{ on_attach = on_attach }
+require'lspconfig'.vimls.setup{ on_attach = on_attach }
 require'lspconfig'.dartls.setup {
 	cmd = { "dart", "/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
 	on_attach = on_attach,
