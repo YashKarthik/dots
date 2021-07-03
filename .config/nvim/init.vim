@@ -54,8 +54,6 @@ EOF
 luafile ~/Code/nvim_lua/plugins/statusline1.lua
 
 " Python shit
-nnoremap <leader>r :!clear;python %<CR>
-
 let g:python_highlight_all = 1
 let python_highlight_all=1
 let g:python3_host_prog='/opt/anaconda3/bin/python'
@@ -262,6 +260,8 @@ let g:completion_chain_complete_list = {
 
 "lsp auto-format before save
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.dart lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " nvim-compe uses default
 let g:compe = {}
@@ -292,7 +292,7 @@ let g:compe.source.emoji = v:true
 lua << EOF
 require('lint').linters_by_ft = {
   markdown = {'vale'},
-  python = {'pylint'}
+  python = {'pylint'},
 }
 EOF
 
