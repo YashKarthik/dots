@@ -37,6 +37,14 @@ Plug 'luochen1990/rainbow'
 call plug#end()
 
 " ======================================================================
+"                        Running the Code
+" ======================================================================
+autocmd FileType python map <buffer> <leader>r :exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType dart map <buffer> <leader>r :exec '!dart' shellescape(@%, 1)<CR>
+autocmd FileType dart :silent! lcd %:p:h
+
+
+" ======================================================================
 "                        other settings 
 " ======================================================================
 "
@@ -220,14 +228,18 @@ end
 -- for _, lsp in ipairs(servers) do
 --   nvim_lsp[lsp].setup { on_attach = on_attach }
 -- end
+local custom_lsp_attach = function(client)
+  vim.api.nvim_set_current_dir(client.config.root_dir)
+end
+
 
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.dartls.setup {
 	cmd = { "dart", "/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
 	on_attach = on_attach,
-	root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
-}
+	root_dir = function() return vim.loop.cwd() end      -- run lsp for dart in any directory
+	}
 EOF
 
 " lsp completion
@@ -237,7 +249,7 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_chain_complete_list = {
 			\'default' : {
 			\	'default' : [
-			\		{'complete_items' : ['lsp', 'snippet', 'buffer']},
+			\		{'complete_items' : ['lsp', 'snippet', 'buffer', 'ts']},
 			\		{'mode' : 'file'}
 			\	],
 			\	'comment' : [],
@@ -257,11 +269,6 @@ let g:completion_chain_complete_list = {
 			\	{'complete_items': ['ts', 'buffer']}
 			\	],
 			\}
-
-"lsp auto-format before save
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.dart lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " nvim-compe uses default
 let g:compe = {}
@@ -297,8 +304,21 @@ require('lint').linters_by_ft = {
 EOF
 
 au BufWritePost <buffer> lua require('lint').try_lint()
+
 " =======================================================================================
-" other settings
+"                                   TREE-SITTER
+" =======================================================================================
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "python",
+  highlight = {enable = true},
+  indent = {enable = false}
+}
+EOF
+
+" =======================================================================================
+"                                       Other settings
 " =======================================================================================
 
 set undodir=~/.vim/undodir
@@ -331,9 +351,7 @@ set fdm=manual
 set tm=500
 set nohlsearch
 set shell=/bin/bash
-set tabstop=4|
-set softtabstop=4|
-set shiftwidth=4|
-set textwidth=79|
-set autoindent|
-set fileformat=unix|
+set textwidth=100
+set autoindent
+set cindent
+set fileformat=unix
