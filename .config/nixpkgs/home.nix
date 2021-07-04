@@ -25,15 +25,16 @@
 	pkgs.girara
 	pkgs.fish
 	pkgs.gh
-    pkgs.luajit
+        pkgs.luajit
 	pkgs.cmake
-    pkgs.neovim-nightly
-    pkgs.pinentry_mac
+        pkgs.neovim-nightly
+        pkgs.pinentry_mac
 	pkgs.starship
 	pkgs.tree
 	pkgs.qutebrowser
 	pkgs.dart
 	pkgs.nodejs
+	pkgs.onefetch
   ];
 
 
