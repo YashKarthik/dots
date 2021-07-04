@@ -101,7 +101,7 @@ colorscheme tokyonight
 " VimWiki syntax highlighting
 let wiki = {}
 let wiki.path = '~/vimwiki/'
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'sh': 'sh', 'fish': 'fish', 'javascript': 'js', 'html': 'html', 'css': 'css'}
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'sh': 'sh', 'fish': 'fish', 'javascript': 'js', 'html': 'html', 'css': 'css', 'dart': 'dart'}
 let g:vimwiki_hl_cb_checked=2
 let g:vimwiki_conceallevel=3
 let g:indentLine_concealcursor=""
@@ -177,8 +177,8 @@ nnoremap <silent> <leader><leader>= <C-w>=
 " ======================================================================
 "                        Running the Code
 " ======================================================================
-autocmd FileType python map <buffer> <leader>r :vs \| terminal python %<CR>
-autocmd FileType dart map <buffer> <leader>r :vs \| terminal dart %<CR>
+autocmd FileType python map <buffer> <leader>r :sp \| terminal python %<CR>
+autocmd FileType dart map <buffer> <leader>r :sp \| terminal dart %<CR>
 autocmd FileType dart :silent! lcd %:p:h
 
 
@@ -352,3 +352,4 @@ set textwidth=100
 set autoindent
 set cindent
 set fileformat=unix
+set cursorline
