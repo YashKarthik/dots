@@ -1,5 +1,4 @@
 filetype on
-filetype plugin on
 syntax on
 
 source $HOME/.config/nvim/config/plugins.vim
@@ -12,10 +11,19 @@ source $HOME/.config/nvim/config/colors.vim
 " galaxyline setup
 luafile ~/Code/nvim_lua/plugins/statusline1.lua
 
+"some stuff
+autocmd CompleteDone * if !pumvisible() | pclose | endif
+au BufWritePost <buffer> lua require('lint').try_lint()
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumForwardTrigger = '<tab>'
+let g:UltiSnipsJumBackwardTrigger = '<s-tab>'
+
 " Python shit
 let g:python_highlight_all = 1
 let python_highlight_all=1
-let g:python3_host_prog='/opt/anaconda3/bin/python'
+let g:python3_host_prog='/Users/Yash/anaconda3/bin/python'
 let g:python_host_prog='/usr/bin/python2'
 
 " rainbow settings
@@ -54,6 +62,3 @@ autocmd FileType dart map <buffer> <leader>r :sp \| terminal dart %<CR>
 autocmd FileType dart set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType dart :silent! lcd %:p:h
 
-"some stuff
-autocmd CompleteDone * if !pumvisible() | pclose | endif
-au BufWritePost <buffer> lua require('lint').try_lint()
