@@ -13,7 +13,7 @@ inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 " :telescope
-map <silent> <Leader>t :Telescope
+map <Leader>t :Telescope
 map <silent> <Leader>f :Telescope find_files<CR>
 map <silent> <Leader>F :Telescope file_browser<CR>
 " figure this out for different dirs

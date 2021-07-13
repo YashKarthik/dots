@@ -16,6 +16,7 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'mfussenegger/nvim-lint'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'akinsho/flutter-tools.nvim'
 Plug 'mbbill/undotree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do':':TSUpdate'}
 Plug 'nvim-treesitter/playground'
