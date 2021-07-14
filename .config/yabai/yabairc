@@ -1,7 +1,9 @@
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
 # default layout is binary space partition
 yabai -m config layout bsp
-# new vertical window to rigt, horizontal to bottom
-yabai -m config window_placement second_child
+# new vertical window to rigt, horizontal to bottom (default)
 
 # padding & gaps
 yabai -m config top_padding    20
@@ -11,10 +13,16 @@ yabai -m config right_padding  20
 yabai -m config window_gap     20
 
 # on or off (default: off)
-yabai -m config auto_balance off
+yabai -m config auto_balance on
 
 # set mouse interaction modifier key (default: fn)
 # yabai -m config mouse_modifier fn
 
 # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
 yabai -m config focus_follows_mouse autoraise
+
+# window barder on
+yabai -m config window_border on
+yabai -m config window_border_width 4
+yabai -m config active_window_border_color 0xFFbcaaff
+yabai -m config normal_window_border_color 0x806453a3

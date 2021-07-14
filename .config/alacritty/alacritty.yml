@@ -27,7 +27,7 @@ draw_bold_text_with_bright_colors: true
 colors:
 
   primary:
-    background: '#1c1d26'
+    background: '#1c1f2d'
     foreground: '#ffffff'
 
   cursor:
@@ -60,8 +60,8 @@ colors:
 window:
   decorations: "none"
   padding:
-          x: 1
-          y: 1
+          x: 3
+          y: 3
 
 key_bindings:
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
