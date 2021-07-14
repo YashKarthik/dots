@@ -1,0 +1,20 @@
+# default layout is binary space partition
+yabai -m config layout bsp
+# new vertical window to rigt, horizontal to bottom
+yabai -m config window_placement second_child
+
+# padding & gaps
+yabai -m config top_padding    20
+yabai -m config bottom_padding 20
+yabai -m config left_padding   20
+yabai -m config right_padding  20
+yabai -m config window_gap     20
+
+# on or off (default: off)
+yabai -m config auto_balance off
+
+# set mouse interaction modifier key (default: fn)
+# yabai -m config mouse_modifier fn
+
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse autoraise
