@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'folke/tokyonight.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'gko/vim-coloresque'
