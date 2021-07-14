@@ -8,7 +8,6 @@ set belloff=all
 set incsearch
 set autowrite
 set nowrap
-set sidescroll=10
 set textwidth=90
 "set completeopt=menuone,longest,preview,noinsert,noselect
 set completeopt=menuone,noselect

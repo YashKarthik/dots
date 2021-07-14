@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'folke/tokyonight.nvim'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'gko/vim-coloresque'
@@ -23,7 +23,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'kyazdani42/nvim-web-devicons' " lua
 Plug 'ryanoasis/vim-devicons' " vimscript
-Plug 'lukas-reineke/indent-blankline.nvim' , {'branch': 'master'}
+"Plug 'lukas-reineke/indent-blankline.nvim' , {'branch': 'master'}
 Plug 'luochen1990/rainbow'
 
 call plug#end()
