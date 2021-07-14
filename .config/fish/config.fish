@@ -5,9 +5,6 @@ set fish_function_path $fish_function_path ~/plugin-foreign-env/functions
 fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 
-set -g -x PATH /usr/local/bin $PATH
-set -Ua fish_user_paths ~/Code/flutter/bin
-
 fish_vi_key_bindings
 
 alias neo=nvim
