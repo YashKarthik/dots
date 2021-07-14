@@ -35,3 +35,10 @@ starship init fish | source
 # !! Contents within this block are managed by 'conda init' !!
 eval /Users/Yash/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
+#
+# Solarized Light & Magenta highlight
+set -g man_blink -o red
+set -g man_bold -o magenta
+set -g man_standout -b white 586e75
+set -g man_underline -u 586e75
+

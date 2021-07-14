@@ -27,7 +27,6 @@
 	pkgs.gh
         pkgs.luajit
 	pkgs.cmake
-        pkgs.neovim-nightly
         pkgs.pinentry_mac
 	pkgs.starship
 	pkgs.tree
@@ -36,12 +35,4 @@
 	pkgs.nodejs
 	pkgs.onefetch
   ];
-
-
- nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
-
 }
