@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'SirVer/ultisnips'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'honza/vim-snippets'
 Plug 'gko/vim-coloresque'
 Plug 'folke/which-key.nvim'
