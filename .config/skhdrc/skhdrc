@@ -11,8 +11,8 @@ cmd + alt - 3 : yabai -m space --layout stack
 shift + alt - s : yabai -m window --toggle sticky
 
 # Make window native fullscreen
-cmd + alt - 5 : yabai -m window --toggle zoom-fullscreen
-cmd + alt - 6 : yabai -m window --toggle native-fullscreen
+cmd + alt - 4 : yabai -m window --toggle zoom-fullscreen
+cmd + alt - 5 : yabai -m window --toggle native-fullscreen
 
 
 # Float / Unfloat window
