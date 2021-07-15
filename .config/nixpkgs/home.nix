@@ -34,5 +34,6 @@
 	pkgs.dart
 	pkgs.nodejs
 	pkgs.onefetch
+	pkgs.tty-clock
   ];
 }
