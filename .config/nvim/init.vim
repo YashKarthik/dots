@@ -60,5 +60,4 @@ autocmd FileType python set tabstop=4 softtabstop=4 shiftwidth=4
 
 autocmd FileType dart map <buffer> <leader>r :sp \| terminal dart %<CR>
 autocmd FileType dart set tabstop=2 softtabstop=2 shiftwidth=2
-autocmd FileType dart :silent! lcd %:p:h
 
