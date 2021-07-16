@@ -29,6 +29,5 @@ set shell=/bin/bash
 set textwidth=100
 set smartindent
 set shortmess+=c
-set hidden
 set fileformat=unix
 set cursorline
