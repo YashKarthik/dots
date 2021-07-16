@@ -6,17 +6,15 @@ alt + shift - f: /Applications/Firefox.app/Contents/MacOS/firefox
 cmd + alt - 1 : yabai -m space --layout bsp
 cmd + alt - 2 : yabai -m window --toggle split
 cmd + alt - 3 : yabai -m space --layout stack
+# Float / Unfloat window
+cmd + alt - 4 : yabai -m window --toggle float
 
 # toggle sticky (show on all spaces)
-shift + alt - s : yabai -m window --toggle sticky
+# shift + alt - s : yabai -m window --toggle sticky
 
 # Make window native fullscreen
-cmd + alt - 4 : yabai -m window --toggle zoom-fullscreen
-cmd + alt - 5 : yabai -m window --toggle native-fullscreen
-
-
-# Float / Unfloat window
-cmd + alt - f : yabai -m window --toggle float
+cmd + alt - 5 : yabai -m window --toggle zoom-fullscreen
+cmd + alt - 6 : yabai -m window --toggle native-fullscreen
 
 # focus window
 alt - x : yabai -m window --focus recent
@@ -32,14 +30,14 @@ shift + cmd - x : yabai -m window --warp recent
 shift + cmd - h : yabai -m window --warp west
 shift + cmd - t : yabai -m window --warp south
 shift + cmd - c : yabai -m window --warp north
-shift + cmd - f : yabai -m window --warp east
+shift + cmd - s : yabai -m window --warp east
 
 # swapping windows
 shift + alt - x : yabai -m window --swap recent
 shift + alt - h : yabai -m window --swap west
 shift + alt - t : yabai -m window --swap south
 shift + alt - c : yabai -m window --swap north
-shift + alt - f : yabai -m window --swap east
+shift + alt - s : yabai -m window --swap east
 
 
 # Resize windows

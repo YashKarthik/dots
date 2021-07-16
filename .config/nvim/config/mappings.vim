@@ -8,6 +8,9 @@ nnoremap <Leader>s1 :so ~/Code/alt_config.vim<CR>
 " open scartch-pad in new tab
 nnoremap <Leader>sc :tabnew ~/vimwiki/Scratch-pad.wiki<CR>
 
+" delete text losing copied stuff and past the copied stuff into that place
+vnoremap <leader>p "_dP
+
 " nvim-compe
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
