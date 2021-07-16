@@ -8,6 +8,9 @@ nnoremap <Leader>s1 :so ~/Code/alt_config.vim<CR>
 " open scartch-pad in new tab
 nnoremap <Leader>sc :tabnew ~/vimwiki/Scratch-pad.wiki<CR>
 
+" cd into current dir
+nnoremap <Leader>cd :lcd %:p:h<CR><bar>:pwd<CR>
+
 " delete text losing copied stuff and past the copied stuff into that place
 vnoremap <leader>p "_dP
 
