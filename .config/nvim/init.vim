@@ -19,6 +19,9 @@ au BufWritePost <buffer> lua require('lint').try_lint()
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumForwardTrigger = '<tab>'
 let g:UltiSnipsJumBackwardTrigger = '<s-tab>'
+let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
+let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
+
 
 " Python shit
 let g:python_highlight_all = 1
