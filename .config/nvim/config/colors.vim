@@ -32,9 +32,6 @@ function! MyHighlights() abort
 	hi VimwikiHeader5 guifg=#eb91ab
 	hi VimwikiHeader6 guifg=#f5da6e
 	hi Statusline guifg=#a9b1d6 guibg=#202328
-	hi Normal guibg=none
-	hi NonText guibg=none
-
 endfunction
 
 augroup MyColors
