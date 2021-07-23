@@ -22,7 +22,6 @@ let g:UltiSnipsJumBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 
-
 " Python shit
 let g:python_highlight_all = 1
 let python_highlight_all=1
