@@ -14,10 +14,7 @@ alias reddit=ttrv
 alias qb=/Applications/Neo.app/Contents/MacOS/qutebrowser
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
 alias dartls='/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot --lsp'
-
-function fetch 
-	sh ~/Code/pfetch/pfetch
-end
+alias zathura=~/Code/zath.py
 
 function fish_right_prompt
   #intentionally left blank

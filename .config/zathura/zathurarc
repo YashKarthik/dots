@@ -9,7 +9,7 @@
 
 # GENERAL SETTINGS
 set statusbar-h-padding 5
-set statusbar-v-padding 5
+set statusbar-v-padding 6
 set selection-clipboard clipboard
 set page-padding 1
 map D toggle_page_mode # p to change page mode
@@ -17,26 +17,26 @@ map R reload # R to reload document
 map r rotate # r to rotate document
 map c recolor # C to change theme
 set recolor true # Set custom colorscheme by default
-set font "Fira Code 15" # Font
+set font "FiraCode Nerd Font Mono 15" # Font
 
 # ------------------------------------------------
 # COLORS
 
 # Tab completion colors
 set completion-group-bg         '#1B1D27'
-set completion-group-fg         '#ECEFF4'
+set completion-group-fg         '#4d94ff'
 set completion-bg               '#1B1D27'
-set completion-fg               '#ECEFF4'
-set completion-highlight-bg     '#4C566A'
-set completion-highlight-fg     '#ECEFF4'
+set completion-fg               '#4c566a'
+set completion-highlight-bg     '#1B1D27'
+set completion-highlight-fg     '#5e95bc'
 
 # Notification colors
 set notification-error-bg       '#434C5E'
 set notification-error-fg       '#ECBDF6'
 set notification-warning-bg     '#434C5E'
 set notification-warning-fg     '#ECBDF6'
-set notification-bg             '#434C5E'
-set notification-fg             '#ECBDF6'
+set notification-bg             '#161b24'
+set notification-fg             '#37455e'
 
 # Index colors
 set index-bg                    '#1B1D27'
@@ -50,7 +50,7 @@ set inputbar-fg                 '#E5E9F0'
 
 # Status Bar colors
 set statusbar-bg                '#2E3440'
-set statusbar-fg                '#E5E9F0'
+set statusbar-fg                '#6a82ab'
 
 # Search-highlight colors
 set highlight-color             '#1B1D27'
