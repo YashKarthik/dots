@@ -1,9 +1,5 @@
 -- which key
-require("which-key").setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  -- refer to the configuration section below
-}
+require("which-key").setup()
 
 -- treesitter
 require'nvim-treesitter.configs'.setup {
@@ -40,4 +36,7 @@ do
 end
 
 -- fluttter-tools
-require("flutter-tools").setup{}
+require("flutter-tools").setup()
+
+-- gitsign.nvim
+require('gitsigns').setup()

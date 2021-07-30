@@ -27,7 +27,7 @@ set tm=500
 set nohlsearch
 set shell=/bin/bash
 set textwidth=100
-set cindent
+"set cindent
 set shortmess+=c
 set fileformat=unix
 set cursorline

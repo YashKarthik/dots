@@ -30,7 +30,6 @@
         pkgs.pinentry_mac
 	pkgs.starship
 	pkgs.tree
-	pkgs.qutebrowser
 	pkgs.dart
 	pkgs.nodejs
 	pkgs.onefetch

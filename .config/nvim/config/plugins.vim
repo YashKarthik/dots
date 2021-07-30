@@ -9,6 +9,7 @@ Plug 'folke/which-key.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'

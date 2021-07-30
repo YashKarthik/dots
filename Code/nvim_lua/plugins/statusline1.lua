@@ -41,7 +41,7 @@ gls.left[3] = {
 
 gls.left[4] = {
   GitIcon = {
-    provider = function() return '  ' end,
+    provider = function() return ' ' end,
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
@@ -52,25 +52,27 @@ gls.left[4] = {
 gls.left[5] = {
   GitBranch = {
     provider = 'GitBranch',
+    separator = ' ',
     condition = condition.check_git_workspace,
     highlight = {colors.violet,colors.bg,'bold'},
 	}
 }
 
 gls.left[6] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = condition.hide_in_width,
-    icon = '  ',
-    highlight = {colors.green,colors.bg},
-	}
-}
-gls.left[7] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
     icon = ' 柳',
     highlight = {colors.orange,colors.bg},
+	}
+}
+
+gls.left[7] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    condition = condition.hide_in_width,
+    icon = '  ',
+    highlight = {colors.green,colors.bg},
 	}
 }
 gls.left[8] = {

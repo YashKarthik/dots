@@ -11,7 +11,6 @@ alias neo=nvim
 alias vim=nvim
 alias python=~/anaconda3/bin/python
 alias reddit=ttrv
-alias qb=/Applications/Neo.app/Contents/MacOS/qutebrowser
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
 alias dartls='/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot --lsp'
 alias zathura=~/Code/zath.py
