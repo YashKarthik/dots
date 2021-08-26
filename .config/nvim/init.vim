@@ -47,7 +47,8 @@ let g:indentLine_conceallevel=2
 let g:vimwiki_list = [wiki]
 
 " vimwiki spell checker
-autocmd BufRead,BufNewFile   *.wiki setlocal spell spelllang=en_us
+autocmd BufRead,BufNewFile *.wiki setlocal spell spelllang=en_us
+autocmd BufRead,BufNewFile *.wiki set tabstop=2 softtabstop=2 shiftwidth=2 textwidth=80
 
 " no numbers in terminal
 autocmd TermOpen * setlocal nonumber norelativenumber
