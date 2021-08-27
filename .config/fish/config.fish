@@ -35,3 +35,5 @@ set -g man_bold -o magenta
 set -g man_standout -b white 586e75
 set -g man_underline -u 586e75
 
+fish_add_path /usr/local/opt/icu4c/bin
+fish_add_path /usr/local/opt/icu4c/sbin

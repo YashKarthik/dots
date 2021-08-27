@@ -34,5 +34,6 @@
 	pkgs.nodejs
 	pkgs.onefetch
 	pkgs.tty-clock
+	pkgs.youtube-dl
   ];
 }
