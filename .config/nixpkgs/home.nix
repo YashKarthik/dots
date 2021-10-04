@@ -31,7 +31,6 @@
 	pkgs.starship
 	pkgs.tree
 	pkgs.dart
-	pkgs.nodejs
 	pkgs.onefetch
 	pkgs.tty-clock
 	pkgs.youtube-dl

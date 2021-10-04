@@ -34,14 +34,6 @@ local on_attach = function(client, bufnr)
 
 end
 
-require'lspconfig'.pyright.setup{ on_attach = on_attach }
-require'lspconfig'.vimls.setup{ on_attach = on_attach }
-require'lspconfig'.dartls.setup {
-	cmd = { "dart", "/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
-	on_attach = on_attach,
-	root_dir = function() return vim.loop.cwd() end      -- run lsp for dart in any directory
-}
-
 -- nvim-compe
 require'compe'.setup {
   enabled = true;
@@ -70,9 +62,113 @@ require'compe'.setup {
     buffer = true;
     calc = true;
     nvim_lsp = true;
+    nvim_lua = true;
     treesitter = false;
     nvim_lua = true;
     ultisnips = true;
     emoji = true;
   };
 }
+
+--Enable (broadcasting) snippet capability for completion (required for html-lsp)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- languages
+require'lspconfig'.pyright.setup { on_attach = on_attach }
+require'lspconfig'.vimls.setup { on_attach = on_attach }
+
+
+require'lspconfig'.html.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.tsserver.setup {
+	on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client)
+end
+}
+
+require'lspconfig'.dartls.setup {
+	cmd = { "dart", "/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
+	on_attach = on_attach,
+	root_dir = function() return vim.loop.cwd() end      -- run lsp for dart in any directory
+}
+
+-- ESlint, prettier
+nvim_lsp.diagnosticls.setup {
+  on_attach = on_attach,
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  init_options = {
+    linters = {
+      eslint = {
+        command = 'eslint_d',
+        rootPatterns = { '.git' },
+        debounce = 100,
+        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+        sourceName = 'eslint_d',
+        parseJson = {
+          errorsRoot = '[0].messages',
+          line = 'line',
+          column = 'column',
+          endLine = 'endLine',
+          endColumn = 'endColumn',
+          message = '[eslint] ${message} [${ruleId}]',
+          security = 'severity'
+        },
+        securities = {
+          [2] = 'error',
+          [1] = 'warning'
+        }
+      },
+    },
+    filetypes = {
+      javascript = 'eslint',
+      javascriptreact = 'eslint',
+      typescript = 'eslint',
+      typescriptreact = 'eslint',
+    },
+    formatters = {
+      eslint_d = {
+        command = 'eslint_d',
+        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+        rootPatterns = { '.git' },
+      },
+      prettier = {
+        command = 'prettier',
+        args = { '--stdin-filepath', '%filename' }
+      }
+    },
+    formatFiletypes = {
+      css = 'prettier',
+      javascript = 'eslint_d',
+      javascriptreact = 'eslint_d',
+      json = 'prettier',
+      scss = 'prettier',
+      less = 'prettier',
+      typescript = 'eslint_d',
+      typescriptreact = 'eslint_d',
+      json = 'prettier',
+      markdown = 'prettier',
+    }
+  }
+}
+
+-- fromat on save
+local format_async = function(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then return end
+    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+        local view = vim.fn.winsaveview()
+        vim.lsp.util.apply_text_edits(result, bufnr)
+        vim.fn.winrestview(view)
+        if bufnr == vim.api.nvim_get_current_buf() then
+            vim.api.nvim_command("noautocmd :update")
+        end
+    end
+end
+vim.lsp.handlers["textDocument/formatting"] = format_async

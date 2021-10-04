@@ -37,3 +37,4 @@ set -g man_underline -u 586e75
 
 fish_add_path /usr/local/opt/icu4c/bin
 fish_add_path /usr/local/opt/icu4c/sbin
+fish_add_path /usr/local/sbin
