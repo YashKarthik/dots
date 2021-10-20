@@ -34,5 +34,7 @@
 	pkgs.onefetch
 	pkgs.tty-clock
 	pkgs.youtube-dl
+	pkgs.mpv
+	pkgs.telnet
   ];
 }
