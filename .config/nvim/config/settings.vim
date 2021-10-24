@@ -1,3 +1,6 @@
+scriptencoding utf-8
+set encoding=utf-8
+set termguicolors
 set undodir=~/.vim/undodir
 set undofile
 set termguicolors
@@ -9,8 +12,7 @@ set incsearch
 set autowrite
 set nowrap
 set textwidth=90
-"set completeopt=menuone,longest,preview,noinsert,noselect
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 set encoding=utf-8
 set guifont=Fira\ Code:h14
 set splitbelow splitright
@@ -27,7 +29,7 @@ set tm=500
 set nohlsearch
 set shell=/bin/bash
 set textwidth=100
-"set cindent
+set cindent
 set shortmess+=c
 set fileformat=unix
 set cursorline

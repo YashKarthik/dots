@@ -14,10 +14,6 @@ nnoremap <Leader>cd :lcd %:p:h<CR><bar>:pwd<CR>
 " delete text losing copied stuff and past the copied stuff into that place
 vnoremap <leader>p "_dP
 
-" nvim-compe
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-
 " :telescope
 map <Leader>t :Telescope
 map <silent> <Leader>f :Telescope find_files<CR>

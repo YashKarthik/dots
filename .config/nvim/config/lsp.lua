@@ -34,72 +34,65 @@ local on_attach = function(client, bufnr)
 
 end
 
--- nvim-compe
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
+-- nvim-cmp
+local cmp = require'cmp'
 
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    treesitter = false;
-    nvim_lua = true;
-    ultisnips = true;
-    emoji = true;
-  };
-}
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.fn["UltiSnips#Anon"](args.body)
+		end,
+	},
+	mapping = {
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      		['<C-f>'] = cmp.mapping.scroll_docs(4),
+      		['<C-Space>'] = cmp.mapping.complete(),
+      		['<C-e>'] = cmp.mapping.close(),
+      		['<CR>'] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'ultisnips' },
+	}, {
+		{ name = 'buffer' },
+	})
+})
+
+
+
+
+
 
 --Enable (broadcasting) snippet capability for completion (required for html-lsp)
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- languages
-require'lspconfig'.pyright.setup { on_attach = on_attach }
-require'lspconfig'.vimls.setup { on_attach = on_attach }
+nvim_lsp.pyright.setup { on_attach = on_attach }
+nvim_lsp.vimls.setup { on_attach = on_attach }
 
 
-require'lspconfig'.html.setup {
+nvim_lsp.html.setup {
   capabilities = capabilities,
 }
 
-require'lspconfig'.cssls.setup {
+nvim_lsp.cssls.setup {
   capabilities = capabilities,
 }
 
-require'lspconfig'.tsserver.setup {
-	on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        on_attach(client)
-end
-}
-
-require'lspconfig'.dartls.setup {
+nvim_lsp.dartls.setup {
 	cmd = { "dart", "/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
 	on_attach = on_attach,
 	root_dir = function() return vim.loop.cwd() end      -- run lsp for dart in any directory
 }
 
+nvim_lsp.tsserver.setup {
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
+end
+}
 -- ESlint, prettier
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,

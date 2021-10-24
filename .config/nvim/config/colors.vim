@@ -1,18 +1,3 @@
-if (has("nvim"))
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-
-if (has("termguicolors"))
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  	set termguicolors
-endif
-
-if &background == "dark"     
-  let s:base03 = "NONE"     
-  let s:base02 = "NONE"     
-endif
-
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
@@ -41,9 +26,9 @@ augroup END
 colorscheme tokyonight 
 
 " rainbow settings
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\	'guifgs': ['#ff9d00', 'yellow', '#007bff', '#874ecf', '#e84373'],
-\	'operators': '_,_',
-\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\}
+"let g:rainbow_active = 1
+"let g:rainbow_conf = {
+"\	'guifgs': ['#ff9d00', 'yellow', '#007bff', '#874ecf', '#e84373'],
+"\	'operators': '_,_',
+"\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+"\}

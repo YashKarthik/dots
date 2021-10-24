@@ -1,12 +1,12 @@
 filetype on
 syntax on
 
+source $HOME/.config/nvim/config/settings.vim
 source $HOME/.config/nvim/config/plugins.vim
+source $HOME/.config/nvim/config/mappings.vim
+source $HOME/.config/nvim/config/colors.vim
 source $HOME/.config/nvim/config/lsp.lua
 source $HOME/.config/nvim/config/misc.lua
-source $HOME/.config/nvim/config/mappings.vim
-source $HOME/.config/nvim/config/settings.vim
-source $HOME/.config/nvim/config/colors.vim
 
 " galaxyline setup
 luafile ~/Code/nvim_lua/plugins/statusline1.lua
@@ -29,12 +29,12 @@ let g:python3_host_prog='/Users/Yash/anaconda3/bin/python'
 let g:python_host_prog='/usr/bin/python2'
 
 " rainbow settings
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\	'guifgs': ['#ff9d00', 'yellow', '#007bff', '#874ecf', '#e84373'],
-\	'operators': '_,_',
-\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\}
+"let g:rainbow_active = 1
+"let g:rainbow_conf = {
+"\	'guifgs': ['#ff9d00', 'yellow', '#007bff', '#874ecf', '#e84373'],
+"\	'operators': '_,_',
+"\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+"\}
 
 " VimWiki syntax highlighting, will prolly move to orgmode.nvim
 let wiki = {}
@@ -64,4 +64,12 @@ autocmd FileType python set tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType dart map <buffer> <leader>r :sp \| terminal dart %<CR>
 autocmd FileType dart set tabstop=2 softtabstop=2 shiftwidth=2
 
+au BufNewFile,BufRead *.es6 setf javascript
+au BufNewFile,BufRead *.jsx setf javascriptreact
+au BufNewFile,BufRead *.tsx setf typescriptreact
+
 autocmd FileType html set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType typescript set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType javascriptreact set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType typescriptreact set tabstop=2 softtabstop=2 shiftwidth=2
