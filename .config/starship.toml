@@ -1,7 +1,7 @@
 [character]
-success_symbol = "[λ](bold green)"
-error_symbol = "[λ](bold red)"
-vicmd_symbol = "[Λ](bold green)"
+success_symbol = "[λ](bold #917de0)"
+error_symbol = "[λ](bold #f26076)"
+vicmd_symbol = "[λ](bold #7d9be0)"
 
 [aws]
 symbol = "  "
