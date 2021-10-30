@@ -10,6 +10,8 @@ source $HOME/.config/nvim/config/misc.lua
 
 " galaxyline setup
 luafile ~/Code/nvim_lua/plugins/statusline1.lua
+"telescope
+luafile ~/Code/nvim_lua/plugins/telescope.lua
 
 "some stuff
 autocmd CompleteDone * if !pumvisible() | pclose | endif

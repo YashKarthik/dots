@@ -21,7 +21,6 @@
 
   home.packages = [
 	pkgs.zathura
-	pkgs.cmatrix
 	pkgs.girara
 	pkgs.fish
 	pkgs.gh
