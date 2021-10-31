@@ -35,5 +35,6 @@
 	pkgs.youtube-dl
 	pkgs.mpv
 	pkgs.telnet
+	pkgs.tcl2048
   ];
 }
