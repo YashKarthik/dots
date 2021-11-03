@@ -5,7 +5,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m config layout bsp
 # new vertical window to rigt, horizontal to bottom (default)
 
-# ignore tor
+# ignore tor and authy
 yabai -m rule --add app="^Tor Browser" manage=off 
 yabai -m rule --add app="^Authy Desktop" manage=off 
 
