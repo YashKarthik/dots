@@ -26,8 +26,8 @@ Plug 'mbbill/undotree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do':':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-Plug 'kyazdani42/nvim-web-devicons' " lua
-Plug 'ryanoasis/vim-devicons' " vimscript
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'tpope/vim-surround'
