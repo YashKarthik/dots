@@ -30,14 +30,6 @@ let python_highlight_all=1
 let g:python3_host_prog='/Users/Yash/anaconda3/bin/python'
 let g:python_host_prog='/usr/bin/python2'
 
-" rainbow settings
-"let g:rainbow_active = 1
-"let g:rainbow_conf = {
-"\	'guifgs': ['#ff9d00', 'yellow', '#007bff', '#874ecf', '#e84373'],
-"\	'operators': '_,_',
-"\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-"\}
-
 " VimWiki syntax highlighting, will prolly move to orgmode.nvim
 let wiki = {}
 let wiki.path = '~/vimwiki/'
