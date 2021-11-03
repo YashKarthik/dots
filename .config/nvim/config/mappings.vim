@@ -22,7 +22,7 @@ map <silent> <Leader>F :Telescope file_browser<CR>
 map <silent> <Leader>con :lua require('Code.nvim_lua.plugins.telescope').search_dotfiles()<CR>
 
 "split navigations
-nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>d :wincmd h<CR>
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
