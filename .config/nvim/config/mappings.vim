@@ -11,8 +11,14 @@ nnoremap <Leader>sc :tabnew ~/vimwiki/Scratch-pad.wiki<CR>
 " cd into current dir
 nnoremap <Leader>cd :lcd %:p:h<CR><bar>:pwd<CR>
 
+"restart Treesitter highlight to sync buffer - this not working yet
+"nnoremap <Leader>T :write | edit | TSBufEnable highlight<CR>
+
 " delete text losing copied stuff and past the copied stuff into that place
 vnoremap <leader>p "_dP
+" copy-paste to-from system clipboard
+vnoremap <leader>y "*y
+nnoremap <leader>p "*p
 
 " :telescope
 map <Leader>t :Telescope
@@ -29,9 +35,9 @@ nnoremap <silent> <leader>l :wincmd l<CR>
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 "split resizing
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 32/20)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <leader>= <C-w>=
-nnoremap <silent> <Leader><Leader>+ :exe "vertical resize " . (winwidth(0) * 32/20)<CR>
-nnoremap <silent> <Leader><Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <silent> <Leader><Leader>+ :exe "resize " . (winheight(0) * 32/20)<CR>
+nnoremap <silent> <Leader><Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <leader><leader>= <C-w>=
+nnoremap <silent> <Leader>+ :exe "vertical resize " . (winwidth(0) * 32/20)<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <silent> <leader>= <C-w>=

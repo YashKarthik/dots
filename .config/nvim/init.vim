@@ -52,26 +52,25 @@ autocmd TermOpen * startinsert
 " ======================================================================
 "                        Running the Code
 " ======================================================================
+au BufNewFile,BufRead *.es6 setf javascript
+au BufNewFile,BufRead *.jsx setf javascriptreact
+au BufNewFile,BufRead *.tsx setf typescriptreact
+au BufNewFile,BufRead *.mdx setf markdown
+
 autocmd FileType python map <buffer> <leader>r :sp \| terminal python %<CR>
 autocmd FileType python set tabstop=4 softtabstop=4 shiftwidth=4
 
 autocmd FileType dart map <buffer> <leader>r :sp \| terminal dart %<CR>
 autocmd FileType dart set tabstop=2 softtabstop=2 shiftwidth=2
 
-autocmd FileType javascript map <buffer> <leader>r :sp \| terminal node %<CR>
+autocmd FileType javascript map <buffer> <leader>rd :sp \| terminal npm run dev<CR>
 autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
 
-autocmd FileType typescript map <buffer> <leader>r :sp \| terminal node %<CR>
+autocmd FileType typescript  map <buffer> <leader>rd :sp \| terminal npm run dev<CR>
 autocmd FileType typescript set tabstop=2 softtabstop=2 shiftwidth=2
 
-autocmd FileType javascriptreact map <buffer> <leader>r :sp \| terminal node %<CR>
+autocmd FileType javascriptreact map <buffer> <leader>r :sp \| terminal npm run dev<CR>
 autocmd FileType javascriptreact set tabstop=2 softtabstop=2 shiftwidth=2
 
-autocmd FileType typescriptreact map <buffer> <leader>r :sp \| terminal node %<CR>
+autocmd FileType typescriptreact map <buffer> <leader>r :sp \| terminal npm run dev<CR>
 autocmd FileType typescriptreact set tabstop=2 softtabstop=2 shiftwidth=2
-
-au BufNewFile,BufRead *.es6 setf javascript
-au BufNewFile,BufRead *.jsx setf javascriptreact
-au BufNewFile,BufRead *.tsx setf typescriptreact
-
-autocmd FileType html set tabstop=2 softtabstop=2 shiftwidth=2

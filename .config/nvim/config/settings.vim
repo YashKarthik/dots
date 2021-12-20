@@ -33,3 +33,6 @@ set cindent
 set shortmess+=c
 set fileformat=unix
 set cursorline
+set expandtab
+set shiftwidth=2
+set tabstop=2
