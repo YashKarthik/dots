@@ -1,7 +1,5 @@
-# open terminal
-alt - return    : /Applications/Alacritty.app/Contents/MacOS/alacritty
-alt + shift - b : /Applications/Brave Browser.app.app/Contents/MacOS/brave
 alt + shift - z : python ~/Code/zath.py
+cmd + alt + ctrl - return : /usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.3/Emacs.app/Contents/MacOS/Emacs
 
 # change layouts
 cmd + alt - 1 : yabai -m space --layout bsp
@@ -18,7 +16,6 @@ cmd + alt - 5 : yabai -m window --toggle zoom-fullscreen
 cmd + alt - 6 : yabai -m window --toggle native-fullscreen
 
 # focus window
-alt - x : yabai -m window --focus recent
 alt - h : yabai -m window --focus west
 alt - t : yabai -m window --focus south
 alt - c : yabai -m window --focus north
@@ -39,7 +36,6 @@ shift + alt - h : yabai -m window --swap west
 shift + alt - t : yabai -m window --swap south
 shift + alt - c : yabai -m window --swap north
 shift + alt - s : yabai -m window --swap east
-
 
 # Resize windows
 cmd + alt - h : yabai -m window --resize left:-50:0; \

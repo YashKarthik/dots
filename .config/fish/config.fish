@@ -13,6 +13,8 @@ alias reddit=ttrv
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
 alias dartls='/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot --lsp'
 alias zathura=~/Code/zath.py
+alias doom=~/.emacs.d/bin/doom
+alias emacskill='emacsclient -e \'(kill-emacs)\''
 
 function fish_right_prompt
   #intentionally left blank
@@ -38,3 +40,4 @@ set -g man_underline -u 586e75
 fish_add_path /usr/local/opt/icu4c/bin
 fish_add_path /usr/local/opt/icu4c/sbin
 fish_add_path /usr/local/sbin
+fish_add_path /usr/local/bin/emacs
