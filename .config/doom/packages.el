@@ -52,3 +52,6 @@
 
 (package! visual-fill-column)
 (package! writeroom-mode)
+
+(unpin! org-roam)
+(package! org-roam-ui)
