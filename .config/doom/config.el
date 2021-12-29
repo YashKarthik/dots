@@ -110,9 +110,17 @@
 
 (make-code-monospace)
 
+;; org-hook
+(defun my/writing-hook ()
+  (org-appear-mode)
+  (visual-line-mode)
+  (setq visual-fill-column-center-text t)
+  (visual-fill-column-mode)
+  (adaptive-wrap-prefix-mode))
+
 (add-hook!
  'org-mode-hook
- 'turn-on-auto-fill)
+ 'my/writing-hook)
 
 (setq org-indent-indentation-per-level 1)
 

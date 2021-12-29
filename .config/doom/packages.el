@@ -51,5 +51,5 @@
 
 
 (package! visual-fill-column)
-(package! olivetti)
 (package! org-roam-ui)
+(package! poet-theme)
