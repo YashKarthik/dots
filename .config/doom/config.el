@@ -6,11 +6,10 @@
 ;;  Modes such as AutoFillMode insert a line ending after the last word that occurs before the value of option ‘fill-column’ (a column number).
 ;;  Modes such as VisualFillColumn (in concert with VisualLineMode) wrap a line after the last word before ‘fill-column’, but ultimately they do not alter the buffer text. Such “soft” wrapping is essentially a display effect.
 ;;  Modes such as VisualLineMode wrap a line right before the window edge, but ultimately they do not alter the buffer text. VisualLineMode wrapping is essentially a display effect.
-;;  Mail read or written within Emacs can take advantage of FormatFlowed
 
 ;; Function defs (used later)
 
-;; use firacode for these blocks in list
+;; use Firacode for these blocks in list
 (defun my-adjoin-to-list-or-symbol (element list-or-symbol)
   (let ((list (if (not (listp list-or-symbol))
                   (list list-or-symbol)
@@ -61,7 +60,7 @@
 
 
 ;; Themes > fonts
-(setq doom-font (font-spec :family "FiraCodeRetina" :size 15)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15)
       doom-big-font(font-spec :family "FiraCode Nerd Font Mono" :size 25))
 
@@ -89,6 +88,7 @@
             org-superstar-headline-bullets-list '("◉" "●" "○" "❖" "◆" "◇")
             )
 
+;; Not sure if i want this
 ;;(with-eval-after-load 'org-faces (dolist (face '((org-level-1 . 1.2)
 ;;                                                 (org-level-2 . 1.1)
 ;;                                                 (org-level-3 . 1.05)
@@ -114,14 +114,7 @@
  'org-mode-hook
  'turn-on-auto-fill)
 
-(add-hook!
- 'org-mode-hook
- 'olivetti-mode
- )
-
-(map! :leader
-      (:prefix-map ("t" . "toggle")
-       :desc "Writing Mode" "w" #'writing-mode))
+(setq org-indent-indentation-per-level 1)
 
 ;; ORG-roam
 (after! org-roam
