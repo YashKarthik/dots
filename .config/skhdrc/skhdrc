@@ -1,5 +1,5 @@
 alt + shift - z : python ~/Code/zath.py
-cmd + alt + ctrl - return : /usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.3/Emacs.app/Contents/MacOS/Emacs
+cmd + alt + ctrl - return : emacsclient -c
 
 # change layouts
 cmd + alt - 1 : yabai -m space --layout bsp

@@ -48,7 +48,8 @@
 ;; THEMES
 
 ;; Themes > colorscheme
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-palenight)
+
 (setq my/light-theme 'doom-solarized-light
       my/dark-theme doom-theme)
 
@@ -60,7 +61,7 @@
 
 
 ;; Themes > fonts
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
+(setq doom-font (font-spec :family "FiraCodeRetina" :size 15)
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15)
       doom-big-font(font-spec :family "FiraCode Nerd Font Mono" :size 25))
 
@@ -84,17 +85,21 @@
 (setq org-agenda-start-with-log-mode t) ;; daily planner thingy
 (setq org-ellipsis " ▼"
             org-hide-emphasis-markers t
-            org-superstar-headline-bullets-list '("⦿" "◉" "○" "❖" "◆" "◇"))
+            org-superstar-prettify-item-bullets t
+            org-superstar-headline-bullets-list '("◉" "●" "○" "❖" "◆" "◇")
+            )
 
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.1)
-                (org-level-3 . 1.05)
-                (org-level-4 . 1.0)
-                (org-level-5 . 1.0)
-                (org-level-6 . 1.0)
-                (org-level-7 . 1.0)
-                (org-level-8 . 1.0)))
-  (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
+;;(with-eval-after-load 'org-faces (dolist (face '((org-level-1 . 1.2)
+;;                                                 (org-level-2 . 1.1)
+;;                                                 (org-level-3 . 1.05)
+;;                                                 (org-level-4 . 1.0)
+;;                                                 (org-level-5 . 1.0)
+;;                                                 (org-level-6 . 1.0)
+;;                                                 (org-level-7 . 1.0)
+;;                                                 (org-level-8 . 1.0)))
+;;                                   (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
+;;                      )
+
 
 (dolist (mode '(org-mode-hook
                 term-mode-hook
@@ -109,6 +114,11 @@
  'org-mode-hook
  'turn-on-auto-fill)
 
+(add-hook!
+ 'org-mode-hook
+ 'olivetti-mode
+ )
+
 (map! :leader
       (:prefix-map ("t" . "toggle")
        :desc "Writing Mode" "w" #'writing-mode))
@@ -118,6 +128,12 @@
   :config
   (setq org-roam-directory "~/Knowledge\sBase")
   (org-roam-setup))
+
+(setq org-roam-v2-ack t)
+
+(map! :leader
+      (:prefix-map ("t" . "toggle")
+       :desc "Dark theme" "d" #'toggle-dark-theme))
 
 ;; ORG-roam UI
 (use-package! websocket

@@ -51,7 +51,5 @@
 
 
 (package! visual-fill-column)
-(package! writeroom-mode)
-
-(unpin! org-roam)
+(package! olivetti)
 (package! org-roam-ui)
