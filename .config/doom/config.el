@@ -9,40 +9,6 @@
 
 ;; Function defs (used later)
 
-;; use Firacode for these blocks in list
-(defun my-adjoin-to-list-or-symbol (element list-or-symbol)
-  (let ((list (if (not (listp list-or-symbol))
-                  (list list-or-symbol)
-                list-or-symbol)))
-    (require 'cl-lib)
-    (cl-adjoin element list))
-  )
-
-;; run the above function for the list
-(defun make-code-monospace ()
-  '(mapc
-    (lambda (face)
-      (set-face-attribute
-       face nil
-       :inherit
-       (my-adjoin-to-list-or-symbol
-        'fixed-pitch
-        (face-attribute face :inherit))))
-
-    (list 'org-code 'org-block
-          'org-table 'org-table-header
-          'org-todo 'org-verbatim 'org-special-keyword
-          'org-meta-line 'org-checkbox)
-    )
-  )
-
-
-;; function to toggle themes
-(defun toggle-dark-theme ()
-  (interactive)
-  (if (eq my/dark-theme doom-theme)
-      (load-theme my/light-theme t)
-    (load-theme my/dark-theme t)))
 
 ;; THEMES
 
@@ -53,11 +19,17 @@
       my/dark-theme doom-theme)
 
 
+;; function to toggle themes
+(defun toggle-dark-theme ()
+  (interactive)
+  (if (eq my/dark-theme doom-theme)
+      (load-theme my/light-theme t)
+    (load-theme my/dark-theme t)))
+
 ;; mapping to toggle themes
 (map! :leader
       (:prefix-map ("t" . "toggle")
        :desc "Dark theme" "d" #'toggle-dark-theme))
-
 
 ;; Themes > fonts
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
@@ -108,13 +80,47 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; use Firacode for these blocks in list
+(defun my-adjoin-to-list-or-symbol (element list-or-symbol)
+  (let ((list (if (not (listp list-or-symbol))
+                  (list list-or-symbol)
+                list-or-symbol)))
+    (require 'cl-lib)
+    (cl-adjoin element list))
+  )
+
+;; run the above function for the list
+(defun make-code-monospace ()
+  '(mapc
+    (lambda (face)
+      (set-face-attribute
+       face nil
+       :inherit
+       (my-adjoin-to-list-or-symbol
+        'fixed-pitch
+        (face-attribute face :inherit))))
+
+    (list 'org-code 'org-block
+          'org-table 'org-table-header
+          'org-todo 'org-verbatim 'org-special-keyword
+          'org-meta-line 'org-checkbox)
+    )
+  )
+
+
 (make-code-monospace)
+
+;; Spell
 
 ;; org-hook
 (defun my/writing-hook ()
+  (setq visual-fill-column-center-text t)
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+
+  (flyspell-mode-on)
   (org-appear-mode)
   (visual-line-mode)
-  (setq visual-fill-column-center-text t)
   (visual-fill-column-mode)
   (adaptive-wrap-prefix-mode))
 
@@ -126,15 +132,28 @@
 
 ;; ORG-roam
 (after! org-roam
-  :config
+  :init
+  (setq org-roam-v2-ack t)
+
+  :custom
   (setq org-roam-directory "~/Knowledge\sBase")
-  (org-roam-setup))
+  (setq org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+author:\n#+link:\n#+date: [[%U]]\n")
+      :unnarrowed t)
+     ("b" "bio" plain "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+twitter:\n#+link:\n#filetags: :bio:")
+      :unnarrowed t)
+     ))
 
-(setq org-roam-v2-ack t)
+  :config
+  (org-roam-setup)
+  )
 
-(map! :leader
-      (:prefix-map ("t" . "toggle")
-       :desc "Dark theme" "d" #'toggle-dark-theme))
+
+;; org-roam-capture templates
 
 ;; ORG-roam UI
 (use-package! websocket
@@ -147,3 +166,6 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+
+;; disable whitespace-mode
+(setq global-whitespace-mode -1)
