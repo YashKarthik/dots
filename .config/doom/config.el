@@ -140,20 +140,59 @@
   (setq org-roam-capture-templates
    '(("d" "default" plain "%?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+author:\n#+link:\n#+date: [[%U]]\n")
+                         "#+title: ${title}\n")
       :unnarrowed t)
+
+     ("n" "Notes" plain "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                         ":PROPERTIES:
+:author: %^{author}
+:link: [[https://%^{link}][%\\2]]
+:date; %^{%U}
+:END:
+#+title: ${title}\n")
+      :unnarrowed t)
+
      ("b" "bio" plain "%?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+twitter:\n#+link:\n#filetags: :bio:")
-      :unnarrowed t)
-     ))
+                         ":PROPERTIES:
+:twitter: [[https://twitter.com/%^{twitter}][%\\1]]
+:link: [[https://%^{link}][%\\2]]
+:END:
+#+title: ${title}
+#+filetags: :bio:")
+      :unnarrowed t)))
 
   :config
-  (org-roam-setup)
-  )
+  (org-roam-setup))
 
+;; custom capture functions
 
-;; org-roam-capture templates
+;; done't open capture buffer, just put the link
+(defun my/org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
+
+(map! :leader
+      (:prefix-map ("n" . "notes")
+      (:prefix-map ("r" . "roam")
+       :desc "Insert immediately" "m" #'my/org-roam-node-insert-immediate)))
+
+;; inbox for quick-capture
+(defun my/org-roam-capture-inbox ()
+  (interactive)
+  (org-roam-capture- :node (org-roam-node-create)
+                     :templates '(("i" "inbox" plain "%?"
+                                   :if-new (file+head "Inbox.org" "#+title: Inbox\n\n")
+                                   :unnarrowed t))))
+
+(map! :leader
+      (:prefix-map ("n" . "notes")
+      (:prefix-map ("r" . "roam")
+       :desc "Inbox" "I" #'my/org-roam-capture-inbox)))
 
 ;; ORG-roam UI
 (use-package! websocket
