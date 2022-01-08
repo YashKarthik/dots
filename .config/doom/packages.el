@@ -53,3 +53,4 @@
 (package! visual-fill-column)
 (package! org-roam-ui)
 (package! poet-theme)
+(package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))

@@ -15,22 +15,6 @@
 ;; Themes > colorscheme
 (setq doom-theme 'doom-palenight)
 
-(setq my/light-theme 'doom-solarized-light
-      my/dark-theme doom-theme)
-
-
-;; function to toggle themes
-(defun toggle-dark-theme ()
-  (interactive)
-  (if (eq my/dark-theme doom-theme)
-      (load-theme my/light-theme t)
-    (load-theme my/dark-theme t)))
-
-;; mapping to toggle themes
-(map! :leader
-      (:prefix-map ("t" . "toggle")
-       :desc "Dark theme" "d" #'toggle-dark-theme))
-
 ;; Themes > fonts
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15)
@@ -59,6 +43,19 @@
             org-superstar-prettify-item-bullets t
             org-superstar-headline-bullets-list '("◉" "●" "○" "❖" "◆" "◇")
             )
+
+(defcustom org-superstar-item-bullet-alist
+  '((?* . ?•)
+    (?+ . ?•)
+    (?- . ?•))
+  "Alist of UTF-8 bullets to be used for plain org lists.
+
+You should call ‘org-superstar-restart’ after changing this
+variable for your changes to take effect."
+  :group 'org-superstar
+  :type '(alist :options ((?* (character))
+                          (?+ (character))
+                          (?- (character)))))
 
 ;; Not sure if i want this
 ;;(with-eval-after-load 'org-faces (dolist (face '((org-level-1 . 1.2)
@@ -118,7 +115,7 @@
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
-  (flyspell-mode-on)
+  (flyspell-mode)
   (org-appear-mode)
   (visual-line-mode)
   (visual-fill-column-mode)
@@ -146,9 +143,9 @@
      ("n" "Notes" plain "%?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                          ":PROPERTIES:
-:author: %^{author}
-:link: [[https://%^{link}][%\\2]]
-:date; %^{%U}
+:author:
+:link:
+:date:
 :END:
 #+title: ${title}\n")
       :unnarrowed t)
@@ -157,7 +154,7 @@
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                          ":PROPERTIES:
 :twitter: [[https://twitter.com/%^{twitter}][%\\1]]
-:link: [[https://%^{link}][%\\2]]
+:link:
 :END:
 #+title: ${title}
 #+filetags: :bio:")
@@ -165,8 +162,6 @@
 
   :config
   (org-roam-setup))
-
-;; custom capture functions
 
 ;; done't open capture buffer, just put the link
 (defun my/org-roam-node-insert-immediate (arg &rest args)
@@ -176,23 +171,10 @@
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
-(map! :leader
-      (:prefix-map ("n" . "notes")
-      (:prefix-map ("r" . "roam")
-       :desc "Insert immediately" "m" #'my/org-roam-node-insert-immediate)))
-
-;; inbox for quick-capture
-(defun my/org-roam-capture-inbox ()
-  (interactive)
-  (org-roam-capture- :node (org-roam-node-create)
-                     :templates '(("i" "inbox" plain "%?"
-                                   :if-new (file+head "Inbox.org" "#+title: Inbox\n\n")
-                                   :unnarrowed t))))
-
-(map! :leader
-      (:prefix-map ("n" . "notes")
-      (:prefix-map ("r" . "roam")
-       :desc "Inbox" "I" #'my/org-roam-capture-inbox)))
+;;(map! :leader
+;;      (:prefix-map ("m" . "<localleader>")
+;;      (:prefix-map ("m" . "roam")
+;;       :desc "Insert immediately" "m" #'my/org-roam-node-insert-immediate)))
 
 ;; ORG-roam UI
 (use-package! websocket
@@ -208,3 +190,13 @@
 
 ;; disable whitespace-mode
 (setq global-whitespace-mode -1)
+
+;; tailwind-css
+(use-package! lsp-tailwindcss)
+
+(setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
+
+;; use markdown-mode for .mdx
+(add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
