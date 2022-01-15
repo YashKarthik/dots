@@ -13,7 +13,7 @@
 ;; THEMES
 
 ;; Themes > colorscheme
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-nova)
 
 ;; Themes > fonts
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
@@ -30,6 +30,10 @@
 ;; Themes > other
 (setq indent-tabs-mode nil)
 (setq display-line-numbers-type 'relative)
+(setq cursor-color "#5b5143")
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
+;;(setq highlight-indent-guides-character '|)
 
 ;; ORG
 (setq org-directory "~/org")
@@ -111,15 +115,18 @@ variable for your changes to take effect."
 
 ;; org-hook
 (defun my/writing-hook ()
-  (setq visual-fill-column-center-text t)
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+  (setq org-startup-with-inline-images t
+        org-image-actual-width nil
+        visual-fill-column-center-text t
+        ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
   (flyspell-mode)
   (org-appear-mode)
   (visual-line-mode)
   (visual-fill-column-mode)
-  (adaptive-wrap-prefix-mode))
+  (adaptive-wrap-prefix-mode)
+  (highlight-indent-guides-mode))
 
 (add-hook!
  'org-mode-hook
@@ -200,3 +207,4 @@ variable for your changes to take effect."
 
 ;; use markdown-mode for .mdx
 (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+(setq sql-mysql-options '("-C" "-t" "-f" "-n"))
