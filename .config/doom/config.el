@@ -9,7 +9,6 @@
 
 ;; Function defs (used later)
 
-
 ;; THEMES
 
 ;; Themes > colorscheme
@@ -31,9 +30,9 @@
 (setq indent-tabs-mode nil)
 (setq display-line-numbers-type 'relative)
 (setq cursor-color "#5b5143")
+
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
-;;(setq highlight-indent-guides-character '|)
 
 ;; ORG
 (setq org-directory "~/org")
@@ -108,24 +107,31 @@ variable for your changes to take effect."
     )
   )
 
-
 (make-code-monospace)
 
-;; Spell
+(require 'org-download)
+
+(setq org-download-method 'directory)
+(setq-default org-download-heading-lvl nil)
+(setq-default org-download-image-dir "~/Knowledge\sBase/images")
+
+(defun dummy-org-download-annotate-function (link) "")
+(setq org-download-annotate-function 'dummy-org-download-annotate-function)
 
 ;; org-hook
+
+;; (highlight-indent-guides-mode)
+
 (defun my/writing-hook ()
   (setq org-startup-with-inline-images t
         org-image-actual-width nil
-        visual-fill-column-center-text t
-        ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+        org-image-actual-width (/ (* (display-pixel-width) 1) 3)
+        visual-fill-column-center-text t)
 
-  (flyspell-mode)
   (org-appear-mode)
   (visual-line-mode)
   (visual-fill-column-mode)
-  (adaptive-wrap-prefix-mode)
+  (org-download-enable)
   (highlight-indent-guides-mode))
 
 (add-hook!
@@ -178,22 +184,18 @@ variable for your changes to take effect."
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
-;;(map! :leader
-;;      (:prefix-map ("m" . "<localleader>")
-;;      (:prefix-map ("m" . "roam")
-;;       :desc "Insert immediately" "m" #'my/org-roam-node-insert-immediate)))
+(map! :leader
+       :desc "Insert immediately" "n r I" #'my/org-roam-node-insert-immediate)
 
 ;; ORG-roam UI
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam
+  :config
+  (setq org-roam-ui-follow nil
+        org-roam-ui-open-on-start nil))
 
 ;; disable whitespace-mode
 (setq global-whitespace-mode -1)
@@ -202,9 +204,108 @@ variable for your changes to take effect."
 (use-package! lsp-tailwindcss)
 
 (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
+      web-mode-css-indent-offset 2
+      web-mode-code-indent-offset 2)
 
 ;; use markdown-mode for .mdx
 (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 (setq sql-mysql-options '("-C" "-t" "-f" "-n"))
+
+;; svg-tag-mode https://github.com/rougier/svg-tag-mode
+(require 'svg-tag-mode)
+
+(defconst date-re "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}")
+(defconst time-re "[0-9]\\{2\\}:[0-9]\\{2\\}")
+(defconst day-re "[A-Za-z]\\{3\\}")
+
+(defun svg-progress-percent (value)
+  (svg-image (svg-lib-concat
+              (svg-lib-progress-bar (/ (string-to-number value) 100.0)
+                                    nil :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+              (svg-lib-tag (concat value "%")
+                           nil :stroke 0 :margin 0)) :ascent 'center))
+
+(defun svg-progress-count (value)
+  (let* ((seq (mapcar #'string-to-number (split-string value "/")))
+         (count (float (car seq)))
+         (total (float (cadr seq))))
+    (svg-image (svg-lib-concat
+                (svg-lib-progress-bar (/ count total) nil
+                                      :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                (svg-lib-tag value nil
+                             :stroke 0 :margin 0)) :ascent 'center)))
+
+(setq svg-tag-tags
+      `(
+        ;; Org tags
+        (":\\([A-Za-z0-9]+\\)" . ((lambda (tag) (svg-tag-make tag))))
+        (":\\([A-Za-z0-9]+[ \-]\\)" . ((lambda (tag) tag)))
+
+        ;; Task priority
+        ("\\[#[A-Z]\\]" . ( (lambda (tag)
+                              (svg-tag-make tag :face 'org-priority
+                                            :beg 2 :end -1 :margin 0))))
+
+        ;; Progress
+        ("\\(\\[[0-9]\\{1,3\\}%\\]\\)" . ((lambda (tag)
+                                            (svg-progress-percent (substring tag 1 -2)))))
+        ("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
+                                          (svg-progress-count (substring tag 1 -1)))))
+
+        ;; TODO / DONE
+        ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0))))
+        ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0))))
+
+
+        ;; Citation of the form [cite:@Knuth:1984]
+        ("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
+                                          (svg-tag-make tag
+                                                        :inverse t
+                                                        :beg 7 :end -1
+                                                        :crop-right t))))
+        ("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
+                                                   (svg-tag-make tag
+                                                                 :end -1
+                                                                 :crop-left t))))
+
+
+        ;; Active date (without day name, with or without time)
+        (,(format "\\(<%s>\\)" date-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :beg 1 :end -1 :margin 0))))
+        (,(format "\\(<%s *\\)%s>" date-re time-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
+        (,(format "<%s *\\(%s>\\)" date-re time-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
+
+        ;; Inactive date  (without day name, with or without time)
+        (,(format "\\(\\[%s\\]\\)" date-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
+        (,(format "\\(\\[%s *\\)%s\\]" date-re time-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
+        (,(format "\\[%s *\\(%s\\]\\)" date-re time-re) .
+         ((lambda (tag)
+            (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))))
+
+;; Elfeed
+(setq elfeed-goodies/entry-pane-size 0.5)
+(setq elfeed-feeds
+      '(("https://nav.al/feed" life philosophy thinking)
+        ("https://meltingasphalt.com/feed/" philosophy behavior)
+        ("https://latecheckout.substack.com/feed" communities web3)
+        ("https://sahilbloom.substack.com/feed" investing life)
+        ("https://balajis.com/rss/" web3 politics future)
+        ;;("http://www.aaronsw.com/2002/feeds/pgessays.rss" startups investing tech)
+        ))
+
+;; toggle evil
+(map! :leader
+      (:prefix ("e" . "evil")
+       :desc "Evil on" "e" #'turn-off-evil-mode))
+
+(map! :prefix "ESC"
+      :desc "Turn evil on" "e" #'turn-on-evil-mode)

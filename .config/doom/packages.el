@@ -49,10 +49,10 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-
 (package! visual-fill-column)
 (package! org-roam-ui)
 (package! poet-theme)
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
-(package! highlight-indent-guides)
-(package! svg-lib)
+(package! svg-tag-mode)
+(package! org-download)
+(package! elfeed-web)
