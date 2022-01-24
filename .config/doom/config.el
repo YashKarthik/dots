@@ -14,10 +14,8 @@
 ;; Themes > colorscheme
 (setq doom-theme 'doom-nova)
 
-;; Themes > fonts
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15)
-      doom-big-font(font-spec :family "FiraCode Nerd Font Mono" :size 25))
+      doom-variable-pitch-font (font-spec :family "Source Serif Pro" :height 1.05))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -26,10 +24,14 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-;; Themes > other
 (setq indent-tabs-mode nil)
 (setq display-line-numbers-type 'relative)
-(setq cursor-color "#5b5143")
+
+(setq evil-insert-state-cursor '((bar . 2) "plum")
+      evil-normal-state-cursor '(box "plum")
+      evil-visual-state-cursor '(box "magenta")
+      evil-replace-state-cursor '(hbar "plum")
+      )
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
@@ -60,7 +62,7 @@ variable for your changes to take effect."
                           (?+ (character))
                           (?- (character)))))
 
-;; Not sure if i want this
+;; Not sure if i want header sizes
 ;;(with-eval-after-load 'org-faces (dolist (face '((org-level-1 . 1.2)
 ;;                                                 (org-level-2 . 1.1)
 ;;                                                 (org-level-3 . 1.05)
@@ -80,35 +82,6 @@ variable for your changes to take effect."
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; use Firacode for these blocks in list
-(defun my-adjoin-to-list-or-symbol (element list-or-symbol)
-  (let ((list (if (not (listp list-or-symbol))
-                  (list list-or-symbol)
-                list-or-symbol)))
-    (require 'cl-lib)
-    (cl-adjoin element list))
-  )
-
-;; run the above function for the list
-(defun make-code-monospace ()
-  '(mapc
-    (lambda (face)
-      (set-face-attribute
-       face nil
-       :inherit
-       (my-adjoin-to-list-or-symbol
-        'fixed-pitch
-        (face-attribute face :inherit))))
-
-    (list 'org-code 'org-block
-          'org-table 'org-table-header
-          'org-todo 'org-verbatim 'org-special-keyword
-          'org-meta-line 'org-checkbox)
-    )
-  )
-
-(make-code-monospace)
-
 (require 'org-download)
 
 (setq org-download-method 'directory)
@@ -120,22 +93,23 @@ variable for your changes to take effect."
 
 ;; org-hook
 
-;; (highlight-indent-guides-mode)
-
 (defun my/writing-hook ()
-  (setq org-startup-with-inline-images t
+  (setq mixed-pitch-set-height t
         org-image-actual-width nil
-        org-image-actual-width (/ (* (display-pixel-width) 1) 3)
-        visual-fill-column-center-text t)
+        visual-fill-column-center-text t
+        org-image-actual-width (/ (* (display-pixel-width) 1) 3))
+
+  (set-face-attribute 'variable-pitch nil :height 1.05)
 
   (org-appear-mode)
+  (mixed-pitch-mode)
   (visual-line-mode)
-  (visual-fill-column-mode)
   (org-download-enable)
+  (visual-fill-column-mode)
   (highlight-indent-guides-mode))
 
 (add-hook!
- 'org-mode-hook
+ 'text-mode-hook
  'my/writing-hook)
 
 (setq org-indent-indentation-per-level 1)
@@ -176,12 +150,20 @@ variable for your changes to take effect."
   :config
   (org-roam-setup))
 
+;; open org node in new split
+
+(map! :leader
+      (:desc "Open node in new split" "n r v" (lambda () (interactive) (+evil/window-vsplit-and-follow) (org-roam-node-find))))
+
+(map! :leader
+      (:desc "Open node in new split" "n r h" (lambda () (interactive) (+evil/window-split-and-follow) (org-roam-node-find))))
+
 ;; done't open capture buffer, just put the link
 (defun my/org-roam-node-insert-immediate (arg &rest args)
   (interactive "P")
   (let ((args (cons arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
+                (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                        '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
 (map! :leader
@@ -309,3 +291,22 @@ variable for your changes to take effect."
 
 (map! :prefix "ESC"
       :desc "Turn evil on" "e" #'turn-on-evil-mode)
+
+;; prefer newer configs or smth like that
+(setq load-prefer-newer t)
+
+;; Embark
+
+;; select candidate and C-; v/h to open in new vertical/horizontal split
+
+(map!
+ :map embark-file-map
+ :desc "Open file in v-split" "v" (lambda ()
+                                    (interactive)
+                                    (+evil/window-vsplit-and-follow)
+                                    (call-interactively #'find-file))
+
+ :desc "Open file in h-split" "h" (lambda ()
+                                    (interactive)
+                                    (+evil/window-split-and-follow)
+                                    (call-interactively #'find-file)))

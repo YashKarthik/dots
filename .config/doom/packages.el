@@ -56,3 +56,4 @@
 (package! svg-tag-mode)
 (package! org-download)
 (package! elfeed-web)
+(package! mixed-pitch)
