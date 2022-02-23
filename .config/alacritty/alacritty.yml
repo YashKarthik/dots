@@ -24,11 +24,34 @@ font:
 
 draw_bold_text_with_bright_colors: true
 
+# Colors (Oceanic Next)
 colors:
-
+  # Default colors
   primary:
-    background: '#1c1f2d'
-    foreground: '#ffffff'
+    background: '0x1b2b34'
+    foreground: '0xd8dee9'
+
+  # Normal colors
+  normal:
+    black:   '0x29414f'
+    red:     '0xec5f67'
+    green:   '0x99c794'
+    yellow:  '0xfac863'
+    blue:    '0x6699cc'
+    magenta: '0xc594c5'
+    cyan:    '0x5fb3b3'
+    white:   '0x65737e'
+
+  # Bright colors
+  bright:
+    black:   '0x405860'
+    red:     '0xec5f67'
+    green:   '0x99c794'
+    yellow:  '0xfac863'
+    blue:    '0x6699cc'
+    magenta: '0xc594c5'
+    cyan:    '0x5fb3b3'
+    white:   '0xadb5c0'
 
   cursor:
     cursor: '#4287f5'
@@ -36,26 +59,6 @@ colors:
   selection:
     text:       '#282a36'
     background: '#feffff'
-
-  normal:
-    black:   '#282a36'
-    red:     '#ff5c57'
-    green:   '#5af78e'
-    yellow:  '#f3f99d'
-    blue:    '#57c7ff'
-    magenta: '#ff6ac1'
-    cyan:    '#9aedfe'
-    white:   '#f1f1f0'
-
-  bright:
-    black:   '#686868'
-    red:     '#ff5c57'
-    green:   '#5af78e'
-    yellow:  '#f3f99d'
-    blue:    '#57c7ff'
-    magenta: '#ff6ac1'
-    cyan:    '#9aedfe'
-    white:   '#eff0eb'
 
 window:
   decorations: "none"

@@ -20,6 +20,7 @@
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
+
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
@@ -37,8 +38,8 @@
 (setq highlight-indent-guides-method 'character)
 
 ;; ORG
-(setq org-directory "~/org")
-(setq org-agenda-files (quote ("~/org/agenda")))
+(setq org-directory "~/Knowledge\sBase")
+(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
 
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -76,6 +77,7 @@ variable for your changes to take effect."
 
 
 (dolist (mode '(org-mode-hook
+                markdown-mode-hook
                 term-mode-hook
                 shell-mode-hook
                 treemacs-mode-hook
@@ -111,6 +113,15 @@ variable for your changes to take effect."
 (add-hook!
  'text-mode-hook
  'my/writing-hook)
+
+(defun my/agenda-text-pitch-hook ()
+  (if (string= default-directory "/Users/Yash/Knowledge Base/agenda/")
+      (mixed-pitch-mode 0)
+    (message "Not in agenda file")))
+
+(add-hook!
+ 'org-mode-hook
+ 'my/agenda-text-pitch-hook)
 
 (setq org-indent-indentation-per-level 1)
 
@@ -276,18 +287,20 @@ variable for your changes to take effect."
 ;; Elfeed
 (setq elfeed-goodies/entry-pane-size 0.5)
 (setq elfeed-feeds
-      '(("https://nav.al/feed" life philosophy thinking)
+      '(("https://nav.al/feed" wisdom)
         ("https://meltingasphalt.com/feed/" philosophy behavior)
         ("https://latecheckout.substack.com/feed" communities web3)
         ("https://sahilbloom.substack.com/feed" investing life)
         ("https://balajis.com/rss/" web3 politics future)
+        ("https://www.weskao.com/blog?format=rss" education communities)
+        ("https://fs.blog/feed" wisdom frameworks)
         ;;("http://www.aaronsw.com/2002/feeds/pgessays.rss" startups investing tech)
         ))
 
 ;; toggle evil
 (map! :leader
       (:prefix ("e" . "evil")
-       :desc "Evil on" "e" #'turn-off-evil-mode))
+       :desc "Evil off" "e" #'turn-off-evil-mode))
 
 (map! :prefix "ESC"
       :desc "Turn evil on" "e" #'turn-on-evil-mode)
@@ -310,3 +323,20 @@ variable for your changes to take effect."
                                     (interactive)
                                     (+evil/window-split-and-follow)
                                     (call-interactively #'find-file)))
+
+;; Fix problems with aspell and the --run-together option
+(after! ispell
+  (setq ispell-program-name "/usr/local/bin/aspell"
+        ispell-dictionary "en_US"
+        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
+
+;; Latex
+
+(setq TeX-PDF-mode t)
+(setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
+(add-to-list 'exec-path "/Library/TeX/texbin/")
+
+(setq org-preview-latex-default-process 'dvisvgm)
+(setq org-latex-listings 'minted)
+
+(setq pdf-view-use-scaling t)
