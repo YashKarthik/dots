@@ -58,4 +58,3 @@
 (package! elfeed-web)
 (package! mixed-pitch)
 (package! auctex-latexmk)
-(package! engrave-faces)

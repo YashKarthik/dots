@@ -123,8 +123,6 @@ variable for your changes to take effect."
  'org-mode-hook
  'my/agenda-text-pitch-hook)
 
-(setq org-indent-indentation-per-level 1)
-
 ;; ORG-roam
 (after! org-roam
   :init
@@ -188,7 +186,8 @@ variable for your changes to take effect."
   :after org-roam
   :config
   (setq org-roam-ui-follow nil
-        org-roam-ui-open-on-start nil))
+        org-roam-ui-open-on-start nil
+        org-roam-ui-update-on-save t))
 
 ;; disable whitespace-mode
 (setq global-whitespace-mode -1)
