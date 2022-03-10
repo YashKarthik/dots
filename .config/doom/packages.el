@@ -58,3 +58,4 @@
 (package! elfeed-web)
 (package! mixed-pitch)
 (package! auctex-latexmk)
+(package! mac-pseudo-daemon)

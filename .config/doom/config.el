@@ -116,8 +116,7 @@ variable for your changes to take effect."
 
 (defun my/agenda-text-pitch-hook ()
   (if (string= default-directory "/Users/Yash/Knowledge Base/agenda/")
-      (mixed-pitch-mode 0)
-    (message "Not in agenda file")))
+      (mixed-pitch-mode 0)))
 
 (add-hook!
  'org-mode-hook
@@ -201,6 +200,7 @@ variable for your changes to take effect."
 
 ;; use markdown-mode for .mdx
 (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+
 (setq sql-mysql-options '("-C" "-t" "-f" "-n"))
 
 ;; svg-tag-mode https://github.com/rougier/svg-tag-mode
@@ -296,21 +296,9 @@ variable for your changes to take effect."
         ;;("http://www.aaronsw.com/2002/feeds/pgessays.rss" startups investing tech)
         ))
 
-;; toggle evil
-(map! :leader
-      (:prefix ("e" . "evil")
-       :desc "Evil off" "e" #'turn-off-evil-mode))
-
-(map! :prefix "ESC"
-      :desc "Turn evil on" "e" #'turn-on-evil-mode)
-
-;; prefer newer configs or smth like that
-(setq load-prefer-newer t)
-
 ;; Embark
 
 ;; select candidate and C-; v/h to open in new vertical/horizontal split
-
 (map!
  :map embark-file-map
  :desc "Open file in v-split" "v" (lambda ()
@@ -339,3 +327,6 @@ variable for your changes to take effect."
 (setq org-latex-listings 'minted)
 
 (setq pdf-view-use-scaling t)
+
+(setq mac-pseudo-daemon-mode t)
+(setq tool-bar-mode nil)
