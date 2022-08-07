@@ -1,5 +1,5 @@
 alt + shift - z : python ~/Code/zath.py
-cmd + alt + ctrl - return : open -a "Emacs.app" && yabai -m --toggle float
+cmd + alt + ctrl - return : emacsclient -c
 
 # change layouts
 cmd + alt - 1 : yabai -m space --layout bsp

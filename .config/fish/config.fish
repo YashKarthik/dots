@@ -33,12 +33,6 @@ set -gx GPG_TTY (tty)
 set fish_greeting
 starship init fish | source
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /Users/Yash/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-#
-
 # Solarized Light & Magenta highlight
 set -g man_blink -o red
 set -g man_bold -o magenta
@@ -49,3 +43,5 @@ fish_add_path /usr/local/opt/icu4c/bin
 fish_add_path /usr/local/opt/icu4c/sbin
 fish_add_path /usr/local/sbin
 fish_add_path /usr/local/bin/emacs
+
+pyenv init - | source

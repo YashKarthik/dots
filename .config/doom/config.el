@@ -12,7 +12,8 @@
 ;; THEMES
 
 ;; Themes > colorscheme
-(setq doom-theme 'doom-nova)
+(setq doom-theme 'doom-tokyo-night)
+
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Source Serif Pro" :height 1.05))
@@ -20,6 +21,17 @@
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
+
+;; splash screen
+(setq fancy-splash-image (concat doom-private-dir "splash.png"))
+
+(set-face-background 'scroll-bar "transparent")
+
+;; nyan cat
+(use-package! nyan-mode
+  :hook (doom-modeline-mode . nyan-mode)
+  :config
+  (setq nyan-animate-nyancat t))
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
@@ -39,7 +51,11 @@
 
 ;; ORG
 (setq org-directory "~/Knowledge\sBase")
-(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
+;;(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
+
+
+(setq org-agenda-files (list "~/Knowledge\sBase/agenda"
+                             "~/Knowledge\sBase/College\sStuff.org"))
 
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -75,6 +91,11 @@ variable for your changes to take effect."
 ;;                                   (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
 ;;                      )
 
+;; un-hides whitespace between headings when collapsing headings.
+(customize-set-variable 'org-blank-before-new-entry
+                        '((heading . nil)
+                          (plain-list-item . nil)))
+(setq org-cycle-separator-lines 1)
 
 (dolist (mode '(org-mode-hook
                 markdown-mode-hook
@@ -104,11 +125,11 @@ variable for your changes to take effect."
   (set-face-attribute 'variable-pitch nil :height 1.05)
 
   (org-appear-mode)
+  (svg-tag-mode-on)
   (mixed-pitch-mode)
   (visual-line-mode)
   (org-download-enable)
-  (visual-fill-column-mode)
-  (highlight-indent-guides-mode))
+  (visual-fill-column-mode))
 
 (add-hook!
  'text-mode-hook
@@ -123,70 +144,64 @@ variable for your changes to take effect."
  'my/agenda-text-pitch-hook)
 
 ;; ORG-roam
-(after! org-roam
+(use-package! org-roam
+  :ensure t
   :init
-  (setq org-roam-v2-ack t)
-
-  :custom
   (setq org-roam-directory "~/Knowledge\sBase")
+  :config
   (setq org-roam-capture-templates
-   '(("d" "default" plain "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n")
-      :unnarrowed t)
+        '(("d" "default" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :unnarrowed t)
 
-     ("n" "Notes" plain "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                         ":PROPERTIES:
-:author:
-:link:
+          ("n" "Notes" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              ":PROPERTIES:
+:people:
 :date:
 :END:
 #+title: ${title}\n")
-      :unnarrowed t)
+           :unnarrowed t)
 
-     ("b" "bio" plain "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                         ":PROPERTIES:
+          ("b" "bio" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              ":PROPERTIES:
 :twitter: [[https://twitter.com/%^{twitter}][%\\1]]
 :link:
 :END:
 #+title: ${title}
 #+filetags: :bio:")
-      :unnarrowed t)))
+           :unnarrowed t)))
 
-  :config
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" plain
+           "\n[%<%R>] %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%d %b, %Y>\n")
+           :unnarrowed t)))
+
+
   (org-roam-setup))
 
-;; open org node in new split
-
+;; open org-roam node in new split
 (map! :leader
       (:desc "Open node in new split" "n r v" (lambda () (interactive) (+evil/window-vsplit-and-follow) (org-roam-node-find))))
 
 (map! :leader
       (:desc "Open node in new split" "n r h" (lambda () (interactive) (+evil/window-split-and-follow) (org-roam-node-find))))
 
-;; done't open capture buffer, just put the link
-(defun my/org-roam-node-insert-immediate (arg &rest args)
-  (interactive "P")
-  (let ((args (cons arg args))
-                (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                        '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
-
-(map! :leader
-       :desc "Insert immediately" "n r I" #'my/org-roam-node-insert-immediate)
-
 ;; ORG-roam UI
+
 (use-package! websocket
   :after org-roam)
 
-(use-package! org-roam-ui
-  :after org-roam
-  :config
-  (setq org-roam-ui-follow nil
-        org-roam-ui-open-on-start nil
-        org-roam-ui-update-on-save t))
+;;(use-package! org-roam-ui
+;;  :hook (after-init . org-roam-ui-mode)
+;;  :config
+;;  (setq org-roam-ui-follow nil
+;;        org-roam-ui-open-on-start nil
+;;        org-roam-ui-update-on-save t))
 
 ;; disable whitespace-mode
 (setq global-whitespace-mode -1)
@@ -194,26 +209,36 @@ variable for your changes to take effect."
 ;; tailwind-css
 (use-package! lsp-tailwindcss)
 
-(setq web-mode-markup-indent-offset 2
-      web-mode-css-indent-offset 2
-      web-mode-code-indent-offset 2)
+(defun my-web-mode-hook ()
+  "Hooks for web mode"
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        typescript-indent-level 2))
+
+(add-hook 'web-mode-hook
+          'my-web-mode-hook)
+
+(add-hook 'typescript-mode-hook
+          'my-web-mode-hook)
 
 ;; use markdown-mode for .mdx
 (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
 (setq sql-mysql-options '("-C" "-t" "-f" "-n"))
 
-;; svg-tag-mode https://github.com/rougier/svg-tag-mode
+;;svg-tag-mode https://github.com/rougier/svg-tag-mode
 (require 'svg-tag-mode)
 
 (defconst date-re "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}")
 (defconst time-re "[0-9]\\{2\\}:[0-9]\\{2\\}")
 (defconst day-re "[A-Za-z]\\{3\\}")
+(defconst day-time-re (format "\\(%s\\)? ?\\(%s\\)?" day-re time-re))
 
 (defun svg-progress-percent (value)
   (svg-image (svg-lib-concat
               (svg-lib-progress-bar (/ (string-to-number value) 100.0)
-                                    nil :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                                nil :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
               (svg-lib-tag (concat value "%")
                            nil :stroke 0 :margin 0)) :ascent 'center))
 
@@ -221,11 +246,11 @@ variable for your changes to take effect."
   (let* ((seq (mapcar #'string-to-number (split-string value "/")))
          (count (float (car seq)))
          (total (float (cadr seq))))
-    (svg-image (svg-lib-concat
-                (svg-lib-progress-bar (/ count total) nil
-                                      :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
-                (svg-lib-tag value nil
-                             :stroke 0 :margin 0)) :ascent 'center)))
+  (svg-image (svg-lib-concat
+              (svg-lib-progress-bar (/ count total) nil
+                                    :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+              (svg-lib-tag value nil
+                           :stroke 0 :margin 0)) :ascent 'center)))
 
 (setq svg-tag-tags
       `(
@@ -244,8 +269,8 @@ variable for your changes to take effect."
         ("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
                                           (svg-progress-count (substring tag 1 -1)))))
 
-        ;; TODO / DONE
         ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0))))
+
         ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0))))
 
 
@@ -256,32 +281,42 @@ variable for your changes to take effect."
                                                         :beg 7 :end -1
                                                         :crop-right t))))
         ("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
-                                                   (svg-tag-make tag
-                                                                 :end -1
-                                                                 :crop-left t))))
+                                                (svg-tag-make tag
+                                                              :end -1
+                                                              :crop-left t))))
 
 
-        ;; Active date (without day name, with or without time)
+        ;; Active date (with or without day name, with or without time)
         (,(format "\\(<%s>\\)" date-re) .
          ((lambda (tag)
             (svg-tag-make tag :beg 1 :end -1 :margin 0))))
-        (,(format "\\(<%s *\\)%s>" date-re time-re) .
+
+        (,(format "\\(<%s \\)%s>" date-re day-time-re) .
          ((lambda (tag)
             (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
-        (,(format "<%s *\\(%s>\\)" date-re time-re) .
+
+        (,(format "<%s \\(%s>\\)" date-re day-time-re) .
          ((lambda (tag)
             (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
 
-        ;; Inactive date  (without day name, with or without time)
-        (,(format "\\(\\[%s\\]\\)" date-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
-        (,(format "\\(\\[%s *\\)%s\\]" date-re time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
-        (,(format "\\[%s *\\(%s\\]\\)" date-re time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))))
+        ;; Inactive date  (with or without day name, with or without time)
+         (,(format "\\(\\[%s\\]\\)" date-re) .
+          ((lambda (tag)
+             (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
+
+         (,(format "\\(\\[%s \\)%s\\]" date-re day-time-re) .
+          ((lambda (tag)
+             (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
+
+         (,(format "\\[%s \\(%s\\]\\)" date-re day-time-re) .
+          ((lambda (tag)
+             (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))
+
+         (,(format "\\(\\[%s\\]\\)" time-re) .
+          ((lambda (tag)
+             (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
+
+         ))
 
 ;; Elfeed
 (setq elfeed-goodies/entry-pane-size 0.5)
@@ -293,11 +328,11 @@ variable for your changes to take effect."
         ("https://balajis.com/rss/" web3 politics future)
         ("https://www.weskao.com/blog?format=rss" education communities)
         ("https://fs.blog/feed" wisdom frameworks)
+        ("https://www.alexbeckett.xyz/rss/" crypto-technical)
         ;;("http://www.aaronsw.com/2002/feeds/pgessays.rss" startups investing tech)
         ))
 
 ;; Embark
-
 ;; select candidate and C-; v/h to open in new vertical/horizontal split
 (map!
  :map embark-file-map
@@ -311,22 +346,42 @@ variable for your changes to take effect."
                                     (+evil/window-split-and-follow)
                                     (call-interactively #'find-file)))
 
-;; Fix problems with aspell and the --run-together option
+;; Spell
 (after! ispell
-  (setq ispell-program-name "/usr/local/bin/aspell"
+  (setq ispell-program-name "aspell"
         ispell-dictionary "en_US"
+        ispell-local-dictionary "en_US"
         ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
 
-;; Latex
 
+;; Latex
 (setq TeX-PDF-mode t)
 (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
 (add-to-list 'exec-path "/Library/TeX/texbin/")
 
 (setq org-preview-latex-default-process 'dvisvgm)
+(after! org (plist-put org-format-latex-options :scale 1))
 (setq org-latex-listings 'minted)
 
-(setq pdf-view-use-scaling t)
+(require 'org-src)
+(add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t)))
 
-(setq mac-pseudo-daemon-mode t)
+;; other
+
+(setq pdf-view-use-scaling t)
 (setq tool-bar-mode nil)
+(setq ns-pop-up-frames t)
+
+;; python
+(use-package! pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+(setq auth-sources nil)
+(setq password-cache-expiry nil)
