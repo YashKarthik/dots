@@ -1,13 +1,4 @@
-(setq user-full-name "yashkarthik.eth")
-
-;;  NOTE:
-;;  Text wrapping:
-;;  By default, Emacs wraps a line that reaches the window width, except at a word boundary. The buffer text is not changed.
-;;  Modes such as AutoFillMode insert a line ending after the last word that occurs before the value of option ‘fill-column’ (a column number).
-;;  Modes such as VisualFillColumn (in concert with VisualLineMode) wrap a line after the last word before ‘fill-column’, but ultimately they do not alter the buffer text. Such “soft” wrapping is essentially a display effect.
-;;  Modes such as VisualLineMode wrap a line right before the window edge, but ultimately they do not alter the buffer text. VisualLineMode wrapping is essentially a display effect.
-
-;; Function defs (used later)
+(setq user-full-name "yashkarthik")
 
 ;; THEMES
 
@@ -27,12 +18,6 @@
 
 (set-face-background 'scroll-bar "transparent")
 
-;; nyan cat
-(use-package! nyan-mode
-  :hook (doom-modeline-mode . nyan-mode)
-  :config
-  (setq nyan-animate-nyancat t))
-
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
@@ -51,11 +36,7 @@
 
 ;; ORG
 (setq org-directory "~/Knowledge\sBase")
-;;(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
-
-
-(setq org-agenda-files (list "~/Knowledge\sBase/agenda"
-                             "~/Knowledge\sBase/College\sStuff.org"))
+(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
 
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -63,8 +44,7 @@
 (setq org-ellipsis " ▼"
             org-hide-emphasis-markers t
             org-superstar-prettify-item-bullets t
-            org-superstar-headline-bullets-list '("◉" "●" "○" "❖" "◆" "◇")
-            )
+            org-superstar-headline-bullets-list '("◉" "●" "○" "❖" "◆" "◇"))
 
 (defcustom org-superstar-item-bullet-alist
   '((?* . ?•)
@@ -78,18 +58,6 @@ variable for your changes to take effect."
   :type '(alist :options ((?* (character))
                           (?+ (character))
                           (?- (character)))))
-
-;; Not sure if i want header sizes
-;;(with-eval-after-load 'org-faces (dolist (face '((org-level-1 . 1.2)
-;;                                                 (org-level-2 . 1.1)
-;;                                                 (org-level-3 . 1.05)
-;;                                                 (org-level-4 . 1.0)
-;;                                                 (org-level-5 . 1.0)
-;;                                                 (org-level-6 . 1.0)
-;;                                                 (org-level-7 . 1.0)
-;;                                                 (org-level-8 . 1.0)))
-;;                                   (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
-;;                      )
 
 ;; un-hides whitespace between headings when collapsing headings.
 (customize-set-variable 'org-blank-before-new-entry
@@ -106,16 +74,13 @@ variable for your changes to take effect."
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (require 'org-download)
-
 (setq org-download-method 'directory)
 (setq-default org-download-heading-lvl nil)
 (setq-default org-download-image-dir "~/Knowledge\sBase/images")
-
 (defun dummy-org-download-annotate-function (link) "")
 (setq org-download-annotate-function 'dummy-org-download-annotate-function)
 
 ;; org-hook
-
 (defun my/writing-hook ()
   (setq mixed-pitch-set-height t
         org-image-actual-width nil
@@ -318,20 +283,6 @@ variable for your changes to take effect."
 
          ))
 
-;; Elfeed
-(setq elfeed-goodies/entry-pane-size 0.5)
-(setq elfeed-feeds
-      '(("https://nav.al/feed" wisdom)
-        ("https://meltingasphalt.com/feed/" philosophy behavior)
-        ("https://latecheckout.substack.com/feed" communities web3)
-        ("https://sahilbloom.substack.com/feed" investing life)
-        ("https://balajis.com/rss/" web3 politics future)
-        ("https://www.weskao.com/blog?format=rss" education communities)
-        ("https://fs.blog/feed" wisdom frameworks)
-        ("https://www.alexbeckett.xyz/rss/" crypto-technical)
-        ;;("http://www.aaronsw.com/2002/feeds/pgessays.rss" startups investing tech)
-        ))
-
 ;; Embark
 ;; select candidate and C-; v/h to open in new vertical/horizontal split
 (map!
@@ -361,27 +312,43 @@ variable for your changes to take effect."
 
 (setq org-preview-latex-default-process 'dvisvgm)
 (after! org (plist-put org-format-latex-options :scale 1))
-(setq org-latex-listings 'minted)
+(setq org-latex-src-block-backend 'minted)
 
 (require 'org-src)
 (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t)))
 
-;; other
-
+;; visual
 (setq pdf-view-use-scaling t)
 (setq tool-bar-mode nil)
 (setq ns-pop-up-frames t)
 
 ;; python
 (use-package! pipenv
-  :hook (python-mode . pipenv-mode)
-  :init
-  (setq
-   pipenv-projectile-after-switch-function
-   #'pipenv-projectile-after-switch-extended))
+  :hook (python-mode . pipenv-mode))
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
 (setq auth-sources nil)
 (setq password-cache-expiry nil)
+
+;; org-alert: https://github.com/spegoraro/org-alert
+(use-package! org-alert
+  :ensure t)
+(setq org-alert-interval 300
+      org-alert-notify-cutoff 10
+      org-alert-notify-after-event-cutoff 10
+      org-alert-notification-title "Reminder")
+
+(setq alert-default-style 'osx-notifier)
+(setq alert-fade-time 10)
+
+(advice-add 'org-alert--dispatch :after #'my/play-sound-on-alert
+ '((name . "my/org-alert-sound")))
+
+(defun my/play-sound-on-alert ()
+  (start-process-shell-command "sound"  nil "afplay /System/Library/Sounds/Blow.aiff"))
+
+;;(advice-remove
+;; 'org-alert--dispatch
+;; "my/org-alert-sound")

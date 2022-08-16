@@ -50,9 +50,7 @@
 ;(unpin! t)
 
 (package! pipenv)
-(package! nyan-mode)
-(package! poet-theme)
-(package! elfeed-web)
+(package! org-alert)
 (package! org-roam-ui)
 (package! mixed-pitch)
 (package! svg-tag-mode)
