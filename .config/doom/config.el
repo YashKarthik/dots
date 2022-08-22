@@ -7,7 +7,7 @@
 
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Source Serif Pro" :height 1.05))
+      doom-variable-pitch-font (font-spec :family "SF Pro" :size 15))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -28,8 +28,7 @@
 (setq evil-insert-state-cursor '((bar . 2) "plum")
       evil-normal-state-cursor '(box "plum")
       evil-visual-state-cursor '(box "magenta")
-      evil-replace-state-cursor '(hbar "plum")
-      )
+      evil-replace-state-cursor '(hbar "plum"))
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
@@ -87,8 +86,6 @@ variable for your changes to take effect."
         visual-fill-column-center-text t
         org-image-actual-width (/ (* (display-pixel-width) 1) 3))
 
-  (set-face-attribute 'variable-pitch nil :height 1.05)
-
   (org-appear-mode)
   (svg-tag-mode-on)
   (mixed-pitch-mode)
@@ -114,40 +111,48 @@ variable for your changes to take effect."
   :init
   (setq org-roam-directory "~/Knowledge\sBase")
   :config
+  (setq org-roam-node-display-template
+        (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
   (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n")
+        '(("p" "People" plain "%?"
+           :if-new (file+head "people/${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
 
-          ("n" "Notes" plain "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+          ("r" "Reference" plain "%?"
+           :if-new (file+head "reference/${slug}.org"
                               ":PROPERTIES:
-:people:
-:date:
+:DATE: %<%d %b, %Y>
+:ROAM_REFS:
 :END:
 #+title: ${title}\n")
            :unnarrowed t)
 
-          ("b" "bio" plain "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+          ("e" "Evergreen" plain "%?"
+           :if-new (file+head "evergreen/${slug}.org"
                               ":PROPERTIES:
-:twitter: [[https://twitter.com/%^{twitter}][%\\1]]
-:link:
+:DATE: %<%d %b, %Y>
 :END:
-#+title: ${title}
-#+filetags: :bio:")
-           :unnarrowed t)))
+#+title: ${title}\n")
+           :unnarrowed t)
 
   (setq org-roam-dailies-capture-templates
-        '(("d" "default" plain
-           "\n[%<%R>] %?"
-           :target (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%d %b, %Y>\n")
+        '(("d" "default" plain "%?"
+           :target (file+head "%<%d %b %Y>.org" "#+title: %<%d %b, %Y>\n")
            :unnarrowed t)))
 
 
-  (org-roam-setup))
+  (org-roam-setup))))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file "~/Knowledge\sBase/agenda/todo.org")
+         "* TODO %?\n")
+        ("s" "Fleeting" entry (file "~/Knowledge\sBase/inbox.org")
+         "* %?\n")))
+
+(defun my/org-capture-slipbox ()
+  (interactive)
+  (org-capture nil "s"))
 
 ;; open org-roam node in new split
 (map! :leader
