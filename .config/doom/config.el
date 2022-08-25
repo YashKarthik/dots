@@ -134,7 +134,7 @@ variable for your changes to take effect."
 :DATE: %<%d %b, %Y>
 :END:
 #+title: ${title}\n")
-           :unnarrowed t)
+           :unnarrowed t)))
 
   (setq org-roam-dailies-capture-templates
         '(("d" "default" plain "%?"
@@ -142,7 +142,7 @@ variable for your changes to take effect."
            :unnarrowed t)))
 
 
-  (org-roam-setup))))
+  (org-roam-setup))
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file "~/Knowledge\sBase/agenda/todo.org")
@@ -150,9 +150,14 @@ variable for your changes to take effect."
         ("s" "Fleeting" entry (file "~/Knowledge\sBase/inbox.org")
          "* %?\n")))
 
-(defun my/org-capture-slipbox ()
-  (interactive)
-  (org-capture nil "s"))
+(cl-defmethod org-roam-node-type ((node org-roam-node))
+  "Return the TYPE of NODE."
+  (condition-case nil
+      (file-name-nondirectory
+       (directory-file-name
+        (file-name-directory
+         (file-relative-name (org-roam-node-file node) org-roam-directory))))
+    (error "")))
 
 ;; open org-roam node in new split
 (map! :leader
@@ -348,11 +353,11 @@ variable for your changes to take effect."
 (setq alert-default-style 'osx-notifier)
 (setq alert-fade-time 10)
 
-(advice-add 'org-alert--dispatch :after #'my/play-sound-on-alert
+(advice-add 'alert :after #'my/play-sound-on-alert
  '((name . "my/org-alert-sound")))
 
-(defun my/play-sound-on-alert ()
-  (start-process-shell-command "sound"  nil "afplay /System/Library/Sounds/Blow.aiff"))
+(defun my/play-sound-on-alert (&rest r)
+  (start-process-shell-command "Agenda Alert" nil "afplay /System/Library/Sounds/Glass.aiff"))
 
 ;;(advice-remove
 ;; 'org-alert--dispatch
