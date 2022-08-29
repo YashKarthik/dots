@@ -12,11 +12,11 @@ yabai -m rule --add app="^IINA" manage=off
 yabai -m rule --add app="^QuickTime Player" manage=off
 
 # padding & gaps
-yabai -m config top_padding    10
-yabai -m config bottom_padding 10
-yabai -m config left_padding   10
-yabai -m config right_padding  10
-yabai -m config window_gap     10
+yabai -m config top_padding    5
+yabai -m config bottom_padding 5
+yabai -m config left_padding   5
+yabai -m config right_padding  5
+yabai -m config window_gap     5
 
 # on or off (default: off)
 yabai -m config auto_balance on
@@ -30,5 +30,7 @@ yabai -m config focus_follows_mouse autoraise
 # window barder on
 yabai -m config window_border on
 yabai -m config window_border_width 4
-yabai -m config active_window_border_color 0xFF3b2a7b
+yabai -m config active_window_border_color 0xFF3E4042
 yabai -m config normal_window_border_color 0x006453a3
+
+yabai -m config window_border_placement inset

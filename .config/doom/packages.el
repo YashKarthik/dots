@@ -58,5 +58,16 @@
 (package! mac-pseudo-daemon)
 (package! visual-fill-column)
 (package! exec-path-from-shell)
-(package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
-(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+
+(package! nano-theme
+  :recipe (:host github
+           :repo "rougier/nano-theme"))
+
+(package! lsp-tailwindcss
+  :recipe (:host github
+           :repo "merrickluo/lsp-tailwindcss"))
+
+(package! prisma-mode
+  :recipe (:host github
+           :repo "pimeys/emacs-prisma-mode"
+           :branch "main"))
