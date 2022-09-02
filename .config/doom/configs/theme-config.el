@@ -9,7 +9,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
-(set-face-attribute 'mode-line nil :font "FiraCode Nerd Font Mono" :height 140)
+(set-face-attribute 'mode-line nil :font "FiraCode Nerd Font Mono" :height 137)
 (set-face-attribute 'mode-line-inactive nil :font "FiraCode Nerd Font Mono" :height 140)
 (setq doom-modeline-bar-width 4)
 
@@ -33,24 +33,17 @@
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
 
+(setq org-superstar-item-bullet-alist
+  '((?* . ?•)
+    (?+ . ?•)
+    (?- . ?•)))
+
+(setq org-superstar-headline-bullets-list '(?◉ ?○ ?◌))
+
 (setq org-ellipsis " ▼"
             org-hide-emphasis-markers t
             org-superstar-prettify-item-bullets t)
 
-(defcustom org-superstar-item-bullet-alist
-  "Set all org-superstar bullets to the same style."
-  '((?* . ?•)
-    (?+ . ?•)
-    (?- . ?•))
-  :group 'org-superstar
-  :type '(alist :options ((?* (character))
-                          (?+ (character))
-                          (?- (character)))))
-
-(defcustom org-superstar-headline-bullet-list
-  "Setup org-superstar headline bullets"
-  '(?◉ ?○ ?◌)
-  :group 'org-superstar)
 
 ;; un-hides whitespace between headings when collapsing headings.
 (customize-set-variable 'org-blank-before-new-entry
@@ -65,4 +58,6 @@
 (setq ns-pop-up-frames t)
 
 (add-hook! 'text-mode-hook (svg-tag-mode-on))
-(add-hook! 'prog-mode-hook (svg-tag-mode-on))
+(add-hook! 'prog-mode-hook
+  (svg-tag-mode-on)
+  (lsp-headerline-breadcrumb-mode))
