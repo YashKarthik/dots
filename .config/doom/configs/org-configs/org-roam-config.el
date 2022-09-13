@@ -3,7 +3,7 @@
 (use-package! org-roam
   :ensure t
   :init
-  (setq org-roam-directory "~/Knowledge\sBase")
+  (setq org-roam-directory "~/Nextcloud/Knowledge\sBase")
   :config
   (setq org-roam-node-display-template
         (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
@@ -39,9 +39,9 @@
   (org-roam-setup))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file "~/Knowledge\sBase/agenda/todo.org")
+      '(("t" "Todo" entry (file "~/Nextcloud/Knowledge\sBase/agenda/todo.org")
          "* TODO %?\n")
-        ("s" "Fleeting" entry (file "~/Knowledge\sBase/inbox.org")
+        ("s" "Fleeting" entry (file "~/Nextcloud/Knowledge\sBase/agenda/inbox.org")
          "* %?\n")))
 
 (cl-defmethod org-roam-node-type ((node org-roam-node))

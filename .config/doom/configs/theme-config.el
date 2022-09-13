@@ -1,6 +1,6 @@
 ;;; theming.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'nano-dark)
+(setq doom-theme 'doom-tokyo-night)
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "SF Pro" :size 15))
@@ -12,6 +12,10 @@
 (set-face-attribute 'mode-line nil :font "FiraCode Nerd Font Mono" :height 137)
 (set-face-attribute 'mode-line-inactive nil :font "FiraCode Nerd Font Mono" :height 140)
 (setq doom-modeline-bar-width 4)
+
+(custom-set-faces!
+  '(org-drawer :font "FiraCode Nerd Font Mono")
+  '(org-special-keyword :font "FiraCode Nerd Font Mono"))
 
 ;; splash screen
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))

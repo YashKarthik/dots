@@ -24,16 +24,16 @@
               (svg-lib-tag value nil
                            :stroke 0 :margin 0)) :ascent 'center)))
 
+;; :#TAG:#TAG:#TAG:
 (setq svg-tag-tags
       `(
         ;; Org tags
-        (":\\([A-Za-z0-9]+\\)" . ((lambda (tag) (svg-tag-make tag))))
-        (":\\([A-Za-z0-9]+[ \-]\\)" . ((lambda (tag) tag)))
 
-        ("\\(:[A-Za-z0-9]+:\\)" . ((lambda (tag) (svg-tag-make tag :beg 1 :end -1))))
-        ("\\(:[A-Za-z0-9]+:[ \-]\\)" . ((lambda (tag) tag)))
+        ("\\(:#[A-Za-z0-9]+\\)" . ((lambda (tag)
+                                     (svg-tag-make tag :beg 2))))
 
-        ;;("\\(:[A-Z]+:\\)" . ((lambda (tag) (svg-tag-make tag :beg 1 :end -1))))
+        ("\\(:#[A-Za-z0-9]+:\\)$" . ((lambda (tag)
+                                       (svg-tag-make tag :beg 2 :end -1))))
 
         ;; Task priority
         ("\\[#[A-Z]\\]" . ( (lambda (tag)

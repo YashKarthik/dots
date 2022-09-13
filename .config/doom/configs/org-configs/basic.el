@@ -1,7 +1,7 @@
 ;;; configs/org-config/basic.el -*- lexical-binding: t; -*-
 
-(setq org-directory "~/Knowledge\sBase")
-(setq org-agenda-files (quote ("~/Knowledge\sBase/agenda")))
+(setq org-directory "~/Nextcloud/Knowledge\sBase")
+(setq org-agenda-files (quote ("~/Nextcloud/Knowledge\sBase/agenda")))
 
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -20,7 +20,7 @@
 (use-package! org-download
   :init
   (setq org-download-method 'directory)
-  (setq-default org-download-image-dir "~/Knowledge\sBase/images")
+  (setq-default org-download-image-dir "~/Nextcloud/Knowledge\sBase/images")
 
   :config
   (setq-default org-download-heading-lvl nil)
