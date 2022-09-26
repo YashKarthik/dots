@@ -1,0 +1,26 @@
+{
+	"title": "Vim for dvorak",
+	"rules": [
+		{
+			"description": "caps + h = left ",
+			"manipulators": [
+				{
+					"type": "basic",
+					"from": {
+						"key_code": "left_arrow"
+					},
+					"to": [
+						{
+							"repeat": true,
+							"key_code": "caps_lock"
+						},
+						{
+							"repeat": true,
+							"key_code": "h"
+						}
+					]
+				}
+			]
+		}
+	]
+}

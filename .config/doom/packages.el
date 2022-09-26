@@ -51,6 +51,7 @@
 
 (package! pipenv)
 (package! org-alert)
+(package! org-caldav)
 (package! org-roam-ui)
 (package! mixed-pitch)
 (package! svg-tag-mode)

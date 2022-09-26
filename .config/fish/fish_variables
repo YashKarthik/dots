@@ -35,4 +35,5 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_user_paths:/Users/Yash/Library/Python/3\x2e9/bin\x1e/usr/local/sbin\x1e/usr/local/opt/icu4c/sbin\x1e/usr/local/opt/icu4c/bin\x1e/Users/Yash/Code/flutter/bin
+SETUVAR --export nextcloud_caldav_url:https\x3a//172\x2d105\x2d62\x2d50\x2eip\x2elinodeusercontent\x2ecom/remote\x2ephp/dav/calendars/admin
 SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27

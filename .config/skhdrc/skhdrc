@@ -60,14 +60,12 @@ ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
 shift + cmd - n : yabai -m space --create && \
-                  index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                  yabai -m window --space "${index}" && \
-                  yabai -m space --focus "${index}"
+                  yabai -m window --space last && \
+                  yabai -m space --focus last
 
 # create desktop and follow focus - uses jq for parsing json (brew install jq)
 cmd + alt - n : yabai -m space --create && \
-                index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                yabai -m space --focus "${index}"
+                yabai -m space --focus last
 
 # destroy desktop
 cmd + alt - w : yabai -m space --destroy
@@ -84,7 +82,7 @@ shift + cmd - 8 : yabai -m window --space  8 && yabai -m space --focus 8
 shift + cmd - 9 : yabai -m window --space  9 && yabai -m space --focus 9
 shift + cmd - 0 : yabai -m window --space 10 && yabai -m space --focus 10
 
-# focus window
+# focus space
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
 alt - 3 : yabai -m space --focus 3
@@ -103,3 +101,9 @@ cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Prof
 cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 3"
 cmd + ctrl - 4 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 4"
 cmd + ctrl - 5 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
+
+# minimize emacs
+cmd + ctrl - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --minimize
+# maximize emacs into current space
+cmd + ctrl + shift - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --space $(yabai -m query --spaces | jq '.[] | select(."has-focus"==true).index') & \
+                         yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --focus

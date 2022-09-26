@@ -8,8 +8,6 @@ yabai -m config layout bsp
 # ignore tor and authy
 yabai -m rule --add app="^Tor Browser" manage=off 
 yabai -m rule --add app="^Authy Desktop" manage=off
-yabai -m rule --add app="^IINA" manage=off
-yabai -m rule --add app="^QuickTime Player" manage=off
 
 # padding & gaps
 yabai -m config top_padding    5
@@ -29,8 +27,9 @@ yabai -m config focus_follows_mouse autoraise
 
 # window barder on
 yabai -m config window_border on
-yabai -m config window_border_width 4
-yabai -m config active_window_border_color 0xFF3E4042
+yabai -m config window_border_width 2
+yabai -m config active_window_border_color 0xFF82aaff
 yabai -m config normal_window_border_color 0x006453a3
 
 yabai -m config window_border_placement inset
+yabai -m config window_animation_duration 0.1

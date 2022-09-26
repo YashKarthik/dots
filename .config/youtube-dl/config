@@ -1,0 +1,2 @@
+-f best
+-o ~/Music/%(title)s.%(ext)s
