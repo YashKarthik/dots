@@ -94,13 +94,10 @@ alt - 8 : yabai -m space --focus 8
 alt - 9 : yabai -m space --focus 9
 alt - 0 : yabai -m space --focus 10
 
-# open specific brave profiles
-
-cmd + ctrl - 1 : open -a "Brave Browser.app" -n --args --profile-directory="Default"
-cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 2"
-cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 3"
-cmd + ctrl - 4 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 4"
-cmd + ctrl - 5 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
+# browser shorcuts
+cmd + ctrl - 1 : open -a "Firefox.app" -n
+cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Default"
+cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
 
 # minimize emacs
 cmd + ctrl - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --minimize

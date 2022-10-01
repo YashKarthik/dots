@@ -95,7 +95,7 @@ colors: *tokyo-night
 
 
 window:
-  decorations: "none"
+  decorations: "buttonless"
   padding:
           x: 5
           y: 5
