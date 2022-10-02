@@ -59,5 +59,23 @@ return require('packer').startup(function(use)
     'lewis6991/gitsigns.nvim',
     config = function() require('gitsigns').setup() end
   }
+
+  -- completion
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'saadparwaiz1/cmp_luasnip'
+  use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
+  use "onsails/lspkind.nvim"
+
+  -- langs
+  use {
+      "jose-elias-alvarez/typescript.nvim",
+      config = function() require('typescript').setup() end
+  }
   end
 )

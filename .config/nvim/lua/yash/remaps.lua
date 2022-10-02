@@ -10,9 +10,12 @@ local function bind(op, outer_opts)
 end
 
 local nmap      = bind("n", {noremap = false})
+local imap      = bind("i", {noremap = false})
+
 local nnoremap  = bind("n")
 local vnoremap  = bind("v")
 local xnoremap  = bind("x")
+local snoremap  = bind("s")
 local inoremap  = bind("i")
 
 vim.g.mapleader = " "
@@ -27,10 +30,21 @@ vnoremap("<leader>d", "\"_d")
 
 -- search dots
 nnoremap("<leader>fp", function()
-    require('telescope').search_dotfiles({ hidden = true })
+    require('yash.telescope').search_dotfiles({ hidden = true })
 end)
 
 -- search files
-nnoremap("<leader>.", function()
-    require('telescope').search_dotfiles({ hidden = true })
-end)
+nnoremap("<leader>.", ":Telescope find_files <CR>")
+
+-- C-w is same as <leader>w
+nnoremap("<leader>w", "<c-w>")
+
+-- snippets
+vim.cmd [[
+    imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+    inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+    
+    snoremap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+    snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+]]
+
