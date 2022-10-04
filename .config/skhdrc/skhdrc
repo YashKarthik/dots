@@ -104,3 +104,6 @@ cmd + ctrl - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.
 # maximize emacs into current space
 cmd + ctrl + shift - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --space $(yabai -m query --spaces | jq '.[] | select(."has-focus"==true).index') & \
                          yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --focus
+
+# 0x24 is enter; launches kitty term in home dir
+cmd + alt + ctrl - 0x24 : open -a kitty

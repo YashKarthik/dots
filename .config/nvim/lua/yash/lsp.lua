@@ -8,36 +8,72 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+local on_attach = function(_, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gD',           vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd',           vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K',            vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi',           vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>',        vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<space>wa',    vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr',    vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wi',    function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+    vim.keymap.set('n', '<space>D',     vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>rn',    vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>ca',    vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr',           vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<space>f',     function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
--- this stuff is done in /lua/yash/nvim-cmp.lua
--- require('lspconfig')['pyright'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
--- }
--- require('lspconfig')['tsserver'].setup{
---     on_attach = on_attach,
---     flags = { debounce_text_changes = 150 },
--- }
+-- language servers
+local lspconfig = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local servers = { 'pyright', 'tsserver' , 'lua-language-server' }
+
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = { debounce_text_changes = 150}
+    }
+end
+
+local sumneko_root_path = '/usr/local/Cellar/lua-language-server/3.5.6/libexec/main.lua'
+local sumneko_binary = "/usr/local/bin/lua-language-server"
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+lspconfig.sumneko_lua.setup {
+    on_attach = on_attach,
+    cmd = {sumneko_binary, "-E", sumneko_root_path},
+    capabilities = capabilities,
+    flags = { debounce_text_changes = 150},
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = {'vim'},
+            },
+            workspace = {
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                },
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}

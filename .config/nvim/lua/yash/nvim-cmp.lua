@@ -1,21 +1,6 @@
--- Add additional capabilities supported by nvim-cmp
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
-local lspconfig = require('lspconfig')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'pyright', 'tsserver' }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = { debounce_text_changes = 150}
-  }
-end
 
 cmp.setup {
 
