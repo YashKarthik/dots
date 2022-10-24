@@ -99,11 +99,7 @@ cmd + ctrl - 1 : open -a "Firefox.app" -n
 cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Default"
 cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
 
-# minimize emacs
-cmd + ctrl - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --minimize
-# maximize emacs into current space
-cmd + ctrl + shift - e : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --space $(yabai -m query --spaces | jq '.[] | select(."has-focus"==true).index') & \
-                         yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Emacs").id') --focus
-
-# 0x24 is enter; launches kitty term in home dir
-cmd + alt + ctrl - 0x24 : open -a kitty
+# 0x24 is enter; launches kitty term in home dir; launches obisdian into inbox file.
+ctrl + cmd - 0x24 : open -a kitty
+ctrl + alt - 0x24 : open "obsidian://open?vault=Notes&file=Inbox"
+ctrl + alt - 0x33 : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Obsidian").id') --close

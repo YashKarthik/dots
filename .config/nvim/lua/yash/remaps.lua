@@ -35,6 +35,8 @@ end)
 
 -- search files
 nnoremap("<leader>.", ":Telescope find_files <CR>")
+-- open tele
+nnoremap("<M-x>", ":Telescope <CR>")
 
 -- C-w is same as <leader>w
 nnoremap("<leader>w", "<c-w>")

@@ -17,13 +17,8 @@ return require('packer').startup(function(use)
   }
 
   use {
-      "folke/twilight.nvim",
-      config = function() require("twilight").setup() end
-  }
-
-  use {
-      'winston0410/cmd-parser.nvim',
-      requires = {'winston0410/range-highlight.nvim'},
+      'winston0410/range-highlight.nvim',
+      requires = {'winston0410/cmd-parser.nvim'},
       config = function() require'range-highlight'.setup() end
   }
 
@@ -45,6 +40,7 @@ return require('packer').startup(function(use)
       config = function() require("nvim-autopairs").setup() end
   }
 
+  -- lodash basically
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
   use {
@@ -54,10 +50,20 @@ return require('packer').startup(function(use)
 
   use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
   use 'nvim-treesitter/playground'
+  use { 
+      'nvim-treesitter/nvim-treesitter-context',
+      config = function() require('treesitter-context').setup() end
+  }
 
+  -- git
   use {
     'lewis6991/gitsigns.nvim',
     config = function() require('gitsigns').setup() end
+  }
+
+  use {
+    'TimUntersberger/neogit',
+    config = function() require('neogit').setup() end
   }
 
   -- completion
@@ -72,10 +78,8 @@ return require('packer').startup(function(use)
   use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
   use "onsails/lspkind.nvim"
 
-  -- langs
-  use {
-      "jose-elias-alvarez/typescript.nvim",
-      config = function() require('typescript').setup() end
-  }
+  -- debug
+  use {'kevinhwang91/nvim-bqf', ft='qf'}
+
   end
 )

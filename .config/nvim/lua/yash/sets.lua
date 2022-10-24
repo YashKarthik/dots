@@ -11,7 +11,7 @@ vim.opt.incsearch	= true
 vim.opt.hlsearch 	= true
 
 vim.opt.wrap 		= false
-vim.opt.foldmethod	= "syntax"
+vim.opt.foldmethod	= "manual"
 
 vim.opt.textwidth 	= 90
 vim.opt.completeopt	={"menu","menuone","noselect","noinsert","preview"}
