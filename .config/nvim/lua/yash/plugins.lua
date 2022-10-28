@@ -12,8 +12,8 @@ return require('packer').startup(function(use)
   }
 
   use {
-      'sunjon/shade.nvim',
-      config = function() require'shade'.setup() end
+      'levouh/tint.nvim',
+      config = function() require'tint'.setup() end
   }
 
   use {
@@ -50,9 +50,9 @@ return require('packer').startup(function(use)
 
   use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
   use 'nvim-treesitter/playground'
-  use { 
+  use {
       'nvim-treesitter/nvim-treesitter-context',
-      config = function() require('treesitter-context').setup() end
+      --config = function() require('treesitter-context').setup() end
   }
 
   -- git
