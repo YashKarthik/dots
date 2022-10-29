@@ -8,8 +8,8 @@ cmd + alt - 4 : yabai -m window --toggle float
 # toggle sticky (show on all spaces)
 cmd + ctrl - s : yabai -m window --toggle sticky
 
-# Make window native fullscreen
 cmd + alt - 5 : yabai -m window --toggle zoom-fullscreen
+# Make window native fullscreen
 cmd + alt - 6 : yabai -m window --toggle native-fullscreen
 
 # focus window
@@ -91,8 +91,7 @@ alt - 5 : yabai -m space --focus 5
 alt - 6 : yabai -m space --focus 6
 alt - 7 : yabai -m space --focus 7
 alt - 8 : yabai -m space --focus 8
-alt - 9 : yabai -m space --focus 9
-alt - 0 : yabai -m space --focus 10
+alt - 9 : yabai -m space --focus last
 
 # browser shorcuts
 cmd + ctrl - 1 : open -a "Firefox.app" -n

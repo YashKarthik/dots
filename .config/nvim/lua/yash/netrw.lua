@@ -1,0 +1,6 @@
+vim.cmd [[let g:netrw_keepdir = 0]]
+vim.cmd [[let g:netrw_winsize = 15]]
+vim.cmd [[let g:netrw_banner = 0]]
+vim.cmd [[hi! link netrwMarkFile Search]]
+vim.cmd [[let g:netrw_browse_split = 2]]
+vim.cmd [[let g:netrw_liststyle = 3]]

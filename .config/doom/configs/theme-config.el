@@ -1,6 +1,6 @@
 ;;; theming.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'doom-moonlight)
+(setq doom-theme 'nano-light)
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "SF Pro" :size 15))

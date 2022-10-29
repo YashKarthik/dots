@@ -53,6 +53,7 @@
 (package! org-alert)
 (package! org-caldav)
 (package! org-roam-ui)
+(package! emacsql-sqlite3)
 (package! mixed-pitch)
 (package! svg-tag-mode)
 (package! auctex-latexmk)
