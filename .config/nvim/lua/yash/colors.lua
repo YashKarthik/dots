@@ -22,4 +22,4 @@ require("tokyonight").setup({
 })
 
 vim.cmd [[colorscheme tokyonight]]
-vim.cmd [[hi WinSeparator guibg=None guifg=#3d59a1]]
+vim.cmd [[hi WinSeparator guibg=None guifg=#82aaff]]

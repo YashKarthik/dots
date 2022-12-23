@@ -90,7 +90,6 @@ alt - 4 : yabai -m space --focus 4
 alt - 5 : yabai -m space --focus 5
 alt - 6 : yabai -m space --focus 6
 alt - 7 : yabai -m space --focus 7
-alt - 8 : yabai -m space --focus 8
 alt - 9 : yabai -m space --focus last
 
 # browser shorcuts
@@ -101,4 +100,3 @@ cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Prof
 # 0x24 is enter; launches kitty term in home dir; launches obisdian into inbox file.
 ctrl + cmd - 0x24 : open -a kitty
 ctrl + alt - 0x24 : open "obsidian://open?vault=Notes&file=Inbox"
-ctrl + alt - 0x33 : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Obsidian").id') --close

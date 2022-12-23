@@ -24,9 +24,9 @@
 	pkgs.girara
 	pkgs.fish
 	pkgs.gh
-  pkgs.luajit
+    pkgs.luajit
 	pkgs.cmake
-  pkgs.pinentry_mac
+    pkgs.pinentry_mac
 	pkgs.starship
 	pkgs.tree
 	pkgs.dart

@@ -18,6 +18,7 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
 alias dartls='/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapshots/analysis_server.dart.snapshot --lsp'
 alias doom=~/.emacs.d/bin/doom
+alias cat=bat
 
 function fish_right_prompt
   #intentionally left blank
@@ -28,7 +29,6 @@ set -gx GPG_TTY (tty)
 set fish_greeting
 starship init fish | source
 
-# Solarized Light & Magenta highlight
 set -g man_blink -o red
 set -g man_bold -o magenta
 set -g man_standout -b white 586e75

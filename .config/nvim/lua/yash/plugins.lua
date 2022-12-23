@@ -5,6 +5,10 @@ return require('packer').startup(function(use)
   -- colors
   use 'folke/tokyonight.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
+  use {
+      "folke/twilight.nvim",
+      config = function() require("twilight").setup() end
+  }
 
   use {
       'norcalli/nvim-colorizer.lua',
