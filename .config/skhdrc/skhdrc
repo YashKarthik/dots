@@ -93,9 +93,7 @@ alt - 7 : yabai -m space --focus 7
 alt - 9 : yabai -m space --focus last
 
 # browser shorcuts
-cmd + ctrl - 1 : open -a "Firefox.app" -n
-cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Default"
-cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
+cmd + ctrl - 0 : open -a "Librewolf.app" -n
 
 # 0x24 is enter; launches kitty term in home dir; launches obisdian into inbox file.
 ctrl + cmd - 0x24 : open -a kitty
