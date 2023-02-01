@@ -33,8 +33,8 @@ end
 -- language servers
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver' }
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local servers = { 'pyright', 'tsserver', 'astro' }
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {

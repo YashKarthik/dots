@@ -92,8 +92,11 @@ alt - 6 : yabai -m space --focus 6
 alt - 7 : yabai -m space --focus 7
 alt - 9 : yabai -m space --focus last
 
-# browser shorcuts
-cmd + ctrl - 0 : open -a "Librewolf.app" -n
+# apps shorcuts
+cmd + ctrl - 2 : open -a "Brave Browser.app" -n --args --profile-directory="Default"
+cmd + ctrl - 3 : open -a "Brave Browser.app" -n --args --profile-directory="Profile 5"
+# toggle dark mode
+cmd + ctrl - 0 : osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 
 # 0x24 is enter; launches kitty term in home dir; launches obisdian into inbox file.
 ctrl + cmd - 0x24 : open -a kitty

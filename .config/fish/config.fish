@@ -20,6 +20,8 @@ alias dartls='/nix/store/kxdgginvmx43cdm3s423wayk0bppyv0v-dart-2.13.1/bin/snapsh
 alias doom=~/.emacs.d/bin/doom
 alias cat=bat
 
+source "~/.nvm/nvm.sh"
+
 function fish_right_prompt
   #intentionally left blank
  end
