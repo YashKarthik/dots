@@ -143,11 +143,12 @@ require('lualine').setup {
         lualine_x = {},
     },
     tabline = {
-        lualine_a = {},
-        lualine_b = {{ 'buffers', mode = 4}},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
+        lualine_b = {
+            {
+                "buffers",
+                symbols = { alternate_file = "#" },
+            },
+        },
         lualine_z = {'tabs'}
     },
     extensions = { 'quickfix' }
