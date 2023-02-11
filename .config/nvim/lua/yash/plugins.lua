@@ -6,8 +6,8 @@ return require('packer').startup(function(use)
     use 'folke/tokyonight.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use {
-        "folke/twilight.nvim",
-        config = function() require("twilight").setup() end
+        'folke/twilight.nvim',
+        config = function() require('twilight').setup() end
     }
 
     use {
@@ -35,13 +35,13 @@ return require('packer').startup(function(use)
     -- nice utils
 
     use {
-        "folke/which-key.nvim",
-        config = function() require("which-key").setup() end
+        'folke/which-key.nvim',
+        config = function() require('which-key').setup() end
     }
 
     use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup() end
+        'windwp/nvim-autopairs',
+        config = function() require('nvim-autopairs').setup() end
     }
 
     -- lodash basically
@@ -80,15 +80,15 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
     use {
-        "L3MON4D3/LuaSnip",
-        tag = "v<CurrentMajor>.*",
+        'L3MON4D3/LuaSnip',
+        tag = 'v<CurrentMajor>.*',
         config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
+            require('luasnip.loaders.from_vscode').lazy_load()
             local luasnip = require('luasnip')
-            luasnip.filetype_extend("javascript", { "html" })
-            luasnip.filetype_extend("typescript", { "html" })
-            luasnip.filetype_extend("javascriptreact", { "html" })
-            luasnip.filetype_extend("typescriptreact", { "html" })
+            luasnip.filetype_extend('javascript', { 'html' })
+            luasnip.filetype_extend('typescript', { 'html' })
+            luasnip.filetype_extend('javascriptreact', { 'html' })
+            luasnip.filetype_extend('typescriptreact', { 'html' })
         end
     }
     use 'rafamadriz/friendly-snippets'
