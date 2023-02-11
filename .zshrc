@@ -79,6 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 alias vim=nvim
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
+alias cat=bat
 
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
