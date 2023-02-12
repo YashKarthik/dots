@@ -34,7 +34,7 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'solc' }
+local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss' }
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -43,6 +43,8 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150}
     }
 end
+
+require'lspconfig'.solc.setup{}
 
 local sumneko_root_path = '/usr/local/Cellar/lua-language-server/3.5.6/libexec/main.lua'
 local sumneko_binary = "/usr/local/bin/lua-language-server"
