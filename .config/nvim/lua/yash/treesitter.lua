@@ -1,68 +1,66 @@
 -- Taken from https://github.com/Avimitin/nvim/blob/master/lua/overlays/rc/treesitter.lua
 
--- treesitter don't know what is {type,java}scriptreact,
--- let's filter it out
-local ensure_installed = {}
+require('nvim-treesitter.configs').setup {
+  -- Add languages to be installed here that you want installed for treesitter
+  ensure_installed = {'lua', 'python','typescript', 'typescriptreact', 'javascriptreact', 'help', 'vim' },
 
--- a f*cking disgusting hack for the messy treesitter naming convention
-for _, val in ipairs(vim.g.nvcfg.treesitter_fts) do
-  local idx = #ensure_installed + 1
-  if val ~= "javascriptreact" and val ~= "typescriptreact" then
-    ensure_installed[idx] = val
-  end
-
-  if val == "typescriptreact" then
-    ensure_installed[idx] = "tsx"
-  end
-
-  if val == "zsh" then
-    ensure_installed[idx] = "bash"
-  end
-end
-
-require("nvim-treesitter.configs").setup({
-  -- packer compile is compiled without runtime context, so here we must give it
-  -- the full path to the treesitter ft function for evaluating the filetype
-  ensure_installed = ensure_installed,
-  highlight = {
+  highlight = { enable = true },
+  indent = { enable = true, disable = { 'python' } },
+  incremental_selection = {
     enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  matchup = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
-  },
-  textobjects = {
-    select = {
-      enable = true,
-
-      -- Automatically jump forward to textobj, similar to targets.vim
-      lookahead = true,
-
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["ab"] = "@block.outer",
-        ["ib"] = "@block.inner",
-        ["al"] = "@call.outer",
-        ["il"] = "@call.inner",
-        ["aP"] = "@parameter.outer",
-        ["iP"] = "@parameter.inner",
-        ["ao"] = "@conditional.outer",
-        ["io"] = "@conditional.inner",
-        ["as"] = "@statement.outer",
-      },
+    keymaps = {
+      init_selection = '<CR>',
+      node_incremental = '<CR>',
+      scope_incremental = '<c-s>',
+      node_decremental = '<BS>',
     },
   },
-})
+  -- textobjects = {
+  --   select = {
+  --     enable = true,
+  --     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+  --     keymaps = {
+  --       -- You can use the capture groups defined in textobjects.scm
+  --       ['aa'] = '@parameter.outer',
+  --       ['ia'] = '@parameter.inner',
+  --       ['af'] = '@function.outer',
+  --       ['if'] = '@function.inner',
+  --       ['ac'] = '@class.outer',
+  --       ['ic'] = '@class.inner',
+  --     },
+  --   },
+  --   move = {
+  --     enable = true,
+  --     set_jumps = true, -- whether to set jumps in the jumplist
+  --     goto_next_start = {
+  --       [']m'] = '@function.outer',
+  --       [']]'] = '@class.outer',
+  --     },
+  --     goto_next_end = {
+  --       [']M'] = '@function.outer',
+  --       [']['] = '@class.outer',
+  --     },
+  --     goto_previous_start = {
+  --       ['[m'] = '@function.outer',
+  --       ['[['] = '@class.outer',
+  --     },
+  --     goto_previous_end = {
+  --       ['[M'] = '@function.outer',
+  --       ['[]'] = '@class.outer',
+  --     },
+  --   },
+  --   swap = {
+  --     enable = true,
+  --     swap_next = {
+  --       ['<leader>a'] = '@parameter.inner',
+  --     },
+  --     swap_previous = {
+  --       ['<leader>A'] = '@parameter.inner',
+  --     },
+  --   },
+  -- },
+}
 
--- ALready def in sets.lua
+-- Already set sets.lua
 -- vim.api.nvim_command("set foldmethod=expr")
 -- vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")

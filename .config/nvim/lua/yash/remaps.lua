@@ -30,13 +30,13 @@ vnoremap("<leader>d", "\"_d")
 
 -- search dots
 nnoremap("<leader>fp", function()
-    require('yash.telescope').search_dotfiles({ hidden = true })
+    require('yash.telescope').search_dotfiles()
 end)
 
 -- search files
 nnoremap("<leader>.", ":Telescope find_files <CR>")
 -- open tele
-nnoremap("<M-x>", ":Telescope <CR>")
+nnoremap("<leader>t", ":Telescope <CR>")
 
 -- C-w is same as <leader>w
 nnoremap("<leader>w", "<c-w>")
@@ -50,3 +50,10 @@ vim.cmd [[
     snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 ]]
 
+-- Emacs key mapping in insert mode
+imap("<C-a>", "<Home>")
+imap("<C-e>", "<End>")
+imap("<C-b>", "<ESC>bi")
+imap("<C-f>", "<ESC>wa")
+imap("<C-n>", "<ESC>ja")
+imap("<C-p>", "<ESC>ka")
