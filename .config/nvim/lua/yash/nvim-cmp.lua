@@ -75,4 +75,10 @@ cmp.setup {
           }
       }
   },
+
+  window = {
+      documentation = cmp.config.window.bordered {
+          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+      },
+  }
 }

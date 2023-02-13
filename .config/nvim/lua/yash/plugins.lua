@@ -52,12 +52,9 @@ return require('packer').startup(function(use)
         tag = '0.1.0'
     }
 
-    use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
+    use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate' }
     use 'nvim-treesitter/playground'
-    use {
-        'nvim-treesitter/nvim-treesitter-context',
-        --config = function() require('treesitter-context').setup() end
-    }
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     -- git
     use {
