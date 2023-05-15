@@ -20,21 +20,21 @@
   home.stateVersion = "21.05";
 
   home.packages = [
-	pkgs.zathura
-	pkgs.girara
-	pkgs.fish
-	pkgs.gh
+    pkgs.zathura
+	  pkgs.girara
+	  pkgs.fish
+	  pkgs.gh
     pkgs.luajit
-	pkgs.cmake
+	  pkgs.cmake
     pkgs.pinentry_mac
-	pkgs.starship
-	pkgs.tree
-	pkgs.dart
-	pkgs.onefetch
-	pkgs.tty-clock
-	pkgs.youtube-dl
-	pkgs.mpv
-	pkgs.telnet
-	pkgs.tcl2048
+	  pkgs.starship
+	  pkgs.tree
+	  pkgs.dart
+	  pkgs.onefetch
+	  pkgs.tty-clock
+	  pkgs.youtube-dl
+	  pkgs.mpv
+	  pkgs.telnet
+	  pkgs.tcl2048
   ];
 }

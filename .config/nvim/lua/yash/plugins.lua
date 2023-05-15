@@ -1,6 +1,10 @@
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    use {
+        "williamboman/mason.nvim",
+        config = function() require'mason'.setup() end
+    }
 
     -- colors
     use 'folke/tokyonight.nvim'
@@ -17,7 +21,7 @@ return require('packer').startup(function(use)
 
     use {
         'levouh/tint.nvim',
-        config = function() require'tint'.setup() end
+        config = function() require'tint'.setup{} end
     }
 
     use {
@@ -96,7 +100,17 @@ return require('packer').startup(function(use)
     use 'onsails/lspkind.nvim'
 
     -- debug
-    use {'kevinhwang91/nvim-bqf', ft='qf'}
+    use {
+        'kevinhwang91/nvim-bqf',
+        ft='qf',
+        config = function()
+            require"bqf".setup({
+                preview = {
+                    wrap = true
+                }
+            })
+        end
+    }
 
 end
 )

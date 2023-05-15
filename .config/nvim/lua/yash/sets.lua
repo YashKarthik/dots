@@ -10,8 +10,15 @@ vim.opt.belloff 	= "all"
 vim.opt.incsearch	= true
 vim.opt.hlsearch 	= true
 
-vim.opt.wrap 		= false
 vim.opt.foldmethod	= "manual"
+vim.opt.wrap 		= false
+-- wrap in quickfix list
+vim.cmd([[
+  augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal wrap
+  augroup END
+]])
 
 vim.opt.textwidth 	= 90
 vim.opt.completeopt	={"menu","menuone","noselect","noinsert","preview"}
@@ -38,6 +45,7 @@ vim.opt.shortmess:append("c")
 vim.opt.fileformat="unix"
 
 vim.opt.cursorline=true
+vim.opt.cursorcolumn=true
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

@@ -46,7 +46,7 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss' }
+local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'gopls' }
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -56,7 +56,16 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-lspconfig.solc.setup{}
+require("lspconfig.configs").solidity = {
+    default_config = {
+        cmd = {'nomicfoundation-solidity-language-server', '--stdio'},
+        filetypes = { 'solidity' },
+        root_dir = lspconfig.util.find_git_ancestor,
+        single_file_support = true,
+    },
+}
+
+lspconfig.solidity.setup {}
 
 lspconfig.lua_ls.setup {
   settings = {

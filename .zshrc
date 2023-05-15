@@ -1,6 +1,17 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/Yash/.oh-my-zsh"
 
+# Profiling
+# zmodload zsh/datetime
+# setopt PROMPT_SUBST
+# PS4='+$EPOCHREALTIME %N:%i> '
+
+# logfile=$(mktemp zsh_profile.XXXXXXXX)
+# echo "Logging to $logfile"
+# exec 3>&2 2>$logfile
+# 
+# setopt XTRACE
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -67,8 +78,8 @@ ZSH_THEME="dracula"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions zsh-syntax-highlighting nvm)
-zstyle ':omz:plugins:nvm' lazy yes
+
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,6 +101,13 @@ bindkey -e
 
 eval "$(starship init zsh)"
 export EDITOR=nvim
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH="$PATH:/Users/Yash/.foundry/bin"
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# Profiling stuff
+# unsetopt XTRACE
+# exec 2>&3 3>&-
+
+# Volta (node version manager)
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
