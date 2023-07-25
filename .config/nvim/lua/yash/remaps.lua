@@ -41,6 +41,9 @@ nnoremap("<leader>t", ":Telescope <CR>")
 -- C-w is same as <leader>w
 nnoremap("<leader>w", "<c-w>")
 
+-- Reload init.lua
+nnoremap("<leader>so", ":so ~/.config/nvim/init.lua")
+
 -- snippets
 vim.cmd [[
     imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 

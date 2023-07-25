@@ -2,9 +2,16 @@
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {'lua', 'python','typescript', 'typescriptreact', 'javascriptreact', 'help', 'vim' },
+  ensure_installed = {'lua', 'python','typescript', 'typescriptreact', 'javascriptreact', 'go', 'c', 'help', 'vim' },
 
-  highlight = { enable = true },
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+  auto_install = true,
+
+  highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+  },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
     enable = true,
