@@ -53,10 +53,18 @@ vim.cmd [[
     snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 ]]
 
--- Emacs key mapping in insert mode
+-- Emacs key mapping in insert mode; haha evil
 imap("<C-a>", "<Home>")
 imap("<C-e>", "<End>")
 imap("<C-b>", "<ESC>bi")
 imap("<C-f>", "<ESC>wa")
 imap("<C-n>", "<ESC>ja")
 imap("<C-p>", "<ESC>ka")
+
+-- Debugging
+nnoremap("<leader>dap", ":lua require'dap'.continue() <CR>")
+nnoremap("<leader>db", ":lua require'dap'.toggle_breakpoint() <CR>")
+nnoremap("<leader>dB", ":lua require'dap'.set_breakpoint() <CR>")
+nnoremap("<leader>dn", ":lua require'dap'.step_over() <CR>")
+nnoremap("<leader>di", ":lua require'dap'.step_into() <CR>")
+nnoremap("<leader>dr", ":lua require'dap'.repl_open() <CR>")

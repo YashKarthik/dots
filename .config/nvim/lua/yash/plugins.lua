@@ -100,7 +100,12 @@ return require('packer').startup(function(use)
     use 'rafamadriz/friendly-snippets'
     use 'onsails/lspkind.nvim'
 
-    -- debug
+    -- debugging
+    use 'mfussenegger/nvim-dap'
+    use 'rcarriga/nvim-dap-ui'
+    use 'theHamsta/nvim-dap-virtual-text'
+    use 'nvim-telescope/telescope-dap.nvim'
+    use 'leoluz/nvim-dap-go'
     use {
         'kevinhwang91/nvim-bqf',
         ft='qf',
