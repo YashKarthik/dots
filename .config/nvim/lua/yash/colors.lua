@@ -72,7 +72,7 @@ require('rose-pine').setup({
 		-- By default each group adds to the existing config.
 		-- If you only want to set what is written in this config exactly,
 		-- you can set the inherit option:
-		Search = { bg = 'rose', inherit = false },
+		Search = { fg = "overlay", bg = 'rose', blend = 50, inherit = false },
 	}
 })
 
