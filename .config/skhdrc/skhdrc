@@ -82,6 +82,11 @@ shift + cmd - 8 : yabai -m window --space  8 && yabai -m space --focus 8
 shift + cmd - 9 : yabai -m window --space  9 && yabai -m space --focus 9
 shift + cmd - 0 : yabai -m window --space 10 && yabai -m space --focus 10
 
+# Move space/desktop left
+alt + cmd - 0x1B : yabai -m space --move prev
+# Move space right
+alt + cmd - 0x18 : yabai -m space --move next
+
 # focus space
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
@@ -100,4 +105,3 @@ cmd + ctrl - 0 : osascript -e 'tell application "System Events" to tell appearan
 
 # 0x24 is enter; launches kitty term in home dir; launches obisdian into inbox file.
 ctrl + cmd - 0x24 : open -a kitty
-ctrl + alt - 0x24 : open "obsidian://open?vault=Notes&file=Inbox"

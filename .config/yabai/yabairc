@@ -11,6 +11,8 @@ yabai -m rule --add app="^Authy Desktop" manage=off
 yabai -m rule --add app="^VirtualBox" manage=off
 yabai -m rule --add app="^VirtualBoxVM" manage=off
 yabai -m rule --add app="^Frame" manage=off
+yabai -m rule --add app="^STM32CubeMX" manage=off
+yabai -m rule --add app="^Raycast" manage=off
 
 # padding & gaps
 yabai -m config top_padding    5
