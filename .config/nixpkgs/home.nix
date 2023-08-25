@@ -25,7 +25,6 @@
 	  pkgs.fish
 	  pkgs.gh
     pkgs.luajit
-	  pkgs.cmake
     pkgs.pinentry_mac
 	  pkgs.starship
 	  pkgs.tree

@@ -2,7 +2,25 @@
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {'lua', 'python','typescript', 'typescriptreact', 'javascriptreact', 'go', 'c', 'help', 'vim' },
+  ensure_installed = {
+        'c',
+        'go',
+        'tsx',
+        'cpp',
+        'vim',
+        'lua',
+        'help',
+        'make',
+        'cmake',
+        'astro',
+        'latex',
+        'python',
+        'solidity',
+        'markdown',
+        'javascript',
+        'typescript',
+        'dockerfile',
+    },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -67,7 +85,3 @@ require('nvim-treesitter.configs').setup {
   --   },
   -- },
 }
-
--- Already set sets.lua
--- vim.api.nvim_command("set foldmethod=expr")
--- vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
