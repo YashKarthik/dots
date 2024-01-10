@@ -103,6 +103,7 @@ eval "$(starship init zsh)"
 export EDITOR=nvim
 export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="$PATH:/Users/Yash/.foundry/bin"
+export PATH="$PATH:/usr/local/texlive/2023/bin/universal-darwin"
 
 # Profiling stuff
 # unsetopt XTRACE
@@ -111,3 +112,9 @@ export PATH="$PATH:/Users/Yash/.foundry/bin"
 # Volta (node version manager)
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Pipenv
+alias pipenv=~/Library/Python/3.9/bin/pipenv
+#eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
+
+export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources

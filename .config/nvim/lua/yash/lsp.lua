@@ -56,6 +56,18 @@ for _, lsp in ipairs(servers) do
     }
 end
 
+-- lspconfig.clangd.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     flags = {
+--         debounce_text_changes = 150,
+--     },
+--     cmd = {
+--         "clangd",
+--         "-std=c++11", -- Specify C++11 here
+--     },
+-- }
+
 require("lspconfig.configs").solidity = {
     default_config = {
         cmd = {'nomicfoundation-solidity-language-server', '--stdio'},

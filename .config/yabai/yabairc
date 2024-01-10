@@ -13,13 +13,16 @@ yabai -m rule --add app="^VirtualBoxVM" manage=off
 yabai -m rule --add app="^Frame" manage=off
 yabai -m rule --add app="^STM32CubeMX" manage=off
 yabai -m rule --add app="^Raycast" manage=off
+yabai -m rule --add app="^Weather" manage=off
+
+yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
 
 # padding & gaps
-yabai -m config top_padding    5
-yabai -m config bottom_padding 5
-yabai -m config left_padding   5
-yabai -m config right_padding  5
-yabai -m config window_gap     5
+yabai -m config top_padding    1
+yabai -m config bottom_padding 1
+yabai -m config left_padding   2
+yabai -m config right_padding  2
+yabai -m config window_gap     3
 
 # on or off (default: off)
 yabai -m config auto_balance on
@@ -32,8 +35,8 @@ yabai -m config focus_follows_mouse autoraise
 
 # window barder on
 yabai -m config window_border on
-yabai -m config window_border_width 2
-yabai -m config active_window_border_color 0xFF82aaff
+yabai -m config window_border_width 3
+yabai -m config active_window_border_color 0xff9e82ed
 yabai -m config normal_window_border_color 0x006453a3
 
 yabai -m config window_border_placement interior
