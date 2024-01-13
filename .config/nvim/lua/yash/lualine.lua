@@ -1,4 +1,5 @@
 
+-- Tokyonight
 -- local colors = {
 --     grey = '#292e42',
 --     light_grey = '#414868',
@@ -14,22 +15,140 @@
 -- }
 
 -- Rose Pine Moon colors
-local rosePineMoonColors = {
-    base = "#232136",
-    surface = "#2a273f",
-    overlay = "#393552",
-    muted = "#6e6a86",
-    subtle = "#908caa",
-    text = "#e0def4",
-    love = "#eb6f92",
-    gold = "#f6c177",
-    rose = "#ea9a97",
-    pine = "#3e8fb0",
-    foam = "#9ccfd8",
-    iris = "#c4a7e7",
-    highlightLow = "#2a283e",
-    highlightMed = "#44415a",
-    highlightHigh = "#56526e",
+-- local colors = {
+--     base = "#232136",
+--     surface = "#2a273f",
+--     overlay = "#393552",
+--     muted = "#6e6a86",
+--     subtle = "#908caa",
+--     text = "#e0def4",
+--     love = "#eb6f92",
+--     gold = "#f6c177",
+--     rose = "#ea9a97",
+--     pine = "#3e8fb0",
+--     foam = "#9ccfd8",
+--     iris = "#c4a7e7",
+--     highlightLow = "#2a283e",
+--     highlightMed = "#44415a",
+--     highlightHigh = "#56526e",
+-- }
+
+-- local p = require('rose-pine.palette')
+-- local myCustomRosePineMoon = {
+--     normal = {
+--         a = { bg = p.gold, fg = p.base },
+--         b = { bg = p.overlay, fg = p.rose },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+--     insert = {
+--         a = { bg = p.foam, fg = p.base },
+--         b = { bg = p.overlay, fg = p.foam },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+--     visual = {
+--         a = { bg = p.iris, fg = p.base },
+--         b = { bg = p.overlay, fg = p.iris },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+--     replace = {
+--         a = { bg = p.pine, fg = p.base },
+--         b = { bg = p.overlay, fg = p.pine },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+--     command = {
+--         a = { bg = p.rose, fg = p.base },
+--         b = { bg = p.overlay, fg = p.love },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+--     inactive = {
+--         a = { bg = p.base, fg = p.muted },
+--         b = { bg = p.base, fg = p.muted },
+--         c = { bg = p.surface, fg = p.text },
+--     },
+-- }
+
+-- melange
+local colors = {
+    bg = "#292522",
+    fg = "#ECE1D7",
+    bright_black = "#867462",
+    bright_blue = "#A3A9CE",
+    bright_cyan = "#89B3B6",
+    bright_green = "#85B695",
+    bright_magenta = "#CF9BC2",
+    bright_red = "#D47766",
+    bright_white = "#ECE1D7",
+    bright_yellow = "#EBC06D",
+    dark_black = "#292522",
+    dark_blue = "#273142",
+    dark_cyan = "#253333",
+    dark_green = "#233524",
+    dark_magenta = "#422741",
+    dark_red = "#7D2A2F",
+    dark_white = "#403A36",
+    dark_yellow = "#8B7449",
+    black = "#34302C",
+    blue = "#7F91B2",
+    cyan = "#7B9695",
+    green = "#78997A",
+    magenta = "#B380B0",
+    red = "#BD8183",
+    white = "#C1A78E",
+    yellow = "#E49B5D"
+}
+
+local bg = vim.opt.background:get()
+local palette = require('melange/palettes/' .. bg)
+
+local a = palette.a -- Grays
+local b = palette.b -- Bright foreground colors
+local c = palette.c -- Foreground colors
+local d = palette.d -- Background colors
+
+local myMelange = {}
+
+local insert_blue = '#9999BB'
+
+myMelange.normal = {
+  a = { bg = a.com, fg = a.bg },
+  b = { bg = colors.dark_white, fg = a.com },
+  c = { bg = a.float, fg = a.com },
+}
+
+myMelange.insert = {
+  a = { bg = insert_blue, fg = a.bg },
+  b = { bg = colors.dark_white, fg = insert_blue },
+  c = { bg = a.float, fg = insert_blue },
+}
+
+myMelange.command = {
+  a = { bg = c.yellow, fg = a.bg },
+  b = { bg = colors.dark_white, fg = c.yellow },
+  c = { bg = a.float, fg = c.yellow },
+}
+
+myMelange.visual = {
+  a = { bg = c.magenta, fg = a.bg },
+  b = { bg = colors.dark_white, fg = c.magenta },
+  c = { bg = a.float, fg = c.magenta },
+}
+
+myMelange.replace = {
+  a = { bg = c.green, fg = a.bg },
+  b = { bg = colors.dark_white, fg = c.green },
+  c = { bg = a.float, fg = c.green },
+}
+
+myMelange.terminal = {
+  a = { bg = c.yellow, fg = a.bg },
+  b = { bg = colors.dark_white, fg = c.yellow },
+  c = { bg = a.float, fg = c.yellow },
+}
+
+myMelange.inactive = {
+  a = { bg = a.com, fg = a.bg },
+  b = { bg = colors.dark_white, fg = a.com, gui = 'bold' },
+  c = { bg = a.float, fg = a.com },
 }
 
 local empty = require('lualine.component'):extend()
@@ -176,46 +295,94 @@ end
 --     extensions = { 'quickfix' }
 -- }
 
-local p = require('rose-pine.palette')
 
-local myCustomRosePineMoon = {
-	normal = {
-		a = { bg = p.gold, fg = p.base },
-		b = { bg = p.overlay, fg = p.rose },
-		c = { bg = p.surface, fg = p.text },
-	},
-	insert = {
-		a = { bg = p.foam, fg = p.base },
-		b = { bg = p.overlay, fg = p.foam },
-		c = { bg = p.surface, fg = p.text },
-	},
-	visual = {
-		a = { bg = p.iris, fg = p.base },
-		b = { bg = p.overlay, fg = p.iris },
-		c = { bg = p.surface, fg = p.text },
-	},
-	replace = {
-		a = { bg = p.pine, fg = p.base },
-		b = { bg = p.overlay, fg = p.pine },
-		c = { bg = p.surface, fg = p.text },
-	},
-	command = {
-		a = { bg = p.rose, fg = p.base },
-		b = { bg = p.overlay, fg = p.love },
-		c = { bg = p.surface, fg = p.text },
-	},
-	inactive = {
-		a = { bg = p.base, fg = p.muted },
-		b = { bg = p.base, fg = p.muted },
-		c = { bg = p.surface, fg = p.text },
-	},
-}
 
 
 -- Rose Pine Moon version
+-- require('lualine').setup {
+--     options = {
+--         theme = myCustomRosePineMoon,
+--         component_separators = '',
+--         --section_separators = { left = '', right = '' },
+--         section_separators = '',
+--         globalstatus = true
+--     },
+--     sections = process_sections {
+--         lualine_a = { mode_and_search_result },
+--         lualine_b = {
+--             { 'filename', file_status = false, path = 1, color = { fg = colors.subtle, bg = colors.overlay }},
+--             { modified, color = { fg = colors.rose, bg = colors.surface }},
+--         },
+--         lualine_c = {{
+--             '%l:%c',
+--             '%p%%/%L',
+--             color = { fg = colors.muted, bg = colors.surface }
+--         }},
+--         lualine_x = {
+--             {
+--                 'diagnostics',
+--                 sources = { 'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic' },
+--                 sections = { 'error', 'warn', 'hint', 'info'},
+--                 diagnostics_color = {
+--                     info = { fg = colors.foam, bg = colors.surface },
+--                     hint = { fg = colors.iris, bg = colors.surface },
+--                     warn = { fg = colors.gold, bg = colors.surface },
+--                     error = { fg = colors.love, bg = colors.surface },
+--                 },
+--             },
+-- 
+--         },
+--         lualine_y = {
+--             {
+--                 'diff',
+--                 symbols = { added = ' ', modified = ' ', removed = ' ' },
+--                 colored = true,
+--                 diff_color = {
+--                     added = { fg = colors.foam, bg = colors.overlay },
+--                     modified = { fg = colors.rose, bg = colors.overlay },
+--                     removed = { fg = colors.love,  bg = colors.overlay }
+--                 }
+--             },
+--             { 'branch', color = { fg = colors.subtle, bg = colors.overlay }},
+--             {
+--                 '%w',
+--                 cond = function()
+--                     return vim.wo.previewwindow
+--                 end,
+--             },
+--             {
+--                 '%r',
+--                 cond = function()
+--                     return vim.bo.readonly
+--                 end,
+--             },
+--             {
+--                 '%q',
+--                 cond = function()
+--                     return vim.bo.buftype == 'quickfix'
+--                 end,
+--             },
+--         },
+--         lualine_z = { 'fileformat', 'filetype' },
+--     },
+--     tabline = {
+--         lualine_a = {{
+--             'tabs',
+--             mode = 2,
+--             tabs_color = {
+--                 active = { fg = colors.subtle, bg = colors.overlay },
+--                 inactive = { fg = colors.muted, bg = colors.surface },
+--             },
+--         }},
+--     },
+--     extensions = { 'quickfix' }
+-- }
+
+
+-- Melange
 require('lualine').setup {
     options = {
-        theme = myCustomRosePineMoon,
+        theme = myMelange,
         component_separators = '',
         --section_separators = { left = '', right = '' },
         section_separators = '',
@@ -224,25 +391,18 @@ require('lualine').setup {
     sections = process_sections {
         lualine_a = { mode_and_search_result },
         lualine_b = {
-            { 'filename', file_status = false, path = 1, color = { fg = rosePineMoonColors.subtle, bg = rosePineMoonColors.overlay }},
-            { modified, color = { fg = rosePineMoonColors.rose, bg = rosePineMoonColors.surface }},
+            { 'filename', file_status = false, path = 1 },
+            { modified },
         },
         lualine_c = {{
             '%l:%c',
             '%p%%/%L',
-            color = { fg = rosePineMoonColors.muted, bg = rosePineMoonColors.surface }
         }},
         lualine_x = {
             {
                 'diagnostics',
                 sources = { 'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic' },
                 sections = { 'error', 'warn', 'hint', 'info'},
-                diagnostics_color = {
-                    info = { fg = rosePineMoonColors.foam, bg = rosePineMoonColors.surface },
-                    hint = { fg = rosePineMoonColors.iris, bg = rosePineMoonColors.surface },
-                    warn = { fg = rosePineMoonColors.gold, bg = rosePineMoonColors.surface },
-                    error = { fg = rosePineMoonColors.love, bg = rosePineMoonColors.surface },
-                },
             },
 
         },
@@ -251,13 +411,8 @@ require('lualine').setup {
                 'diff',
                 symbols = { added = ' ', modified = ' ', removed = ' ' },
                 colored = true,
-                diff_color = {
-                    added = { fg = rosePineMoonColors.foam, bg = rosePineMoonColors.overlay },
-                    modified = { fg = rosePineMoonColors.rose, bg = rosePineMoonColors.overlay },
-                    removed = { fg = rosePineMoonColors.love,  bg = rosePineMoonColors.overlay }
-                }
             },
-            { 'branch', color = { fg = rosePineMoonColors.subtle, bg = rosePineMoonColors.overlay }},
+            { 'branch' },
             {
                 '%w',
                 cond = function()
@@ -284,8 +439,8 @@ require('lualine').setup {
             'tabs',
             mode = 2,
             tabs_color = {
-                active = { fg = rosePineMoonColors.subtle, bg = rosePineMoonColors.overlay },
-                inactive = { fg = rosePineMoonColors.muted, bg = rosePineMoonColors.surface },
+                active = { fg = colors.bg, bg = colors.white },
+                inactive = { fg = colors.white, bg = colors.black },
             },
         }},
     },

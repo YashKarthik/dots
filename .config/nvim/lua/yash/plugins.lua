@@ -9,6 +9,8 @@ return require('packer').startup(function(use)
     -- colors
     use({ 'rose-pine/neovim', as = 'rose-pine' })
     use 'folke/tokyonight.nvim'
+    use "savq/melange-nvim"
+
     use 'lukas-reineke/indent-blankline.nvim'
     use {
         'folke/twilight.nvim',
