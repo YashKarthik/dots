@@ -1,95 +1,95 @@
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-    use {
-        "williamboman/mason.nvim",
-        config = function() require'mason'.setup() end
-    }
+require('lazy').setup({
 
     -- colors
-    use({ 'rose-pine/neovim', as = 'rose-pine' })
-    use 'folke/tokyonight.nvim'
-    use "savq/melange-nvim"
+    -- ({ 'rose-pine/neovim', name = 'rose-pine' }),
+    -- 'folke/tokyonight.nvim'
+    --"savq/melange-nvim"
+    {
+        "sainnhe/gruvbox-material",
+        lazy = false,
+        config = function()
+            vim.cmd [[set termguicolors]]
+            vim.g.gruvbox_material_enable_italic = true
+            vim.g.gruvbox_material_background = 'soft'
+            vim.cmd.colorscheme('gruvbox-material')
+        end,
+    },
 
-    use 'lukas-reineke/indent-blankline.nvim'
-    use {
+    'lukas-reineke/indent-blankline.nvim',
+    {
         'folke/twilight.nvim',
         config = function() require('twilight').setup() end
-    }
+    },
 
-    use {
+    {
         'norcalli/nvim-colorizer.lua',
-        config = function() require'colorizer'.setup() end
-    }
+        config = function() require'colorizer'.setup() end,
+    },
 
-    use {
+    {
         'levouh/tint.nvim',
-        config = function() require'tint'.setup{} end
-    }
+        config = function() require'tint'.setup{} end,
+    },
 
-    use {
+    {
         'winston0410/range-highlight.nvim',
-        requires = {'winston0410/cmd-parser.nvim'},
-        config = function() require'range-highlight'.setup() end
-    }
+        dependencies = {'winston0410/cmd-parser.nvim'},
+        config = function() require'range-highlight'.setup() end,
+    },
 
-    use {
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function() require('lualine').setup() end
-    }
+        dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true },
+        config = function() require('lualine').setup() end,
+    },
 
     -- nice utils
-
-    use {
-        'folke/which-key.nvim',
-        config = function() require('which-key').setup() end
-    }
-
-    use {
+    'folke/which-key.nvim',
+    {
         'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup() end
-    }
+        config = function() require('nvim-autopairs').setup() end,
+    },
 
     -- lodash basically
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-lua/popup.nvim'
-    use {
+    {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.0'
-    }
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-lua/popup.nvim',
+        },
+        version = '0.1.6'
+    },
 
-    use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate' }
-    use 'nvim-treesitter/playground'
-    use 'nvim-treesitter/nvim-treesitter-context'
-    use {
+    { 'nvim-treesitter/nvim-treesitter', build=':TSUpdate' },
+    'nvim-treesitter/nvim-treesitter-context',
+    {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter'
-    }
+        dependencies = 'nvim-treesitter/nvim-treesitter'
+    },
 
     -- git
-    use {
+    {
         'lewis6991/gitsigns.nvim',
-        config = function() require('gitsigns').setup() end
-    }
+        config = function() require('gitsigns').setup() end,
+    },
 
-    use {
+    {
         'TimUntersberger/neogit',
-        config = function() require('neogit').setup() end
-    }
+        config = function() require('neogit').setup({}) end,
+    },
 
     -- completion
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-nvim-lua'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'saadparwaiz1/cmp_luasnip'
-    use {
+    'neovim/nvim-lspconfig',
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'saadparwaiz1/cmp_luasnip',
+    {
         'L3MON4D3/LuaSnip',
-        tag = 'v<CurrentMajor>.*',
+        version = 'v2.*',
         config = function()
             require('luasnip.loaders.from_vscode').lazy_load()
             local luasnip = require('luasnip')
@@ -97,28 +97,50 @@ return require('packer').startup(function(use)
             luasnip.filetype_extend('typescript', { 'html' })
             luasnip.filetype_extend('javascriptreact', { 'html' })
             luasnip.filetype_extend('typescriptreact', { 'html' })
-        end
-    }
-    use 'rafamadriz/friendly-snippets'
-    use 'onsails/lspkind.nvim'
+        end,
+    },
+    'rafamadriz/friendly-snippets',
+    'onsails/lspkind.nvim',
 
     -- debugging
-    use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
-    use 'theHamsta/nvim-dap-virtual-text'
-    use 'nvim-telescope/telescope-dap.nvim'
-    use 'leoluz/nvim-dap-go'
-    use {
+    'mfussenegger/nvim-dap',
+    'rcarriga/nvim-dap-ui',
+    'theHamsta/nvim-dap-virtual-text',
+    'nvim-telescope/telescope-dap.nvim',
+    'leoluz/nvim-dap-go',
+    {
         'kevinhwang91/nvim-bqf',
         ft='qf',
         config = function()
             require"bqf".setup({
                 preview = {
                     wrap = true
+                },
+            })
+        end,
+    },
+
+    --copilot
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<Tab>",
+                        accept_word = "<M-w>",
+                        accept_line = "<M-l>",
+                        next = "<M-]>",
+                        prev = "<M-[>",
+                        dismiss = "<C-]>",
+                    },
                 }
             })
-        end
+        end,
     }
-
-end
-)
+})

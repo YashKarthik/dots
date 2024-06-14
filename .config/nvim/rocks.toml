@@ -1,0 +1,84 @@
+# This is your rocks.nvim plugins declaration file.
+# Here is a small yet pretty detailed example on how to use it:
+
+# List of non-Neovim rocks.
+# This includes things like `toml` or other lua packages.
+[rocks]
+
+# List of Neovim plugins to install alongside their versions.
+# If the plugin name contains a dot then you must add quotes to the key name!
+[plugins]
+"rocks.nvim" = "2.30.1" # rocks.nvim can also manage itself :D
+"indent-blankline.nvim" = "3.6.2"
+"rocks-git.nvim" = "1.5.1"
+"rocks-config.nvim" = "1.6.0"
+tree-sitter-go = "scm"
+tree-sitter-lua = "scm"
+tree-sitter-asm = "scm"
+tree-sitter-json = "scm"
+tree-sitter-python = "scm"
+tree-sitter-typescript = "scm"
+tree-sitter-javascript = "scm"
+tree-sitter-latex = "scm"
+tree-sitter-css = "scm"
+tree-sitter-html = "scm"
+"telescope.nvim" = "scm"
+nvim-lspconfig = "0.1.8"
+nvim-cmp = "0.0.1"
+luasnip = "2.3.0"
+"twilight.nvim" = "1.0.0"
+neogit = "1.0.0"
+#"rest.nvim" = "2.0.1"
+"which-key.nvim" = "2.1.0"
+nvim-treesitter-context = "scm"
+nvim-treesitter-textobjects = "scm"
+"copilot.lua" = "scm"
+
+[config]
+plugins_dir = "plugins/"
+auto_setup = false
+
+[plugins.gruvbox-material]
+git = "github:sainnhe/gruvbox-material"
+rev = "v1.2.5^{}"
+
+[plugins."lualine.nvim"]
+git = "github:nvim-lualine/lualine.nvim"
+rev = "compat-nvim-0.6"
+
+[plugins.cmp-nvim-lsp]
+git = "github:hrsh7th/cmp-nvim-lsp"
+
+[plugins.cmp-nvim-lua]
+git = "github:hrsh7th/cmp-nvim-lua"
+
+[plugins.cmp-buffer]
+git = "github:hrsh7th/cmp-buffer"
+
+[plugins.cmp-path]
+git = "github:hrsh7th/cmp-path"
+
+[plugins.cmp-cmdline]
+git = "github:hrsh7th/cmp-cmdline"
+
+[plugins.cmp_luasnip]
+git = "github:saadparwaiz1/cmp_luasnip"
+
+[plugins.friendly-snippets]
+git = "github:rafamadriz/friendly-snippets"
+
+[plugins."lspkind.nvim"]
+git = "github:onsails/lspkind.nvim"
+
+[plugins.nvim-autopairs]
+git = "github:windwp/nvim-autopairs"
+
+[plugins."gitsigns.nvim"]
+git = "github:lewis6991/gitsigns.nvim"
+rev = "v0.8.1"
+
+[plugins."range-highlight.nvim"]
+git = "github:winston0410/range-highlight.nvim"
+
+[plugins."nvim-colorizer.lua"]
+git = "github:norcalli/nvim-colorizer.lua"

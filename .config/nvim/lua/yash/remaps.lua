@@ -35,6 +35,7 @@ end)
 
 -- search files
 nnoremap("<leader>.", ":Telescope find_files <CR>")
+nnoremap("<leader>g", ":Telescope live_grep <CR>")
 -- open tele
 nnoremap("<leader>t", ":Telescope <CR>")
 

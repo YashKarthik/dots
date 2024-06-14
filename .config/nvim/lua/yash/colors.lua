@@ -1,3 +1,8 @@
+-- Set colorscheme after options
+vim.g.gruvbox_material_enable_italic = true
+vim.g.gruvbox_material_background = 'soft'
+vim.cmd.colorscheme('gruvbox-material')
+
 -- require("tokyonight").setup({
 --   -- your configuration comes here
 --   -- or leave it empty to use the default settings
@@ -75,8 +80,5 @@
 -- 		Search = { fg = "overlay", bg = 'rose', blend = 50, inherit = false },
 -- 	}
 -- })
-
--- Set colorscheme after options
-vim.cmd('colorscheme melange')
 
 --vim.cmd [[hi WinSeparator guibg=None guifg=#82aaff]] -- for tokyonight

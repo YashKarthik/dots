@@ -97,59 +97,59 @@ local colors = {
     yellow = "#E49B5D"
 }
 
-local bg = vim.opt.background:get()
-local palette = require('melange/palettes/' .. bg)
-
-local a = palette.a -- Grays
-local b = palette.b -- Bright foreground colors
-local c = palette.c -- Foreground colors
-local d = palette.d -- Background colors
-
-local myMelange = {}
-
-local insert_blue = '#9999BB'
-
-myMelange.normal = {
-  a = { bg = a.com, fg = a.bg },
-  b = { bg = colors.dark_white, fg = a.com },
-  c = { bg = a.float, fg = a.com },
-}
-
-myMelange.insert = {
-  a = { bg = insert_blue, fg = a.bg },
-  b = { bg = colors.dark_white, fg = insert_blue },
-  c = { bg = a.float, fg = insert_blue },
-}
-
-myMelange.command = {
-  a = { bg = c.yellow, fg = a.bg },
-  b = { bg = colors.dark_white, fg = c.yellow },
-  c = { bg = a.float, fg = c.yellow },
-}
-
-myMelange.visual = {
-  a = { bg = c.magenta, fg = a.bg },
-  b = { bg = colors.dark_white, fg = c.magenta },
-  c = { bg = a.float, fg = c.magenta },
-}
-
-myMelange.replace = {
-  a = { bg = c.green, fg = a.bg },
-  b = { bg = colors.dark_white, fg = c.green },
-  c = { bg = a.float, fg = c.green },
-}
-
-myMelange.terminal = {
-  a = { bg = c.yellow, fg = a.bg },
-  b = { bg = colors.dark_white, fg = c.yellow },
-  c = { bg = a.float, fg = c.yellow },
-}
-
-myMelange.inactive = {
-  a = { bg = a.com, fg = a.bg },
-  b = { bg = colors.dark_white, fg = a.com, gui = 'bold' },
-  c = { bg = a.float, fg = a.com },
-}
+--local bg = vim.opt.background:get()
+--local palette = require('melange/palettes/' .. bg)
+--
+--local a = palette.a -- Grays
+--local b = palette.b -- Bright foreground colors
+--local c = palette.c -- Foreground colors
+--local d = palette.d -- Background colors
+--
+--local myMelange = {}
+--
+--local insert_blue = '#9999BB'
+--
+--myMelange.normal = {
+--  a = { bg = a.com, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = a.com },
+--  c = { bg = a.float, fg = a.com },
+--}
+--
+--myMelange.insert = {
+--  a = { bg = insert_blue, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = insert_blue },
+--  c = { bg = a.float, fg = insert_blue },
+--}
+--
+--myMelange.command = {
+--  a = { bg = c.yellow, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = c.yellow },
+--  c = { bg = a.float, fg = c.yellow },
+--}
+--
+--myMelange.visual = {
+--  a = { bg = c.magenta, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = c.magenta },
+--  c = { bg = a.float, fg = c.magenta },
+--}
+--
+--myMelange.replace = {
+--  a = { bg = c.green, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = c.green },
+--  c = { bg = a.float, fg = c.green },
+--}
+--
+--myMelange.terminal = {
+--  a = { bg = c.yellow, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = c.yellow },
+--  c = { bg = a.float, fg = c.yellow },
+--}
+--
+--myMelange.inactive = {
+--  a = { bg = a.com, fg = a.bg },
+--  b = { bg = colors.dark_white, fg = a.com, gui = 'bold' },
+--  c = { bg = a.float, fg = a.com },
+--}
 
 local empty = require('lualine.component'):extend()
 function empty:draw(default_highlight)
@@ -296,8 +296,6 @@ end
 -- }
 
 
-
-
 -- Rose Pine Moon version
 -- require('lualine').setup {
 --     options = {
@@ -378,11 +376,9 @@ end
 --     extensions = { 'quickfix' }
 -- }
 
-
--- Melange
 require('lualine').setup {
     options = {
-        theme = myMelange,
+        theme = 'gruvbox-material',
         component_separators = '',
         --section_separators = { left = '', right = '' },
         section_separators = '',
