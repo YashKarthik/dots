@@ -24,14 +24,13 @@
 	  pkgs.girara
 	  pkgs.fish
 	  pkgs.gh
-    pkgs.luajit
+    #pkgs.luajit
     pkgs.pinentry_mac
 	  pkgs.starship
 	  pkgs.tree
 	  pkgs.dart
 	  pkgs.onefetch
 	  pkgs.tty-clock
-	  pkgs.youtube-dl
 	  pkgs.mpv
 	  pkgs.telnet
 	  pkgs.tcl2048

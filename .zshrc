@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/Yash/.oh-my-zsh"
+export YARN_IGNORE_NODE=1
 
 # Profiling
 # zmodload zsh/datetime
@@ -91,6 +92,7 @@ source $ZSH/oh-my-zsh.sh
 alias vim=nvim
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
 alias cat=bat
+alias python=python3
 
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
@@ -118,3 +120,6 @@ alias pipenv=~/Library/Python/3.9/bin/pipenv
 #eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
 
 export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+export MACOSX_DEPLOYMENT_TARGET="12.6"
+
+eval "$(atuin init zsh --disable-up-arrow)"
