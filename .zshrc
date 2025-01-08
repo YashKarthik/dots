@@ -18,6 +18,7 @@ export YARN_IGNORE_NODE=1
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="dracula"
+zstyle ':completion:*' list-colors '=(#b)cyan'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -91,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 alias vim=nvim
 alias dots='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME'
-alias cat=bat
+alias cat='bat --theme=ansi --color=always'
 alias python=python3
 
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -121,5 +122,10 @@ alias pipenv=~/Library/Python/3.9/bin/pipenv
 
 export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
 export MACOSX_DEPLOYMENT_TARGET="12.6"
+export VERILATOR_ROOT=/usr/local/share/verilator
 
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# Created by `pipx` on 2024-06-20 17:55:11
+export PATH="$PATH:/Users/Yash/.local/bin"
+path+=('/Users/Yash/.apio/packages/tools-oss-cad-suite/bin/')

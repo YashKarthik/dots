@@ -15,7 +15,15 @@ require('lazy').setup({
         end,
     },
 
-    'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function () require("ibl").setup({
+            indent = {char = "·" },
+            scope = { enabled = false },
+        }
+        ) end
+    },
+
     {
         'folke/twilight.nvim',
         config = function() require('twilight').setup() end
@@ -26,10 +34,10 @@ require('lazy').setup({
         config = function() require'colorizer'.setup() end,
     },
 
-    {
-        'levouh/tint.nvim',
-        config = function() require'tint'.setup{} end,
-    },
+    --{
+    --    'levouh/tint.nvim',
+    --    config = function() require'tint'.setup{} end,
+    --},
 
     {
         'winston0410/range-highlight.nvim',
@@ -66,16 +74,28 @@ require('lazy').setup({
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = 'nvim-treesitter/nvim-treesitter'
     },
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+        config = function() require("aerial").setup({
+            on_attach = function(bufnr)
+                vim.keymap.set("n", "<leader>an", "<cmd>AerialNavOpen<CR>", { buffer = bufnr })
+            end,
+        })
+        end
+    },
 
     -- git
     {
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end,
     },
-
     {
-        'TimUntersberger/neogit',
-        config = function() require('neogit').setup({}) end,
+        'tpope/vim-fugitive'
     },
 
     -- completion
@@ -102,7 +122,11 @@ require('lazy').setup({
     'rafamadriz/friendly-snippets',
     'onsails/lspkind.nvim',
 
+    -- linting
+    'mfussenegger/nvim-lint',
+
     -- debugging
+     "nvim-neotest/nvim-nio",
     'mfussenegger/nvim-dap',
     'rcarriga/nvim-dap-ui',
     'theHamsta/nvim-dap-virtual-text',
@@ -132,7 +156,7 @@ require('lazy').setup({
                     auto_trigger = true,
                     debounce = 75,
                     keymap = {
-                        accept = "<Tab>",
+                        accept = "<M-Tab>",
                         accept_word = "<M-w>",
                         accept_line = "<M-l>",
                         next = "<M-]>",
@@ -144,3 +168,4 @@ require('lazy').setup({
         end,
     }
 })
+

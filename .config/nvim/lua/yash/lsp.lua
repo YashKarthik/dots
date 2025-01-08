@@ -46,7 +46,7 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'gopls', 'clangd', 'ghdl_ls'}
+local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'gopls', 'clangd', 'verible'}
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -55,18 +55,6 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150}
     }
 end
-
--- lspconfig.clangd.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     flags = {
---         debounce_text_changes = 150,
---     },
---     cmd = {
---         "clangd",
---         "-std=c++11", -- Specify C++11 here
---     },
--- }
 
 require("lspconfig.configs").solidity = {
     default_config = {

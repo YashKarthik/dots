@@ -1,7 +1,7 @@
 -- Set colorscheme after options
-vim.g.gruvbox_material_enable_italic = true
-vim.g.gruvbox_material_background = 'soft'
-vim.cmd.colorscheme('gruvbox-material')
+-- vim.g.gruvbox_material_enable_italic = true
+-- vim.g.gruvbox_material_background = 'soft'
+-- vim.cmd.colorscheme('gruvbox-material')
 
 -- require("tokyonight").setup({
 --   -- your configuration comes here

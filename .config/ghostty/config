@@ -1,0 +1,9 @@
+font-family               =  "Iosevka Term Light"
+font-family-bold          =  "Iosevka Term SemiBold"
+font-family-italic        =  "Iosevka Term Italic"
+font-family-bold-italic   =  "Iosevka Term SemiBold Italic"
+
+font-size = "16"
+theme = "GruvboxLight"
+cursor-style = "block"
+bold-is-bright = "true"

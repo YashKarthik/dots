@@ -1,9 +1,9 @@
 add_newline = false
 
 [character]
-success_symbol = "[∑](bold #91e07d)"
-error_symbol = "[∑](bold #f26076)"
-vicmd_symbol = "[∑](bold #917de0)"
+success_symbol = "[󰘧](bold #91e07d)"
+error_symbol = "[󰘧](bold #f26076)"
+vicmd_symbol = "[󰘧](bold #917de0)"
 
 [aws]
 symbol = "  "

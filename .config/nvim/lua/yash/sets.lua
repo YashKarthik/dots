@@ -26,7 +26,7 @@ vim.opt.completeopt	={"menu","menuone","noselect","noinsert","preview"}
 vim.opt.splitbelow	= true
 vim.opt.splitright	= true
 
-vim.opt.background = "dark"
+vim.opt.background = "light"
 
 vim.opt.nu	= true
 vim.opt.rnu	= true
@@ -35,7 +35,7 @@ vim.opt.linespace = 5
 vim.opt.cmdheight = 1
 
 vim.opt.cocu = "n"
-vim.opt.cole = 2
+vim.opt.cole = 0
 
 vim.opt.timeoutlen = 500
 
@@ -46,9 +46,9 @@ vim.opt.fileformat="unix"
 vim.opt.cursorline=true
 vim.opt.cursorcolumn=true
 
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.cindent=true
 

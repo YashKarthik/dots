@@ -69,3 +69,6 @@ nnoremap("<leader>dB", ":lua require'dap'.set_breakpoint() <CR>")
 nnoremap("<leader>dn", ":lua require'dap'.step_over() <CR>")
 nnoremap("<leader>di", ":lua require'dap'.step_into() <CR>")
 nnoremap("<leader>dr", ":lua require'dap'.repl_open() <CR>")
+
+-- aerial
+vim.keymap.set("n", "<leader>ao", "<cmd>AerialToggle!<CR>")
