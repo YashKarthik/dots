@@ -11,4 +11,3 @@ bold-is-bright = "true"
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 macos-option-as-alt = "true"
 macos-titlebar-style = "tabs"
-keybind = shift+enter=text:\n
