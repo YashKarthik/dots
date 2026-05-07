@@ -49,7 +49,11 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+<<<<<<< Updated upstream
 local servers = { 'pyright', 'ts_ls', 'gopls', 'clangd'}
+=======
+local servers = { 'pyright', 'tsserver', 'tailwindcss', 'clangd'}
+>>>>>>> Stashed changes
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {

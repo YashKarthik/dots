@@ -1,84 +1,15 @@
 require('lazy').setup({
 
-    -- colors
-    -- {
-    --     "rebelot/kanagawa.nvim",
-    --     config = function()
-    --         require('kanagawa').setup({
-    --             colors = {
-    --                 theme = {
-    --                     all = {
-    --                         ui = {
-    --                             bg_gutter = "none"
-    --                         }
-    --                     }
-    --                 }
-    --             },
-    --             overrides = function(colors)
-    --                 return {
-    --                     ["@function.call.elixir"] = { fg = colors.palette.dragonOrange, italic = true },
-    --                     ["@keyword.function.elixir"] = { fg = colors.palette.dragonOrange2},
-    --                     ["@string.special.symbol.elixir"] = { fg = colors.palette.dragonPink },
-
-    --                     TelescopeTitle = { fg = colors.theme.ui.special, bold = true },
-    --                     TelescopePromptNormal = { bg = colors.theme.ui.bg_p1 },
-    --                     TelescopePromptBorder = { fg = colors.theme.ui.bg_p1, bg = colors.theme.ui.bg_p1 },
-    --                     TelescopeResultsNormal = { fg = colors.theme.ui.fg_dim, bg = colors.theme.ui.bg_m1 },
-    --                     TelescopeResultsBorder = { fg = colors.theme.ui.bg_m1, bg = colors.theme.ui.bg_m1 },
-    --                     TelescopePreviewNormal = { bg = colors.theme.ui.bg_dim },
-    --                     TelescopePreviewBorder = { bg = colors.theme.ui.bg_dim, fg = colors.theme.ui.bg_dim }
-    --                 }
-    --             end
-    --         })
-
-
-    --         vim.cmd [[set termguicolors]]
-    --         vim.cmd.colorscheme('kanagawa-dragon')
-    --     end,
-    -- },
-
-    ({
-        'rose-pine/neovim',
-        name = 'rose-pine'
-            -------require("rose-pine").setup({
-            -------    highlight_groups = {
-            -------        ["@module"] = { fg = "foam" },
-            -------        ["@string.special.symbol.elixir"] = { fg = "iris" },
-            -------        ["@markup.raw.block.markdown"] = { fg = "muted" },
-            -------        ["@string"] = { fg = "muted" },
-            -------    },
-            -------})
-    }),
-
-    --"savq/melange-nvim"
-
     {
       'maxmx03/solarized.nvim',
       lazy = false,
       priority = 1000,
       ---@type solarized.config
-      opts = {
-        variant = "autumn",
-        styles = {
-          enabled = true,
-          keywords = { italic = true },
-          constants = { italic = true },
-        },
-        --on_colors = function(colors, color)
-        --  local tint = color.tint
-        --  local blend = color.blend
-        --  return {
-        --    base3 = "#fbf1c7",
-        --    base2 = "#fbf1c7"
-        --}
-        --end
-      },
+      opts = {},
       config = function(_, opts)
         vim.o.termguicolors = true
         vim.o.background = 'light'
-
         require('solarized').setup(opts)
-
         vim.cmd.colorscheme 'solarized'
       end,
     },

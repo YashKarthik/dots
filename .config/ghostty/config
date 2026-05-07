@@ -4,7 +4,7 @@ font-family-italic        =  "Iosevka Term Light Italic"
 font-family-bold-italic   =  "Iosevka Term SemiBold Italic"
 
 font-size = "15"
-theme = "Builtin Solarized Light"
+theme = "iTerm2 Solarized Light"
 cursor-style = "block"
 bold-is-bright = "true"
 
