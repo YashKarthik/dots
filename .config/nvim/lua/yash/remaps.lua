@@ -9,14 +9,15 @@ local function bind(op, outer_opts)
     end
 end
 
-local nmap      = bind("n", {noremap = false})
-local imap      = bind("i", {noremap = false})
+local nmap = bind("n", {noremap = false})
+local imap = bind("i", {noremap = false})
 
 local nnoremap  = bind("n")
 local vnoremap  = bind("v")
 local xnoremap  = bind("x")
 local snoremap  = bind("s")
 local inoremap  = bind("i")
+local tnoremap  = bind("t")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "m"
@@ -38,9 +39,6 @@ nnoremap("<leader>.", ":Telescope find_files <CR>")
 nnoremap("<leader>g", ":Telescope live_grep <CR>")
 -- open tele
 nnoremap("<leader>t", ":Telescope <CR>")
-
--- C-w is same as <leader>w
-nnoremap("<leader>w", "<c-w>")
 
 -- Reload init.lua
 nnoremap("<leader>so", ":so ~/.config/nvim/init.lua")
@@ -70,5 +68,34 @@ nnoremap("<leader>dn", ":lua require'dap'.step_over() <CR>")
 nnoremap("<leader>di", ":lua require'dap'.step_into() <CR>")
 nnoremap("<leader>dr", ":lua require'dap'.repl_open() <CR>")
 
--- aerial
-vim.keymap.set("n", "<leader>ao", "<cmd>AerialToggle!<CR>")
+tnoremap("<ESC>", "<C-\\><C-n>")
+
+-- Create a custom command :ww that saves and formats Elixir files
+vim.api.nvim_create_user_command("WW", function()
+  -- Save the file first
+  vim.cmd("write")
+  
+  -- Only run formatter on Elixir files
+  local filename = vim.fn.expand("%")
+  if filename:match("%.ex$") or filename:match("%.exs$") then
+    local view = vim.fn.winsaveview()
+    
+    -- Run mix format asynchronously
+    vim.fn.jobstart("mix format " .. vim.fn.shellescape(filename), {
+      on_exit = function(_, exit_code)
+        if exit_code == 0 then
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(vim.fn.bufnr(filename)) then
+              -- Reload file content
+              vim.cmd("checktime " .. vim.fn.bufnr(filename))
+              -- Restore cursor position
+              vim.fn.winrestview(view)
+              -- Join with previous undo block
+              pcall(function() vim.cmd("undojoin") end)
+            end
+          end)
+        end
+      end
+    })
+  end
+end, {})

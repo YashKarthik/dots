@@ -1,18 +1,86 @@
 require('lazy').setup({
 
     -- colors
-    -- ({ 'rose-pine/neovim', name = 'rose-pine' }),
-    -- 'folke/tokyonight.nvim'
+    -- {
+    --     "rebelot/kanagawa.nvim",
+    --     config = function()
+    --         require('kanagawa').setup({
+    --             colors = {
+    --                 theme = {
+    --                     all = {
+    --                         ui = {
+    --                             bg_gutter = "none"
+    --                         }
+    --                     }
+    --                 }
+    --             },
+    --             overrides = function(colors)
+    --                 return {
+    --                     ["@function.call.elixir"] = { fg = colors.palette.dragonOrange, italic = true },
+    --                     ["@keyword.function.elixir"] = { fg = colors.palette.dragonOrange2},
+    --                     ["@string.special.symbol.elixir"] = { fg = colors.palette.dragonPink },
+
+    --                     TelescopeTitle = { fg = colors.theme.ui.special, bold = true },
+    --                     TelescopePromptNormal = { bg = colors.theme.ui.bg_p1 },
+    --                     TelescopePromptBorder = { fg = colors.theme.ui.bg_p1, bg = colors.theme.ui.bg_p1 },
+    --                     TelescopeResultsNormal = { fg = colors.theme.ui.fg_dim, bg = colors.theme.ui.bg_m1 },
+    --                     TelescopeResultsBorder = { fg = colors.theme.ui.bg_m1, bg = colors.theme.ui.bg_m1 },
+    --                     TelescopePreviewNormal = { bg = colors.theme.ui.bg_dim },
+    --                     TelescopePreviewBorder = { bg = colors.theme.ui.bg_dim, fg = colors.theme.ui.bg_dim }
+    --                 }
+    --             end
+    --         })
+
+
+    --         vim.cmd [[set termguicolors]]
+    --         vim.cmd.colorscheme('kanagawa-dragon')
+    --     end,
+    -- },
+
+    ({
+        'rose-pine/neovim',
+        name = 'rose-pine'
+            -------require("rose-pine").setup({
+            -------    highlight_groups = {
+            -------        ["@module"] = { fg = "foam" },
+            -------        ["@string.special.symbol.elixir"] = { fg = "iris" },
+            -------        ["@markup.raw.block.markdown"] = { fg = "muted" },
+            -------        ["@string"] = { fg = "muted" },
+            -------    },
+            -------})
+    }),
+
     --"savq/melange-nvim"
+
     {
-        "sainnhe/gruvbox-material",
-        lazy = false,
-        config = function()
-            vim.cmd [[set termguicolors]]
-            vim.g.gruvbox_material_enable_italic = true
-            vim.g.gruvbox_material_background = 'soft'
-            vim.cmd.colorscheme('gruvbox-material')
-        end,
+      'maxmx03/solarized.nvim',
+      lazy = false,
+      priority = 1000,
+      ---@type solarized.config
+      opts = {
+        variant = "autumn",
+        styles = {
+          enabled = true,
+          keywords = { italic = true },
+          constants = { italic = true },
+        },
+        --on_colors = function(colors, color)
+        --  local tint = color.tint
+        --  local blend = color.blend
+        --  return {
+        --    base3 = "#fbf1c7",
+        --    base2 = "#fbf1c7"
+        --}
+        --end
+      },
+      config = function(_, opts)
+        vim.o.termguicolors = true
+        vim.o.background = 'light'
+
+        require('solarized').setup(opts)
+
+        vim.cmd.colorscheme 'solarized'
+      end,
     },
 
     {
@@ -33,11 +101,6 @@ require('lazy').setup({
         'norcalli/nvim-colorizer.lua',
         config = function() require'colorizer'.setup() end,
     },
-
-    --{
-    --    'levouh/tint.nvim',
-    --    config = function() require'tint'.setup{} end,
-    --},
 
     {
         'winston0410/range-highlight.nvim',
@@ -65,7 +128,7 @@ require('lazy').setup({
             'nvim-lua/plenary.nvim',
             'nvim-lua/popup.nvim',
         },
-        version = '0.1.6'
+        version = '0.1.6',
     },
 
     { 'nvim-treesitter/nvim-treesitter', build=':TSUpdate' },
@@ -98,11 +161,24 @@ require('lazy').setup({
         'tpope/vim-fugitive'
     },
 
+    -- Interactive Reply Over Nvim
+    'Vigemus/iron.nvim',
+    {
+        'jpalardy/vim-slime',
+        config = function()
+            vim.g.slime_target = "tmux"
+            vim.g.slime_default_config = {
+                socket_name = "default",
+                target_pane = "term"
+            }
+            vim.g.slime_dont_ask_default = 1
+        end
+    },
+
     -- completion
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -145,27 +221,108 @@ require('lazy').setup({
     },
 
     --copilot
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    debounce = 75,
-                    keymap = {
-                        accept = "<M-Tab>",
-                        accept_word = "<M-w>",
-                        accept_line = "<M-l>",
-                        next = "<M-]>",
-                        prev = "<M-[>",
-                        dismiss = "<C-]>",
-                    },
-                }
-            })
-        end,
-    }
+    -- {
+    --     "yetone/avante.nvim",
+    --     event = "VeryLazy",
+    --     lazy = false,
+    --     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    --     opts = {
+    --         provider = "copilot",
+    --         auto_suggestions_provider = "copilot",
+    --         copilot = {
+    --             endpoint = "https://api.githubcopilot.com",
+    --             model = "claude-3.5-sonnet",
+    --             timeout = 30000, -- Timeout in milliseconds
+    --             temperature = 0,
+    --             max_tokens = 4096,
+    --         },
+    --         behaviour = {
+    --             auto_suggestions = true,
+    --         },
+    --         build = "make",
+    --         mappings = {
+    --             --- @class AvanteConflictMappings
+    --             diff = {
+    --                 ours = "co",
+    --                 theirs = "ct",
+    --                 all_theirs = "ca",
+    --                 both = "cb",
+    --                 cursor = "cc",
+    --                 next = "]x",
+    --                 prev = "[x",
+    --             },
+    --             suggestion = {
+    --                 accept = "<C-CR>",
+    --                 next = "<C-]>",
+    --                 prev = "<S-C-]>",
+    --                 dismiss = "<C-0>",
+    --             },
+    --             jump = {
+    --                 next = "]]",
+    --                 prev = "[[",
+    --             },
+    --             submit = {
+    --                 normal = "<CR>",
+    --                 insert = "<C-s>",
+    --             },
+    --             sidebar = {
+    --                 apply_all = "A",
+    --                 apply_cursor = "a",
+    --                 switch_windows = "<Tab>",
+    --                 reverse_switch_windows = "<S-Tab>",
+    --             },
+    --         },
+    --         highlights = {
+    --             ---@type AvanteConflictHighlights
+    --             diff = {
+    --                 current = "Visual",
+    --                 incoming = "Search",
+    --             }, 
+    --             diff = {
+    --                 current = "Visual",
+    --                 incoming = "Search",
+    --             },
+    --             sidebar = {
+    --                 normal = {
+    --                     bg = "#e5e1d8",
+    --                 },
+    --             },
+    --         },
+    --         windows = {
+    --             ---@type "right" | "left" | "top" | "bottom"
+    --             position = "right", -- the position of the sidebar
+    --             wrap = true, -- similar to vim.o.wrap
+    --             width = 30, -- default % based on available width
+    --             sidebar_header = {
+    --                 enabled = false -- true, false to enable/disable the header
+    --             },
+    --             input = {
+    --                 prefix = "> ",
+    --                 height = 8, -- Height of the input window in vertical layout
+    --             },
+    --             ask = {
+    --                 floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+    --                 start_insert = true, -- Start insert mode when opening the ask window
+    --                 border = "none",
+    --                 ---@type "ours" | "theirs"
+    --                 focus_on_apply = "theirs", -- which diff to focus after applying
+    --             },
+    --         },
+    --         suggestion = {
+    --             debounce = 75,
+    --             throttle = 0,
+    --         },
+    --     },
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "stevearc/dressing.nvim",
+    --         "nvim-lua/plenary.nvim",
+    --         "MunifTanjim/nui.nvim",
+    --         --- The below dependencies are optional,
+    --         "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+    --         "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+    --         "zbirenbaum/copilot.lua" -- for providers='copilot'
+    --     },
+    -- }
 })
 

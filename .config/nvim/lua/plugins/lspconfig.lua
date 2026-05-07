@@ -17,7 +17,17 @@ local on_attach = function(_, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', 'gD',           vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd',           vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gd', function()
+        local params = vim.lsp.util.make_position_params()
+        vim.lsp.buf_request(0, 'textDocument/definition', params, function(_, result)
+            if result and result[1] then
+                vim.cmd('vsplit')
+                vim.lsp.buf.definition()
+            else
+                vim.lsp.buf.definition()
+            end
+        end)
+    end, bufopts)
     vim.keymap.set('n', 'K',            vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi',           vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>',        vim.lsp.buf.signature_help, bufopts)
@@ -47,7 +57,7 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'gopls', 'clangd', 'ghdl_ls'}
+local servers = { 'pyright', 'typescript-language-server', 'astro', 'tailwindcss', 'gopls', 'clangd', 'ghdl_ls'}
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -57,7 +67,7 @@ for _, lsp in ipairs(servers) do
     }
 end
 
--- lspconfig.clangd.setup {
+-- lspconfig.clangd.setup {lspcon
 --     on_attach = on_attach,
 --     capabilities = capabilities,
 --     flags = {

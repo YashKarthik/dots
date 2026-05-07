@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup {
         'cmake',
         'astro',
         'latex',
+        'elixir',
         'python',
         'solidity',
         'markdown',
@@ -27,7 +28,7 @@ require('nvim-treesitter.configs').setup {
 
   highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {

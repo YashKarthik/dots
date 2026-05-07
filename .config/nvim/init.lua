@@ -23,6 +23,5 @@ if not vim.g.vscode then
     require("yash.treesitter")
     require('yash.ts-context')
     require("yash.lualine")
-    require("yash.lint")
-    require("yash.debugging")
+    require("yash.iron")
 end

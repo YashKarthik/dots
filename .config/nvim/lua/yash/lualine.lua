@@ -34,68 +34,68 @@
 -- }
 
 -- local p = require('rose-pine.palette')
--- local myCustomRosePineMoon = {
---     normal = {
---         a = { bg = p.gold, fg = p.base },
---         b = { bg = p.overlay, fg = p.rose },
---         c = { bg = p.surface, fg = p.text },
---     },
---     insert = {
---         a = { bg = p.foam, fg = p.base },
---         b = { bg = p.overlay, fg = p.foam },
---         c = { bg = p.surface, fg = p.text },
---     },
---     visual = {
---         a = { bg = p.iris, fg = p.base },
---         b = { bg = p.overlay, fg = p.iris },
---         c = { bg = p.surface, fg = p.text },
---     },
---     replace = {
---         a = { bg = p.pine, fg = p.base },
---         b = { bg = p.overlay, fg = p.pine },
---         c = { bg = p.surface, fg = p.text },
---     },
---     command = {
---         a = { bg = p.rose, fg = p.base },
---         b = { bg = p.overlay, fg = p.love },
---         c = { bg = p.surface, fg = p.text },
---     },
---     inactive = {
---         a = { bg = p.base, fg = p.muted },
---         b = { bg = p.base, fg = p.muted },
---         c = { bg = p.surface, fg = p.text },
---     },
--- }
+--local myCustomRosePineMoon = {
+--    normal = {
+--        a = { bg = colors.gold, fg = colors.base },
+--        b = { bg = colors.overlay, fg = colors.rose },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--    insert = {
+--        a = { bg = colors.foam, fg = colors.base },
+--        b = { bg = colors.overlay, fg = colors.foam },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--    visual = {
+--        a = { bg = colors.iris, fg = colors.base },
+--        b = { bg = colors.overlay, fg = colors.iris },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--    replace = {
+--        a = { bg = colors.pine, fg = colors.base },
+--        b = { bg = colors.overlay, fg = colors.pine },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--    command = {
+--        a = { bg = colors.rose, fg = colors.base },
+--        b = { bg = colors.overlay, fg = colors.love },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--    inactive = {
+--        a = { bg = colors.base, fg = colors.muted },
+--        b = { bg = colors.base, fg = colors.muted },
+--        c = { bg = colors.surface, fg = colors.text },
+--    },
+--}
 
 -- melange
-local colors = {
-    bg = "#292522",
-    fg = "#ECE1D7",
-    bright_black = "#867462",
-    bright_blue = "#A3A9CE",
-    bright_cyan = "#89B3B6",
-    bright_green = "#85B695",
-    bright_magenta = "#CF9BC2",
-    bright_red = "#D47766",
-    bright_white = "#ECE1D7",
-    bright_yellow = "#EBC06D",
-    dark_black = "#292522",
-    dark_blue = "#273142",
-    dark_cyan = "#253333",
-    dark_green = "#233524",
-    dark_magenta = "#422741",
-    dark_red = "#7D2A2F",
-    dark_white = "#403A36",
-    dark_yellow = "#8B7449",
-    black = "#34302C",
-    blue = "#7F91B2",
-    cyan = "#7B9695",
-    green = "#78997A",
-    magenta = "#B380B0",
-    red = "#BD8183",
-    white = "#C1A78E",
-    yellow = "#E49B5D"
-}
+--local colors = {
+--    bg = "#292522",
+--    fg = "#ECE1D7",
+--    bright_black = "#867462",
+--    bright_blue = "#A3A9CE",
+--    bright_cyan = "#89B3B6",
+--    bright_green = "#85B695",
+--    bright_magenta = "#CF9BC2",
+--    bright_red = "#D47766",
+--    bright_white = "#ECE1D7",
+--    bright_yellow = "#EBC06D",
+--    dark_black = "#292522",
+--    dark_blue = "#273142",
+--    dark_cyan = "#253333",
+--    dark_green = "#233524",
+--    dark_magenta = "#422741",
+--    dark_red = "#7D2A2F",
+--    dark_white = "#403A36",
+--    dark_yellow = "#8B7449",
+--    black = "#34302C",
+--    blue = "#7F91B2",
+--    cyan = "#7B9695",
+--    green = "#78997A",
+--    magenta = "#B380B0",
+--    red = "#BD8183",
+--    white = "#C1A78E",
+--    yellow = "#E49B5D"
+--}
 
 --local bg = vim.opt.background:get()
 --local palette = require('melange/palettes/' .. bg)
@@ -109,47 +109,47 @@ local colors = {
 --
 --local insert_blue = '#9999BB'
 --
---myMelange.normal = {
---  a = { bg = a.com, fg = a.bg },
---  b = { bg = colors.dark_white, fg = a.com },
---  c = { bg = a.float, fg = a.com },
---}
---
---myMelange.insert = {
---  a = { bg = insert_blue, fg = a.bg },
---  b = { bg = colors.dark_white, fg = insert_blue },
---  c = { bg = a.float, fg = insert_blue },
---}
---
---myMelange.command = {
---  a = { bg = c.yellow, fg = a.bg },
---  b = { bg = colors.dark_white, fg = c.yellow },
---  c = { bg = a.float, fg = c.yellow },
---}
---
---myMelange.visual = {
---  a = { bg = c.magenta, fg = a.bg },
---  b = { bg = colors.dark_white, fg = c.magenta },
---  c = { bg = a.float, fg = c.magenta },
---}
---
---myMelange.replace = {
---  a = { bg = c.green, fg = a.bg },
---  b = { bg = colors.dark_white, fg = c.green },
---  c = { bg = a.float, fg = c.green },
---}
---
---myMelange.terminal = {
---  a = { bg = c.yellow, fg = a.bg },
---  b = { bg = colors.dark_white, fg = c.yellow },
---  c = { bg = a.float, fg = c.yellow },
---}
---
---myMelange.inactive = {
---  a = { bg = a.com, fg = a.bg },
---  b = { bg = colors.dark_white, fg = a.com, gui = 'bold' },
---  c = { bg = a.float, fg = a.com },
---}
+-- myMelange.normal = {
+--   a = { bg = a.com, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = a.com },
+--   c = { bg = a.float, fg = a.com },
+-- }
+-- 
+-- myMelange.insert = {
+--   a = { bg = insert_blue, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = insert_blue },
+--   c = { bg = a.float, fg = insert_blue },
+-- }
+-- 
+-- myMelange.command = {
+--   a = { bg = c.yellow, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = c.yellow },
+--   c = { bg = a.float, fg = c.yellow },
+-- }
+-- 
+-- myMelange.visual = {
+--   a = { bg = c.magenta, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = c.magenta },
+--   c = { bg = a.float, fg = c.magenta },
+-- }
+-- 
+-- myMelange.replace = {
+--   a = { bg = c.green, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = c.green },
+--   c = { bg = a.float, fg = c.green },
+-- }
+-- 
+-- myMelange.terminal = {
+--   a = { bg = c.yellow, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = c.yellow },
+--   c = { bg = a.float, fg = c.yellow },
+-- }
+-- 
+-- myMelange.inactive = {
+--   a = { bg = a.com, fg = a.bg },
+--   b = { bg = colors.dark_white, fg = a.com, gui = 'bold' },
+--   c = { bg = a.float, fg = a.com },
+-- }
 
 local empty = require('lualine.component'):extend()
 function empty:draw(default_highlight)
@@ -296,7 +296,7 @@ end
 -- }
 
 
--- Rose Pine Moon version
+--Rose Pine Moon version
 -- require('lualine').setup {
 --     options = {
 --         theme = myCustomRosePineMoon,
@@ -378,7 +378,7 @@ end
 
 require('lualine').setup {
     options = {
-        theme = 'gruvbox-material',
+        theme = 'kanagawa',
         component_separators = '',
         --section_separators = { left = '', right = '' },
         section_separators = '',
@@ -430,15 +430,15 @@ require('lualine').setup {
         },
         lualine_z = { 'fileformat', 'filetype' },
     },
-    tabline = {
-        lualine_a = {{
-            'tabs',
-            mode = 2,
-            tabs_color = {
-                active = { fg = colors.bg, bg = colors.white },
-                inactive = { fg = colors.white, bg = colors.black },
-            },
-        }},
-    },
+    -- tabline = {
+    --     lualine_a = {{
+    --         'tabs',
+    --         mode = 2,
+    --         tabs_color = {
+    --             active = { fg = colors.bg, bg = colors.white },
+    --             inactive = { fg = colors.white, bg = colors.black },
+    --         },
+    --     }},
+    -- },
     extensions = { 'quickfix' }
 }

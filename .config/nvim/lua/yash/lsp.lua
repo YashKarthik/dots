@@ -16,7 +16,10 @@ local on_attach = function(_, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', 'gD',           vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd',           vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gd', function()
+        vim.cmd('vsplit')
+        vim.lsp.buf.definition()
+    end, bufopts)
     vim.keymap.set('n', 'K',            vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi',           vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>',        vim.lsp.buf.signature_help, bufopts)
@@ -46,7 +49,7 @@ end
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'pyright', 'tsserver', 'astro', 'tailwindcss', 'gopls', 'clangd', 'verible'}
+local servers = { 'pyright', 'ts_ls', 'gopls', 'clangd'}
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -55,6 +58,13 @@ for _, lsp in ipairs(servers) do
         flags = { debounce_text_changes = 150}
     }
 end
+
+lspconfig["elixirls"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = { debounce_text_changes = 150 },
+    cmd = { "/opt/homebrew/bin/elixir-ls" }
+}
 
 require("lspconfig.configs").solidity = {
     default_config = {
@@ -67,25 +77,25 @@ require("lspconfig.configs").solidity = {
 
 lspconfig.solidity.setup {}
 
-lspconfig.lua_ls.setup {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
+-- lspconfig.lua_ls.setup {
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--         version = 'LuaJIT',
+--       },
+--       diagnostics = {
+--         -- Get the language server to recognize the `vim` global
+--         globals = {'vim'},
+--       },
+--       workspace = {
+--         -- Make the server aware of Neovim runtime files
+--         library = vim.api.nvim_get_runtime_file("", true),
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {
+--         enable = false,
+--       },
+--     },
+--   },
+-- }
